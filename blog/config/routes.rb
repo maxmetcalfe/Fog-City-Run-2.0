@@ -20,7 +20,9 @@ Rails.application.routes.draw do
 
 Rails.application.routes.draw do
  
-  resources :articles
+  resources :articles do
+    resource :comments
+  end
  
   root 'welcome#index'
 end
