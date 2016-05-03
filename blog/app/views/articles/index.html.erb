@@ -18,4 +18,10 @@
               data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
+  <% @racers.each do |racer| %>
+    <tr>
+      <td><%= racer.first_name %></td>
+      <td><%= racer.last_name%></td>
+    </tr>
+  <% end %>
 </table>
