@@ -1,12 +1,13 @@
-# lib/tasks/migrate_topics.rake
 
-desc 'Migrate topics from legacy database to new database'
-task import_csv: :environment do
+
+
+task :import_csv => :environment do
+
 require 'csv'   
-require 'articles' 
 
-CSV.foreach("/Users/max/Desktop/in.csv", :headers => true) do |row|
+
+CSV.foreach("/Users/max/Desktop/racers2.txt", :headers => true) do |row|
 	puts row
-    Articles.create(:title => row['name'], :text => row['text'])
+    Racer.create(:first_name => row['first_name'], :last_name => row['last_name'])
 end
 end
