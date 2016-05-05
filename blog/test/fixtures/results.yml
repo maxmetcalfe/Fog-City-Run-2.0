@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rank: 
+  bib: 
+  regeracer: 1
+  group: 
+  time: MyString
+  date: MyString
+
+two:
+  rank: 
+  bib: 
+  regeracer: 1
+  group: 
+  time: MyString
+  date: MyString

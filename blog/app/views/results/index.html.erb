@@ -1,17 +1,26 @@
-<h1>Racers</h1>
-There are <%= @results.count %> total racers.
+<h1>Results</h1>
+There are <%= @results.count %> total results.
 <br>
 <br>
 <table>
   <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
+    <th>Rank</th>
+    <th>Bib</th>
+    <th>Racer</th>
+    <th>Group</th>
+    <th>Time</th>
+    <th>Date</th>
   </tr>
  
   <% @results.each do |result| %>
     <tr>
-      <td><%= result.id %></td>
+      <td><%= result.rank %></td>
+      <td><%= result.bib %></td>
+      <td><%= result.racer %></td>
+      <td><%= result.group %></td>
+      <td><%= result.time %></td>
+      <td><%= result.date %></td>
     </tr>
   <% end %>
 </table>
-<%= link_to 'New racer', new_result_path %>
+<%= link_to 'New result', new_result_path %>

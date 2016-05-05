@@ -8,4 +8,17 @@
   <%= @racer.last_name %>
 </p>
 
+<h2>Results</h2>
+<% @racer.results.each do |result| %>
+  <p>
+    <strong>Place:</strong>
+    <%= result.place %>
+  </p>
+ 
+  <p>
+    <strong>Time:</strong>
+    <%= result.time %>
+  </p>
+<% end %>
+
 <%= link_to 'Back', racers_path %>

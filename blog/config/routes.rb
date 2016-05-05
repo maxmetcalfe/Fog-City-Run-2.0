@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   end
 
   resources :racers do
+    resource :results
+  end
+
+  resources :results do
   end
  
   root 'welcome#index'
