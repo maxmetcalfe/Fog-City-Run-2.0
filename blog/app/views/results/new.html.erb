@@ -1,0 +1,33 @@
+<h1>New Result</h1>
+
+<%= form_for @result do |r| %>
+ 
+  <% if @result.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@result.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @result.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= r.label :First %><br>
+    <%= r.text_field :first_name %>
+  </p>
+ 	
+  <p>
+    <%= r.label :Last %><br>
+    <%= r.text_field :last_name %>
+  </p>
+ 
+  <p>
+    <%= r.submit %>
+  </p>
+ 
+<% end %>

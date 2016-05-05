@@ -1,0 +1,17 @@
+<h1>Racers</h1>
+There are <%= @results.count %> total racers.
+<br>
+<br>
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+  </tr>
+ 
+  <% @results.each do |result| %>
+    <tr>
+      <td><%= result.id %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'New racer', new_result_path %>
