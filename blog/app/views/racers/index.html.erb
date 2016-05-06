@@ -4,6 +4,7 @@ There are <%= @racers.count %> total racers.
 <br>
 <table>
   <tr>
+    <th>ID</th>
     <th>First Name</th>
     <th>Last Name</th>
   </tr>
@@ -19,3 +20,4 @@ There are <%= @racers.count %> total racers.
   <% end %>
 </table>
 <%= link_to 'New racer', new_racer_path %>
+<%= link_to 'Results', results_path %>

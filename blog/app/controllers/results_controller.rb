@@ -14,6 +14,8 @@ class ResultsController < ApplicationController
   def destroy
     @result = Result.find(params[:id])
     @result.destroy
+
+    redirect_to results_path
   end
 
   # Edit result
@@ -46,9 +48,9 @@ class ResultsController < ApplicationController
     end
   end
 
-  # Permit parameters when creating article
+  #Permit parameters when creating article
   private
   def result_params
-    params.require(:result).permit(:first_name, :last_name)
+    params.require(:result).permit(:rank, :bib, :racer_id, :group, :time, :date)
   end
 end

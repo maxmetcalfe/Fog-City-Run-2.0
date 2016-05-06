@@ -1,4 +1,9 @@
 <p>
+  <strong>ID:</strong>
+  <%= @racer.id %>
+</p>
+
+<p>
   <strong>First Name:</strong>
   <%= @racer.first_name %>
 </p>
@@ -11,13 +16,13 @@
 <h2>Results</h2>
 <% @racer.results.each do |result| %>
   <p>
-    <strong>Place:</strong>
-    <%= result.place %>
+    <strong>Time:</strong>
+    <%= result.time %>
   </p>
  
   <p>
-    <strong>Time:</strong>
-    <%= result.time %>
+    <strong>Date:</strong>
+    <%= result.date %>
   </p>
 <% end %>
 

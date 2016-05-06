@@ -3,7 +3,7 @@ class CreateResults < ActiveRecord::Migration
     create_table :results do |t|
       t.integer :rank
       t.integer :bib
-      t.integer :regeracer
+      t.references :racer, index: true, foreign_key: true
       t.string :group
       t.string :time
       t.string :date

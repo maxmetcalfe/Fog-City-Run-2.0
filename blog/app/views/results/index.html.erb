@@ -16,11 +16,17 @@ There are <%= @results.count %> total results.
     <tr>
       <td><%= result.rank %></td>
       <td><%= result.bib %></td>
-      <td><%= result.racer %></td>
+      <td><%= result.racer_id %></td>
       <td><%= result.group %></td>
       <td><%= result.time %></td>
       <td><%= result.date %></td>
+      <td><%= link_to 'Show', result_path(result) %></td>
+      <td><%= link_to 'Edit', edit_result_path(result) %></td>
+      <td><%= link_to 'Destroy', result_path(result),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
 <%= link_to 'New result', new_result_path %>
+<%= link_to 'Racers', racers_path %>
