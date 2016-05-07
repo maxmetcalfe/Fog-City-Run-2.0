@@ -16,7 +16,7 @@ There are <%= @results.count %> total results.
     <tr>
       <td><%= result.rank %></td>
       <td><%= result.bib %></td>
-      <td><%= result.racer_id %></td>
+      <td><%= link_to result.racer.first_name + " " + result.racer.last_name, racer_path(result.racer) %></td>
       <td><%= result.group %></td>
       <td><%= result.time %></td>
       <td><%= result.date %></td>

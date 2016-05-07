@@ -1,5 +1,7 @@
 class ResultsController < ApplicationController
 
+  @results = Result.includes(:racer)
+
   # Show all results
   def index
     @results = Result.all
