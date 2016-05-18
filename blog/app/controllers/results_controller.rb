@@ -1,6 +1,7 @@
 class ResultsController < ApplicationController
 
   @results = Result.includes(:racer)
+  @results = Result.includes(:race)
 
   # Show all results
   def index
@@ -50,7 +51,7 @@ class ResultsController < ApplicationController
     end
   end
 
-  #Permit parameters when creating article
+  #Permit parameters when creating result
   private
   def result_params
     params.require(:result).permit(:rank, :bib, :racer_id, :group, :time, :date)

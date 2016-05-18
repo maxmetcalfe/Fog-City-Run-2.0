@@ -9,7 +9,7 @@ There are <%= @results.count %> total results.
     <th>Racer</th>
     <th>Group</th>
     <th>Time</th>
-    <th>Date</th>
+    <th>Race ID</th>
   </tr>
  
   <% @results.each do |result| %>
@@ -19,7 +19,7 @@ There are <%= @results.count %> total results.
       <td><%= link_to result.racer.first_name + " " + result.racer.last_name, racer_path(result.racer) %></td>
       <td><%= result.group %></td>
       <td><%= result.time %></td>
-      <td><%= result.date %></td>
+      <td><%= result.race_id %></td>
       <td><%= link_to 'Show', result_path(result) %></td>
       <td><%= link_to 'Edit', edit_result_path(result) %></td>
       <td><%= link_to 'Destroy', result_path(result),
@@ -29,4 +29,7 @@ There are <%= @results.count %> total results.
   <% end %>
 </table>
 <%= link_to 'New result', new_result_path %>
+<br>
 <%= link_to 'Racers', racers_path %>
+<%= link_to 'Results', results_path %>
+<%= link_to 'Races', races_path %>

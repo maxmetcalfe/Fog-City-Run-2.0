@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  race_id: 1
+  date: 2016-05-17 18:32:06
+
+two:
+  race_id: 1
+  date: 2016-05-17 18:32:06

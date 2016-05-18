@@ -1,0 +1,28 @@
+<h1>New Race</h1>
+
+<%= form_for @race do |r| %>
+ 
+  <% if @race.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@race.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @race.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= r.label :date %><br>
+    <%= r.text_field :date %>
+  </p>
+ 
+  <p>
+    <%= r.submit %>
+  </p>
+ 
+<% end %>

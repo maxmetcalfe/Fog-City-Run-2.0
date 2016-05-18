@@ -1,0 +1,27 @@
+<h1>Races</h1>
+There are <%= @races.count %> total races.
+<br>
+<br>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Date</th>
+  </tr>
+ 
+  <% @races.each do |race| %>
+    <tr>
+      <td><%= race.id %></td>
+      <td><%= race.date %></td>
+      <td><%= link_to 'Show', race_path(race) %></td>
+      <td><%= link_to 'Edit', edit_race_path(race) %></td>
+      <td><%= link_to 'Destroy', race_path(race),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'New race', new_race_path %>
+<br>
+<%= link_to 'Racers', racers_path %>
+<%= link_to 'Results', results_path %>
+<%= link_to 'Races', races_path %>
