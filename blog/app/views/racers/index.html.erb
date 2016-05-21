@@ -15,13 +15,10 @@ There are <%= @racers.count %> total racers.
       <td><%= racer.first_name %></td>
       <td><%= racer.last_name %></td>
       <td><%= link_to 'Show', racer_path(racer) %></td>
-      <td><%= link_to 'Edit', edit_racer_path(racer) %></td>
     </tr>
   <% end %>
 </table>
-<%= link_to 'New racer', new_racer_path %>
 <br>
-
 <%= link_to 'Racers', racers_path %>
 <%= link_to 'Results', results_path %>
 <%= link_to 'Races', races_path %>

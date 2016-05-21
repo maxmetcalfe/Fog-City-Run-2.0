@@ -1,9 +1,4 @@
 <p>
-  <strong>ID:</strong>
-  <%= @racer.id %>
-</p>
-
-<p>
   <strong>First Name:</strong>
   <%= @racer.first_name %>
 </p>
@@ -13,16 +8,20 @@
   <%= @racer.last_name %>
 </p>
 
+<%= @racer.first_name %> has run <%= @racer.results.count %> total races.
+
+<br>
+<br>
+<%= link_to 'Racers', racers_path %>
+<%= link_to 'Results', results_path %>
+<%= link_to 'Races', races_path %>
+<br>
+
 <h2>Results</h2>
 <% @racer.results.each do |result| %>
+
   <p>
-    <strong>Time:</strong>
-    <%= result.time %>
-  </p>
- 
-  <p>
-    <strong>Race ID:</strong>
-    <%= result.race_id %>
+    <%= Race.find(result.race_id).date %> : <%= result.time %>
   </p>
 <% end %>
 

@@ -6,4 +6,15 @@
   <strong>Date:</strong>
   <%= @race.date %>
 </p>
-<%= link_to 'Back', races_path %>
+
+<h2>Results</h2>
+<% @race.results.each do |result| %>
+  <p>
+  	<strong></strong>
+    <%= result.rank %>  <%= result.racer.first_name %> <%= result.racer.last_name %> <%= result.time %>
+  </p>
+<% end %>
+<br>
+<%= link_to 'Racers', racers_path %>
+<%= link_to 'Results', results_path %>
+<%= link_to 'Races', races_path %>

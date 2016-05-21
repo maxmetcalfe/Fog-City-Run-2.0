@@ -13,10 +13,6 @@ There are <%= @races.count %> total races.
       <td><%= race.id %></td>
       <td><%= race.date %></td>
       <td><%= link_to 'Show', race_path(race) %></td>
-      <td><%= link_to 'Edit', edit_race_path(race) %></td>
-      <td><%= link_to 'Destroy', race_path(race),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
