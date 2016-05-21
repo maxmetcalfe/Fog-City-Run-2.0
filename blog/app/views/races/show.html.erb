@@ -7,7 +7,7 @@
   <%= @race.date %>
 </p>
 
-<h2>Results</h2>
+<h2>Results (<%= @race.results.count %>) </h2>
 <% @race.results.each do |result| %>
   <p>
   	<strong></strong>
