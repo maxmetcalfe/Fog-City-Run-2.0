@@ -1,20 +1,43 @@
-<p>
-  <strong>ID:</strong>
-  <%= @race.id %>
-</p>
-<p>
-  <strong>Date:</strong>
-  <%= @race.date %>
-</p>
-
-<h2>Results (<%= @race.results.count %>) </h2>
-<% @race.results.each do |result| %>
-  <p>
-  	<strong></strong>
-    <%= result.rank %>  <%= result.racer.first_name %> <%= result.racer.last_name %> <%= result.time %>
-  </p>
-<% end %>
-<br>
-<%= link_to 'Racers', racers_path %>
-<%= link_to 'Results', results_path %>
-<%= link_to 'Races', races_path %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Racers</title>
+</head>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <ul class="nav navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Back', races_path %></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Racers', racers_path %></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Races', races_path %></a>
+    </li>
+  </ul>
+</nav>
+<body style="padding-top: 60px">
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Rank</th>
+    <th>Bib</th>
+    <th>Racer</th>
+    <th>Racer Results</th>
+    <th>Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @race.results.order(:rank).each do |result| %>
+    <tr>
+      <td><%= result.rank %></td>
+      <td><%= result.bib %></td>
+      <td><%= result.racer.first_name %>  <%= result.racer.last_name %></td>
+      <td><%= link_to 'Link', racer_path(result.racer) %></td>
+      <td><%= result.time %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</body>
+</html>

@@ -2,20 +2,28 @@
 <html>
 <head>
   <title>Racers</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
-<h1>Racers</h1>
-There are <%= @racers.count %> total racers.
-<br>
-<br>
-<table>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <ul class="nav navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" <%= link_to 'Racers', racers_path %></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Races', races_path %></a>
+    </li>
+  </ul>
+</nav>
+<body style="padding-top: 60px">
+<table class="table table-hover">
+  <thead>
   <tr>
     <th>ID</th>
     <th>First Name</th>
     <th>Last Name</th>
+    <th>Results</th>
   </tr>
- 
+  </thead>
+  <tbody>
   <% @racers.each do |racer| %>
     <tr>
       <td><%= racer.id %></td>
@@ -24,8 +32,9 @@ There are <%= @racers.count %> total racers.
       <td><%= link_to 'Show', racer_path(racer) %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
-<br>
+</body>
 <%= link_to 'Racers', racers_path %>
 <%= link_to 'Results', results_path %>
 <%= link_to 'Races', races_path %>
