@@ -17,10 +17,10 @@
   </ul>
 </nav>
 <body style="padding-top: 60px">
-<div class="container-fluid">
 <table class="table table-hover">
   <thead>
   <tr>
+    <th>ID</th>
     <th>First Name</th>
     <th>Last Name</th>
     <th>Results</th>
@@ -29,13 +29,13 @@
   <tbody>
   <% @racers.each do |racer| %>
     <tr>
+      <td><%= racer.id %></td>
       <td><%= racer.first_name %></td>
       <td><%= racer.last_name %></td>
-      <td><%= link_to racer.results.count.to_s, racer_path(racer) %></td>
+      <td><%= link_to 'Show', racer_path(racer) %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
-</div>
 </body>
 </html>

@@ -4,8 +4,10 @@
   <title>Racers</title>
 </head>
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <a class="navbar-brand" href="#"><%= @racer.first_name %> <%= @racer.last_name %> (<%= @racer.results.count %>) - <%= @racer.results.order(:time).first.time%></a>
   <ul class="nav navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Back', racers_path %></a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" <%= link_to 'Racers', racers_path %></a>
     </li>
@@ -15,6 +17,12 @@
   </ul>
 </nav>
 <body style="padding-top: 60px">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-5">
+      <h3> <%= @racer.first_name %> <%= @racer.last_name %>: <%= @racer.results.count %> races, PR = <%= @racer.results.order(:time).first.time%></h3>
+    </div>
+  </div>
 <table class="table table-hover">
   <thead>
   <tr>
@@ -31,5 +39,6 @@
   <% end %>
   </tbody>
 </table>
+</div>
 </body>
 </html>
