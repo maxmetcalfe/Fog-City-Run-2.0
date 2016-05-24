@@ -16,7 +16,8 @@
 There are <%= @results.count %> total results.
 <br>
 <br>
-<table>
+<%= column_chart Result.group(:race_id).count %>
+<!-- <table>
   <tr>
     <th>Rank</th>
     <th>Bib</th>
@@ -41,9 +42,4 @@ There are <%= @results.count %> total results.
               data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
-</table>
-<%= link_to 'New result', new_result_path %>
-<br>
-<%= link_to 'Racers', racers_path %>
-<%= link_to 'Results', results_path %>
-<%= link_to 'Races', races_path %>
+</table> -->.coun
