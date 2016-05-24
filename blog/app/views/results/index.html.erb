@@ -1,45 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Racers</title>
+  <title>Races</title> 
 </head>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <a class="navbar-brand" href="#"><b>Fog City Run</b></a>
   <ul class="nav navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="#">Racers</a>
+      <a class="nav-link" <%= link_to "Home", root_path %></a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Racers', racers_path %></a>
+    </li>
+    <li class="nav-item active">
       <a class="nav-link" href="#">Races</a>
     </li>
   </ul>
 </nav>
-There are <%= @results.count %> total results.
-<br>
-<br>
-<%= column_chart Result.group(:race_id).count %>
-<!-- <table>
-  <tr>
-    <th>Rank</th>
-    <th>Bib</th>
-    <th>Racer</th>
-    <th>Group</th>
-    <th>Time</th>
-    <th>Race ID</th>
-  </tr>
- 
-  <% @results.each do |result| %>
-    <tr>
-      <td><%= result.rank %></td>
-      <td><%= result.bib %></td>
-      <td><%= Racer.find(result.racer_id).first_name%></td>
-      <td><%= result.group %></td>
-      <td><%= result.time %></td>
-      <td><%= Race.find(result.race_id).date %></td>
-      <td><%= link_to 'Show', result_path(result) %></td>
-      <td><%= link_to 'Edit', edit_result_path(result) %></td>
-      <td><%= link_to 'Destroy', result_path(result),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table> -->.coun
+<body style="padding-top: 60px">
+<div class="container-fluid">
+asdfas
+  </div>
+</body>
+</html>
