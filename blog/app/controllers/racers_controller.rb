@@ -3,6 +3,9 @@ class RacersController < ApplicationController
   # Show all racers
   def index
     @racers = Racer.all
+    if params[:search]
+      @racers = Racer.search(params[:search])
+    end
   end
 
   # Show racer by id
