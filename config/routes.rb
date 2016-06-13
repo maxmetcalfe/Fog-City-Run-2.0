@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get 'welcome/index'
+  get "/pages/:page" => "pages#show"
+end
 
 Rails.application.routes.draw do
- 
+  
   resources :racers do
     resource :results
   end
@@ -15,5 +17,4 @@ Rails.application.routes.draw do
   end
  
   root 'welcome#index'
-end
 end
