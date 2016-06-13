@@ -11,6 +11,7 @@ html {
 }
 body {
   margin: 0;
+  background: rgb(44,44,44) !important;
 }
 article,
 aside,

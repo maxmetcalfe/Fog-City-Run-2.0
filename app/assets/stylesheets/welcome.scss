@@ -1,3 +1,39 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  margin: 0;
+  background: rgb(255,174,0) !important;
+}
+
+h1 {
+	font-size: 100px;
+	color: rgb(255,0,0);
+}
+
+.navbar-custom {
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
+
+.btn-lg {
+  padding: 50px 90px;
+  font-size: 60px;
+  line-height: 1.3333333;
+  border-radius: 50px;
+  white-space: normal;
+}
+
+.btn-warning {
+  color: #ff0000;
+  background-color: #ffae00;
+  border-color: #ff0000;
+  border: 10px solid;
+}
+
+.btn-warning:hover {
+  color: #ffae00;
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
