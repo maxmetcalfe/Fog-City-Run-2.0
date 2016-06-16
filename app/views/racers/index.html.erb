@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Racers</title>
+  <link href="../../assets/stylesheets/bootstrap.css" rel="stylesheet">
 </head>
 <nav class="navbar navbar-default navbar-fixed-top">
   <a class="navbar-brand" href="#"><b>Fog City Run</b></a>
@@ -16,7 +17,7 @@
       <a class="nav-link" <%= link_to 'Races', races_path %></a>
     </li>
   </ul>
-  <form class="navbar-form navbar-left" role="search">
+  <form class="navbar-form " role="search">
     <div class="input-group">
       <%= form_tag(racers_path, :method => "get", id: "search-form") do %>
         <%= text_field_tag :search, params[:search], placeholder: "Search racers...", class: 'form-control' %>
@@ -29,6 +30,7 @@
 </nav>
 <body style="padding-top: 60px">
 <div class="container-fluid">
+  <div panel panel-default>
 <table class="table table-hover table-bordered">
   <thead>
   <tr>
@@ -47,6 +49,7 @@
   <% end %>
   </tbody>
 </table>
+</div>
 </div>
 </body>
 </html>

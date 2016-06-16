@@ -1,0 +1,81 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.navbar {
+  position: relative;
+  min-height: 5px;
+  margin-bottom: 0px;
+  border: 5px solid transparent;
+}
+
+/* navbar */
+.navbar-orange {
+    background-color: #F8F8F8;
+    border-color: #E7E7E7;
+}
+/* title */
+.navbar-orange .navbar-brand {
+    color: #777;
+}
+.navbar-orange .navbar-brand:hover,
+.navbar-orange .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* link */
+.navbar-orange .navbar-nav > li > a {
+    color: #777;
+}
+.navbar-orange .navbar-nav > li > a:hover,
+.navbar-orange .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-orange .navbar-nav > .active > a, 
+.navbar-orange .navbar-nav > .active > a:hover, 
+.navbar-orange .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-orange .navbar-nav > .open > a, 
+.navbar-orange .navbar-nav > .open > a:hover, 
+.navbar-orange .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+/* caret */
+.navbar-orange .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-orange .navbar-nav > .dropdown > a:hover .caret,
+.navbar-orange .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-orange .navbar-nav > .open > a .caret, 
+.navbar-orange .navbar-nav > .open > a:hover .caret, 
+.navbar-orange .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* mobile version */
+.navbar-orange .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-orange .navbar-toggle:hover,
+.navbar-orange .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-orange .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-orange .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-orange .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-orange .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}
