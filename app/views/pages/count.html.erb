@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Races</title> 
+</head>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <a class="navbar-brand" href="#"><b>Fog City Run</b></a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to "Home", root_path %></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Racers', racers_path %></a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="#">Races</a>
+    </li>
+  </ul>
+</nav>
+<body style="padding-top: 60px">
+<div class="container-fluid">
+<!--   <div class="row">
+    <%= column_chart Result.group(:race_id).count, min: 0, max: 22, colors: ["grey"] %>
+  </div> -->
+  <div class="row">
+    <table class="table table-hover table-bordered">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Racer Count</th>
+        <th>Results</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% Race.order(:date).reverse.each do |race| %>
+        <tr>
+          <td><%= race.date %></td>
+          <td><%= race.results.count %></td>
+          <td><%= link_to 'Show', race_path(race) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
