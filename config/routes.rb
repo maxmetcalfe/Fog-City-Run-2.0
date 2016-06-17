@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/index'
   get '/count' => 'pages#count'
+  get '/records' => 'pages#records'
 end

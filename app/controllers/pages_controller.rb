@@ -6,4 +6,7 @@ class PagesController < ApplicationController
   def count
   end
 
+  def records
+  end
+
 end
