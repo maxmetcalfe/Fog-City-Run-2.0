@@ -15,6 +15,9 @@
     <li class="nav-item">
       <a class="nav-link" <%= link_to 'Races', races_path %></a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Racer Count', count_path %></a>
+    </li>
   </ul>
 </nav>
 <body style="padding-top: 40px">
@@ -34,7 +37,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @racer.results.each do |result| %>
+  <% @racer.results.includes(:race).order("races.date DESC").each do |result| %>
     <tr>
       <td><%= Race.find(result.race_id).date %></td>
       <td><%= result.time %></td>

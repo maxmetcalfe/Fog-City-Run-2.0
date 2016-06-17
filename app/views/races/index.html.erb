@@ -22,21 +22,18 @@
 </nav>
 <body style="padding-top: 60px">
 <div class="container-fluid">
-  <div class="row">
     <table class="table table-hover table-bordered">
       <thead>
       <tr>
         <th>Date</th>
         <th>Racer Count</th>
-        <th>Results</th>
       </tr>
       </thead>
       <tbody>
       <% Race.order(:date).reverse.each do |race| %>
         <tr>
           <td><%= race.date %></td>
-          <td><%= race.results.count %></td>
-          <td><%= link_to 'Show', race_path(race) %></td>
+          <td><%= link_to race.results.count, race_path(race) %></td>
         </tr>
       <% end %>
       </tbody>

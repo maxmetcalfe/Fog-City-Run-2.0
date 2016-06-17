@@ -32,24 +32,24 @@
 </nav>
 <body style="padding-top: 60px">
 <div class="container-fluid">
-<table class="table table-hover table-bordered">
-  <thead>
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Results</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @racers.each do |racer| %>
-    <tr>
-      <td><%= racer.first_name %></td>
-      <td><%= racer.last_name %></td>
-      <td><%= link_to racer.results.count.to_s, racer_path(racer) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-</div>
+    <table class="table table-hover table-bordered">
+      <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Results</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @racers.each do |racer| %>
+        <tr>
+          <td><%= racer.first_name %></td>
+          <td><%= racer.last_name %></td>
+          <td><%= link_to racer.results.count.to_s, racer_path(racer) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
