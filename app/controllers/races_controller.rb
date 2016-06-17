@@ -5,6 +5,9 @@ class RacesController < ApplicationController
   # Show all races
   def index
     @races = Race.all
+    if params[:search]
+      @races = Race.search(params[:search])
+    end
   end
 
   # Show race by id
