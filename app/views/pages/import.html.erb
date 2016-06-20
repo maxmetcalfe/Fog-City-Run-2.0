@@ -26,20 +26,6 @@
 <body style="padding-top: 60px">
 <div class="container-fluid">
   <div class="row">
-      <h4> Import Racers</h4>
-      <%= form_tag import_racers_path, multipart: true do %>
-        <%=file_field_tag :file%>
-        <%=submit_tag "Import CSV"%>
-      <% end %>
-  </div>
-  <div class="row">
-      <h4> Import Races</h4>
-      <%= form_tag import_races_path, multipart: true do %>
-        <%=file_field_tag :file%>
-        <%=submit_tag "Import CSV"%>
-      <% end %>
-  </div>
-  <div class="row">
       <h4> Import Results</h4>
       <%= form_tag import_results_path, multipart: true do %>
         <%=file_field_tag :file%>

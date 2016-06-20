@@ -3,6 +3,8 @@ class ResultsController < ApplicationController
   @results = Result.includes(:racer)
   @results = Result.includes(:race)
 
+  skip_before_action :verify_authenticity_token, only: [:import]
+
   # Show all results
   def index
     @results = Result.all
@@ -53,8 +55,8 @@ class ResultsController < ApplicationController
 
   # import CSV
   def import
-    Result.import(params[:file])
-    redirect_to races_url, notice: "Results imported successfully"
+    Result.import(params[:json])
+    redirect_to root_url, notice: "Results imported successfully"
   end
 
   #Permit parameters when creating result
