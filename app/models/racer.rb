@@ -1,7 +1,19 @@
 class Racer < ActiveRecord::Base
-    #attr_accessible :racer_id
-    has_many :results
-    def self.search(search)
-        where("first_name LIKE :search OR last_name LIKE :search", search: "%#{search}%")
-    end
+
+  has_many :results
+
+  require 'csv'
+
+  def self.search(search)
+    where("first_name LIKE :search OR last_name LIKE :search", search: "%#{search}%")
+  end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      Racer.create!(:first_name => row.to_hash["first_name"], :last_name => row.to_hash["last_name"], :id => Racer.maximum(:id).next)
+	end
+  end
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 end

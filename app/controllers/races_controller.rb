@@ -53,6 +53,12 @@ class RacesController < ApplicationController
     end
   end
 
+  # import CSV
+  def import
+    Race.import(params[:file])
+    redirect_to races_url, notice: "Races imported successfully"
+  end
+
   #Permit parameters when creating article
   private
   def race_params

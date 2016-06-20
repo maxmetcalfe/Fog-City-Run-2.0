@@ -9,4 +9,7 @@ class PagesController < ApplicationController
   def records
   end
 
+  def import
+  end
+
 end

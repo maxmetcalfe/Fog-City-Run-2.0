@@ -51,6 +51,12 @@ class ResultsController < ApplicationController
     end
   end
 
+  # import CSV
+  def import
+    Result.import(params[:file])
+    redirect_to races_url, notice: "Results imported successfully"
+  end
+
   #Permit parameters when creating result
   private
   def result_params
