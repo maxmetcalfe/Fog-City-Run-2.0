@@ -5,7 +5,7 @@ class Racer < ActiveRecord::Base
   require 'csv'
 
   def self.search(search)
-    where("first_name LIKE :search OR last_name LIKE :search", search: "%#{search}%")
+    where("LOWER(first_name) LIKE LOWER(:search) OR LOWER(last_name) LIKE LOWER(:search)", search: "%#{search}%")
   end
 
   def self.import(file)
