@@ -7,12 +7,8 @@ class Result < ActiveRecord::Base
 
   def self.import(file)
 
-    puts file.path
 
     CSV.foreach(file.path, headers: true) do |row|
-
-      puts "Debuging"
-      puts row[1]
 
       # Check if racer exists. If not, add new Racer
       found_racer = Racer.where(last_name: row[2], first_name: row[3])
@@ -28,13 +24,13 @@ class Result < ActiveRecord::Base
       found_race = Race.where(date: row[6])
       if found_race.blank?
         race_id = Race.maximum(:id).next
-        Race.create!(:date => row[6])
+        Race.create!(:date => row[6], :id => Race.maximum(:id).next)
       else
         race_id = found_race.first.id
       end
 
       # Create a new result
-      Result.create!(:rank => row.to_hash["rank"], :bib => row.to_hash["bib"],  :racer_id => racer_id, :group => row.to_hash["group"], :time => row.to_hash["time"],  :race_id => race_id, :id => Result.maximum(:id).next)
+      Result.create!(:rank => row[1], :bib => row[2],  :racer_id => racer_id, :group => row[3], :time => row[4],  :race_id => race_id, :id => Result.maximum(:id).next)
 
   end
   end
