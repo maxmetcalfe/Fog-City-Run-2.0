@@ -55,7 +55,8 @@ class ResultsController < ApplicationController
 
   # import CSV
   def import
-    Result.import(params[:file])
+    Result.import(params)
+    #render plain: "Reponse from results import"
     redirect_to root_url, notice: "Results imported successfully"
   end
 
