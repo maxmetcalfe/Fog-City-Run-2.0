@@ -23,11 +23,11 @@ class Result < ActiveRecord::Base
       else
         race_id = found_race.first.id
       end
+
+      # Create a new result
+      Result.create!(:rank => d["rank"], :bib => d["bib"],  :racer_id => racer_id, :group => d["group"], :time => d["time"],  :race_id => race_id, :id => Result.maximum(:id).next)
+
     end
-
-  # Create a new result
-  Result.create!(:rank => d["rank"], :bib => d["bib"],  :racer_id => racer_id, :group => d["group"], :time => d["time"],  :race_id => race_id, :id => Result.maximum(:id).next)
-
   end
 
   validates :rank, presence: true
