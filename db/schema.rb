@@ -13,6 +13,26 @@
 
 ActiveRecord::Schema.define(version: 20160518034411) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.string   "title"
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "commenter"
+    t.text     "body"
+    t.integer  "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
+
   create_table "racers", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -32,12 +52,12 @@ ActiveRecord::Schema.define(version: 20160518034411) do
     t.integer  "racer_id"
     t.string   "group"
     t.string   "time"
-    t.string   "race_id"
+    t.integer  "race_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "results", ["race_id"], name: "index_results_on_race_id"
-  add_index "results", ["racer_id"], name: "index_results_on_racer_id"
+  add_index "results", ["race_id"], name: "index_results_on_race_id", using: :btree
+  add_index "results", ["racer_id"], name: "index_results_on_racer_id", using: :btree
 
 end
