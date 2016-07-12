@@ -40,10 +40,10 @@
       </tr>
       </thead>
       <tbody>
-      <% @races.each do |race| %>
+      <% Result.joins(:race).group("race_id").count(:race_id).sort_by { |k| k[0]}.reverse.each do |result| %>
         <tr>
-          <td><%= race.date %></td>
-          <td><%= link_to race.results.count, race_path(race) %></td>
+          <td><%= Race.find(result[0]).date %></td>
+          <td><%= result[1] %></td>
         </tr>
       <% end %>
       </tbody>
