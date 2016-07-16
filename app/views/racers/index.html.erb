@@ -18,6 +18,9 @@
     <li class="nav-item">
       <a class="nav-link" <%= link_to 'Racer Count', count_path %></a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Records', records_path %></a>
+    </li>
   </ul>
   <form class="navbar-form navbar-left" role="search">
     <div class="input-group">
@@ -35,17 +38,15 @@
     <table class="table table-hover table-bordered">
       <thead>
       <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>Racer</th>
         <th>Results</th>
       </tr>
       </thead>
       <tbody>
       <% Result.joins(:racer).group("racer_id").count(:racer_id).sort_by {|_key, value| value}.reverse.each do |result| %>
         <tr>
-          <td><%= Racer.find(result[0]).first_name %></td>
-          <td><%= Racer.find(result[0]).last_name %></td>
-          <td><%= link_to result[1], racer_path(Racer.find(result[0])) %></td>
+          <td><%= link_to Racer.find(result[0]).first_name + " " + Racer.find(result[0]).last_name, racer_path(Racer.find(result[0])) %></td>
+          <td><%= result[1] %></td>
       <% end %>
       </tbody>
     </table>
