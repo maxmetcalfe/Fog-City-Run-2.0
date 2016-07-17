@@ -29,6 +29,14 @@
       <h4><i>PR: <%= @racer.results.order(:time).first.time%></i></h4>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= bar_chart Result.where(racer_id: @racer.id).group(:rank).count, xtitle: "Finish Place", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["green "]%>
+    </div>
+    <div class="col-md-4">
+      <%= bar_chart Result.where(racer_id: @racer.id).group(:bib).count, xtitle: "Bib #{}", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["red"]%>
+    </div>
+  </div>
   <table class="table table-hover table-bordered">
   <thead>
   <tr>
