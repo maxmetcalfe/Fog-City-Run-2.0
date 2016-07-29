@@ -14,11 +14,12 @@ body.welcome {
 	padding-top: 10%;
 	background: transparent;
 	font-size: 16px;
-	background-image: url("photo.png");
+	background-image: url("photo.jpg");
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 h1 {
