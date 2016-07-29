@@ -3,6 +3,6 @@ development:
   encoding: unicode
   database: fogcityrun
   pool: 5
-  username: max
+  username: maxmetcalfe
   password:
   host: localhost
