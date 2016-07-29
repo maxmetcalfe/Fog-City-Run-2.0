@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518034411) do
+ActiveRecord::Schema.define(version: 20160728160247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160518034411) do
     t.integer  "rank"
     t.integer  "bib"
     t.integer  "racer_id"
-    t.string   "group"
+    t.string   "group_name"
     t.string   "time"
     t.integer  "race_id"
     t.datetime "created_at", null: false

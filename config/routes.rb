@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get '/count' => 'pages#count'
   get '/records' => 'pages#records'
   get '/import' => 'pages#import'
+  get '/loop_beer' => 'pages#loop_beer'
 end

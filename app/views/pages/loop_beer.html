@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Records</title>
+  <title>Loop - Beer - Loop Records</title>
 </head>
 <nav class="navbar navbar-default navbar-fixed-top">
   <a class="navbar-brand" href="#"><b>Fog City Run</b></a>
@@ -18,10 +18,10 @@
     <li class="nav-item">
       <a class="nav-link" <%= link_to 'Racer Count', count_path %></a>
     </li>
-    <li class="nav-item active">
+    <li class="nav-item">
       <a class="nav-link" <%= link_to 'Records', records_path %></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item active">
       <a class="nav-link" <%= link_to 'Loop-Beer-Loop', loop_beer_path %></a>
     </li>
   </ul>
@@ -36,7 +36,7 @@
       </tr>
       </thead>
       <tbody>
-      <% Result.group(:racer_id).pluck('racer_id', 'min(time)').sort_by {|_key, value| value}.each do |result| %>
+      <% Result.where("group_name = ?", "Loop-Beer").group(:racer_id).pluck('racer_id', 'min(time)').sort_by {|_key, value| value}.each do |result| %>
         <tr>
           <td><%= link_to Racer.find(result[0]).first_name + " " + Racer.find(result[0]).last_name, racer_path(Racer.find(result[0])) %></td>
           <td><%= result[1] %>
