@@ -30,6 +30,7 @@
   <tr>
     <th>Rank</th>
     <th>Bib</th>
+    <th>Group</th>
     <th>Racer</th>
     <th>Time</th>
   </tr>
@@ -39,6 +40,7 @@
     <tr>
       <td><%= result.rank %></td>
       <td><%= result.bib %></td>
+      <td><%= result.group_name %></td>
       <td><%= link_to result.racer.first_name + ' ' + result.racer.last_name, racer_path(result.racer)%> </td>
       <td><%= result.time %></td>
     </tr>
