@@ -7,7 +7,7 @@ class ResultsController < ApplicationController
 
   # Show all results
   def index
-    @results = Result.all
+    redirect_to racers_path
   end
 
   # Show result by id
