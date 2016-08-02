@@ -46,7 +46,7 @@
       </tr>
       </thead>
       <tbody>
-      <% Result.joins(:race).group("race_id").count(:race_id).sort_by { |k| k[0]}.reverse.each do |result| %>
+      <% @races.joins(:results).group("race_id").count(:race_id).sort_by { |k| k[0]}.reverse.each do |result| %>
         <tr>
           <td><%= link_to Race.find(result[0]).date, race_path(Race.find(result[0])) %></td>
           <td><%= result[1] %></td>
