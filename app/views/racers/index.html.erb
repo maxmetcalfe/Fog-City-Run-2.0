@@ -46,7 +46,8 @@
       </tr>
       </thead>
       <tbody>
-      <% Result.joins(:racer).group("racer_id").count(:racer_id).sort_by {|_key, value| value}.reverse.each do |result| %>
+      <% @racers.joins(:results).group("racer_id").count(:racer_id).sort_by {|_key, value| value}.reverse.each do |result| %>
+
         <tr>
           <td><%= link_to Racer.find(result[0]).first_name + " " + Racer.find(result[0]).last_name, racer_path(Racer.find(result[0])) %></td>
           <td><%= result[1] %></td>
