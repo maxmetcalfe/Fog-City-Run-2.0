@@ -25,7 +25,7 @@ class Result < ActiveRecord::Base
       end
 
       # Create a new result
-      Result.create!(:rank => d["rank"], :bib => d["bib"],  :racer_id => racer_id, :group => d["group"], :time => d["time"],  :race_id => race_id, :id => Result.maximum(:id).next)
+      Result.create!(:rank => d["rank"], :bib => d["bib"],  :racer_id => racer_id, :group_name => d["group_name"], :time => d["time"],  :race_id => race_id, :id => Result.maximum(:id).next)
 
     end
   end
@@ -33,7 +33,7 @@ class Result < ActiveRecord::Base
   validates :rank, presence: true
   validates :bib, presence: true
   validates :racer_id, presence: true
-  validates :group, presence: true
+  validates :group_name, presence: true
   validates :time, presence: true
   validates :race_id, presence: true
 end

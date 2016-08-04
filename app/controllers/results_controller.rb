@@ -63,6 +63,6 @@ class ResultsController < ApplicationController
   #Permit parameters when creating result
   private
   def result_params
-    params.require(:result).permit(:rank, :bib, :racer_id, :group, :time, :race_id)
+    params.require(:result).permit(:rank, :bib, :racer_id, :group_name, :time, :race_id)
   end
 end
