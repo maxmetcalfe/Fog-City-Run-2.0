@@ -18,7 +18,7 @@
       <li class="nav-item">
       <a class="nav-link" <%= link_to 'Records', records_path %></a>
     </li>
-    <li class="nav-item active">
+    <li class="nav-item">
       <a class="nav-link" <%= link_to 'Loop-Beer-Loop', loop_beer_path %></a>
     </li>
   </ul>
@@ -44,7 +44,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-large-1">
-      <%= line_chart @results_to_show, colors: ["blue"] %>
+      <%= line_chart @results_to_show, colors: ["blue"], xtitle: "Date", ytitle: "Finish Time (seconds)" %>
     </div>
   </div>
   <div class="row">
