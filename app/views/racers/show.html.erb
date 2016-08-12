@@ -41,6 +41,12 @@
       <%= bar_chart Result.where(racer_id: @racer.id).group(:bib).count, xtitle: "Bib #{}", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["red"]%>
     </div>
   </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-large-1">
+      <%= line_chart @results_to_show, colors: ["blue"] %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-3">
     <h4>Races</h4>
