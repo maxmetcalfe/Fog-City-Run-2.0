@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Racers</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <nav class="navbar navbar-default navbar-fixed-top">
   <a class="navbar-brand" href="<%= root_path %>"><b>Fog City Run</b> </a>
@@ -23,30 +24,42 @@
     </li>
   </ul>
 </nav>
-<body style="padding-top: 40px">
+<body style="padding-top: 70px">
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-5">
+    <div class="panel panel-default">
+    <div class="panel-heading">Racer Info</div>
+    <div class="panel-body">
       <h3> <%= @racer.first_name %> <%= @racer.last_name %></h3>
       <h4><i>Races: <%= @racer.results.count %></i></h4>
-      <h4> <%= "Longest Streak: " + @longest_streak_count.to_s %></h4>
-      <h4> <%= "Current Streak: " + @current_streak.to_s %></h4>
-      <h4><i>PR: <%= @racer.results.order(:time).first.time%></i></h4>
-      <h4><i>Loop-Beer Runs: <%= @racer.results.where("group_name = ?", "Loop-Beer").count %></i></h4>
+      <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
+      <h4>Loop-Beer Runs: <%= @racer.results.where("group_name = ?", "Loop-Beer").count %></h4>
+      </div>
+      </div>
+    </div>
+    <div class="col-sm-5">
+    <div class="panel panel-default">
+    <div class="panel-heading">Streak Info</div>
+    <div class="panel-body">
+    <h4><%= "Current Streak: " + @current_streak.to_s %> <i class="fa fa-fire" style="color:red"></i></h4>
+    <h4><%= "Longest Streak: " + @longest_streak_count.to_s %> <i class="fa fa-fire" style="color:red" ></i></h4>
+      </div>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-3">
-      <%= bar_chart Result.where(racer_id: @racer.id).group(:rank).count, xtitle: "Finish Place", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["green "]%>
+      <%= bar_chart Result.where(racer_id: @racer.id).group(:rank).count, xtitle: "Finish Place", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["#52a351"]%>
     </div>
     <div class="col-md-3">
-      <%= bar_chart Result.where(racer_id: @racer.id).group(:bib).count, xtitle: "Bib #{}", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["red"]%>
+      <%= bar_chart Result.where(racer_id: @racer.id).group(:bib).count, xtitle: "Bib #{}", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["#ff8080"]%>
     </div>
   </div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-large-1">
-      <%= line_chart @results_to_show, colors: ["blue"], xtitle: "Date", ytitle: "Finish Time (seconds)" %>
+      <%= line_chart @results_to_show, colors: ["#4689ce"], xtitle: "Date", ytitle: "Finish Time (seconds)" %>
     </div>
   </div>
   <div class="row">
