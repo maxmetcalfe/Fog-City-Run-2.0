@@ -17,10 +17,43 @@ class RacersController < ApplicationController
     return hours.to_i * 3600 + minutes.to_i * 60 + seconds.to_i
   end
 
+  def get_streak_calendar()
+    @racer = Racer.find(params[:id])
+    open_dates = []
+    @open_dates = open_dates.push '2013-01-16'.to_date
+    while @open_dates[-1] < Date.today - 1.week
+      @open_dates = @open_dates.push @open_dates[-1].advance(:weeks => 1)
+    end
+    @races_run = @racer.results.joins(:race).map {|result| Race.find(result.race_id).date }
+    @longest_streak_count = 0
+    @streak = []
+    @current_streak = 0
+    for o in @open_dates
+      @found = 0
+      for r in @races_run
+        if o == r
+          @streak = @streak.push r
+          if @streak.length > @longest_streak_count
+            @longest_streak_count = @streak.length
+          end
+          @found = 1
+          if '2016-8-17' == @streak[-1]
+            @current_streak = @streak
+          end
+        end
+      end
+      if @found == 0
+        @streak = []
+      end
+    end
+    return @longest_streak_count, @current_streak_count
+  end
+
   # Show racer by id
   def show
     @racer = Racer.find(params[:id])
     @results_to_show = @racer.results.joins(:race).where(group_name: "ALL").map {|result| [Race.find(result.race_id).date, to_seconds(result.time)] }
+    @longest_streak_count, @current_streak_count = get_streak_calendar()
   end
 
   # Delete racer

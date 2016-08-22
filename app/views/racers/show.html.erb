@@ -29,6 +29,8 @@
     <div class="col-sm-5">
       <h3> <%= @racer.first_name %> <%= @racer.last_name %></h3>
       <h4><i>Races: <%= @racer.results.count %></i></h4>
+      <h4> <%= "Longest Streak: " + @longest_streak_count.to_s %></h4>
+      <h4> <%= "Current Streak: " + @current_streak.to_s %></h4>
       <h4><i>PR: <%= @racer.results.order(:time).first.time%></i></h4>
       <h4><i>Loop-Beer Runs: <%= @racer.results.where("group_name = ?", "Loop-Beer").count %></i></h4>
     </div>
