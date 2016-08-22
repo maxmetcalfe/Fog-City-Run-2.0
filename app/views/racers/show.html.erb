@@ -31,8 +31,8 @@
     <div class="panel panel-default">
     <div class="panel-heading">Racer Info</div>
     <div class="panel-body">
-      <h3> <%= @racer.first_name %> <%= @racer.last_name %></h3>
-      <h4><i>Races: <%= @racer.results.count %></i></h4>
+      <h2><%= @racer.first_name %> <%= @racer.last_name %></h2>
+      <h4>Races: <%= @racer.results.count %></h4>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
       <h4>Loop-Beer Runs: <%= @racer.results.where("group_name = ?", "Loop-Beer").count %></h4>
       </div>
@@ -42,7 +42,7 @@
     <div class="panel panel-default">
     <div class="panel-heading">Streak Info</div>
     <div class="panel-body">
-    <h4><%= "Current Streak: " + @current_streak.to_s %> <i class="fa fa-fire" style="color:red"></i></h4>
+    <h4><%= "Current Streak: " + @current_streak.to_s %> <i class="fa fa-fire" style="color:#f6b417"></i></h4>
     <h4><%= "Longest Streak: " + @longest_streak_count.to_s %> <i class="fa fa-fire" style="color:red" ></i></h4>
       </div>
       </div>

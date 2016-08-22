@@ -37,8 +37,8 @@ class RacersController < ApplicationController
             @longest_streak_count = @streak.length
           end
           @found = 1
-          if '2016-8-17' == @streak[-1]
-            @current_streak = @streak
+          if @open_dates[-1] == @streak[-1]
+            @current_streak = @streak.length
           end
         end
       end
