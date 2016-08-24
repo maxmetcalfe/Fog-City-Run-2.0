@@ -42,8 +42,8 @@
     <div class="panel panel-default">
     <div class="panel-heading">Streak Info</div>
     <div class="panel-body">
-    <h4><%= "Current Streak: " + @current_streak.to_s %> <i class="fa fa-fire" style="color:#f6b417"></i></h4>
-    <h4><%= "Longest Streak: " + @longest_streak_count.to_s %> <i class="fa fa-fire" style="color:red" ></i></h4>
+    <h3 style="color:#f6b417"><i class="fa fa-trophy fa-2x" style="color:#f6b417"></i>Current: <%= @current_streak.to_s %></h3>
+    <h3 style="color:red"><i class="fa fa-trophy fa-2x" style="color:red"></i>Longest: <%= @longest_streak_count.to_s %></h3>
       </div>
       </div>
     </div>
