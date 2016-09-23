@@ -7,8 +7,8 @@ class Result < ActiveRecord::Base
   def self.upload(file, date)
       out_string = ""
       new_results = []
-      puts file
-      puts date
+
+      puts "Uploading results for date: " + date
 
       if file
         CSV.foreach(file.path, headers: true) do |row|
@@ -23,10 +23,10 @@ class Result < ActiveRecord::Base
           end
 
           # Handle race
-          found_race = Race.where(date: '01-01-2001')
+          found_race = Race.where(date: date)
           if found_race.blank?
             race_id = Race.maximum(:id).next
-            Race.create!(:date => '01-01-2001', :id => Race.maximum(:id).next)
+            Race.create!(:date => date, :id => Race.maximum(:id).next)
           else
             race_id = found_race.first.id
           end

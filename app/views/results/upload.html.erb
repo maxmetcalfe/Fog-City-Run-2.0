@@ -45,6 +45,9 @@
       <%= form_tag upload_results_path, multipart: true do %>
         <%=file_field_tag :file%>
         <br>
+        Date: <%=date_field_tag :date%>
+        <br>
+        <br>
         <%=submit_tag "Import"%>
       <% end %>
     </div>
