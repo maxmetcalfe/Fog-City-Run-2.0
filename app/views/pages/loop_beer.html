@@ -25,6 +25,14 @@
       <a class="nav-link" <%= link_to 'Loop-Beer-Loop', loop_beer_path %></a>
     </li>
   </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <% if current_user %>
+    <%= current_user.name %></i> |  
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <% else %>
+    <%= link_to "Sign in", "/auth/facebook", id: "sign_in" %>
+    <% end %>
+</ul>
 </nav>
 <body style="padding-top: 60px">
 <div class="container-fluid">

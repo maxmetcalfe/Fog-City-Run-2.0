@@ -26,11 +26,20 @@
 <body style="padding-top: 60px">
 <div class="container-fluid">
   <div class="row">
-      <h4> Import Results</h4>
-      <%= form_tag import_results_path, multipart: true do %>
+    <div class="col-lg-5">
+      <h2> Import Results</h2>
+      <%= form_tag upload_results_path, multipart: true do %>
         <%=file_field_tag :file%>
-        <%=submit_tag "Import CSV"%>
+        <br>
+        <%=submit_tag "Import"%>
       <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-5">
+      <h2> <%= @results %> </h2>
+      <%= text_area :sender, :size=>150, :value => "Test" %>
+    </div>
   </div>
 </div>
 </body>

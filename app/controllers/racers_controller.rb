@@ -67,6 +67,12 @@ class RacersController < ApplicationController
     @racer = Racer.find(params[:id])
   end
 
+  # claim this racer
+  def claim_this_racer
+    racer = Racer.find(params[:id])
+    racer = Racer.find(params[:id])
+  end
+
   # Create article
   def create
   	@racer = Racer.new(racer_params)

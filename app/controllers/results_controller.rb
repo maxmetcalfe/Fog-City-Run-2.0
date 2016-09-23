@@ -4,10 +4,11 @@ class ResultsController < ApplicationController
   @results = Result.includes(:race)
 
   skip_before_action :verify_authenticity_token, only: [:import]
+  before_filter :must_be_admin, only: [:edit, :import, :upload]
 
   # Show all results
   def index
-    redirect_to racers_path
+    @results = Result.all
   end
 
   # Show result by id
@@ -20,7 +21,7 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     @result.destroy
 
-    redirect_to results_path
+    redirect_to racers_path
   end
 
   # Edit result
@@ -47,17 +48,29 @@ class ResultsController < ApplicationController
   def update
     @result = Result.find(params[:id])
     if @result.update(result_params)
-      redirect_to @result
+      redirect_to Race.find(@result.race_id)
     else
       render 'edit'
     end
   end
 
-  # import CSV
+  # import JSON
   def import
     Result.import(params)
     #render plain: "Reponse from results import"
     redirect_to root_url, notice: "Results imported successfully"
+  end
+
+  # import file
+  def upload
+    @upload_result_ids = Result.upload(params[:file], params[:date])
+    puts "We just uploaded the following results: " + @upload_result_ids.to_s
+  end
+
+  def must_be_admin
+    unless current_user && current_user.admin?
+      redirect_to root_path, notice: "Some message"
+    end
   end
 
   #Permit parameters when creating result

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :results do
     collection { post :import }
+    collection { post :upload }
+    collection { post :read_import }
   end
 
   resources :races do
@@ -18,6 +20,12 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get '/count' => 'pages#count'
   get '/records' => 'pages#records'
-  get '/import' => 'pages#import'
+  get '/import' => 'results#upload'
   get '/loop_beer' => 'pages#loop_beer'
+
+  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
+  match 'sessions/:id/claim' => 'sessions#claim', via: [:patch, :put], as: :claim
+
 end

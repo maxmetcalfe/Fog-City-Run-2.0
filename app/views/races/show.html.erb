@@ -22,6 +22,14 @@
       <a class="nav-link" <%= link_to 'Loop-Beer-Loop', loop_beer_path %></a>
     </li>
   </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <% if current_user %>
+    <%= current_user.name %></i> |  
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <% else %>
+    <%= link_to "Sign in", "/auth/facebook", id: "sign_in" %>
+    <% end %>
+</ul>
 </nav>
 <body style="padding-top: 60px">
 <div class="container-fluid">
@@ -33,6 +41,7 @@
     <th>Group</th>
     <th>Racer</th>
     <th>Time</th>
+    <th>Actions</th>
   </tr>
   </thead>
   <tbody>
@@ -41,8 +50,10 @@
       <td><%= result.rank %></td>
       <td><%= result.bib %></td>
       <td><%= result.group_name %></td>
-      <td><%= link_to result.racer.first_name + ' ' + result.racer.last_name, racer_path(result.racer)%> </td>
+      <td><%= link_to result.racer.first_name + ' ' + result.racer.last_name, racer_path(result.racer)%></td>
       <td><%= result.time %></td>
+      <td><%= link_to 'Edit', edit_result_path(result) %> |   <%= link_to 'Destroy', 
+              result_path(result), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   </tbody>
