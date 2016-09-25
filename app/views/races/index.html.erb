@@ -40,14 +40,7 @@
         <% end %>
     </div>
   </form>
-  <ul class="nav navbar-nav navbar-right">
-    <% if current_user %>
-    <%= current_user.name %></i> |  
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-    <% else %>
-    <%= link_to "Sign in", "/auth/facebook", id: "sign_in" %>
-    <% end %>
-</ul>
+  <%= render "shared/login" %>
 </nav>
 <body style="padding-top: 60px">
 <div class="container-fluid">
