@@ -3,12 +3,29 @@ class Result < ActiveRecord::Base
     belongs_to :race
 
   require 'csv'
+  require 'date'
 
   def self.upload(file, date)
       out_string = ""
       new_results = []
 
       puts "Uploading results for date: " + date.to_s
+
+      # Check if date is valid
+      unless date.nil?
+        begin
+          Date.parse(date.to_s)
+        rescue ArgumentError
+          return "FAILURE_DATE"
+        end
+      end
+
+      # Check if date is supplied, but file is missing
+      unless date.nil?
+        if file.nil?
+          return "FAILURE_FILE"
+        end
+      end
 
       if file
         CSV.foreach(file.path, headers: true) do |row|

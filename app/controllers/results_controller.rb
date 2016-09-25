@@ -63,8 +63,15 @@ class ResultsController < ApplicationController
 
   # import file
   def upload
-    @upload_result_ids = Result.upload(params[:file], params[:date])
-    puts "We just uploaded the following results: " + @upload_result_ids.to_s
+    @result = Result.upload(params[:file], params[:date])
+    if @result == "FAILURE_DATE"
+      flash.now[:danger] = "Invalid Date"
+    elsif @result == "FAILURE_FILE"
+      flash.now[:danger] = "Ooops. You forgot a file!"
+    elsif @result.any?
+      flash.now[:success] = "Success"
+    end
+    puts "We just uploaded the following results: " + @result.to_s
   end
 
   def must_be_admin
