@@ -76,7 +76,7 @@ class ResultsController < ApplicationController
 
   def must_be_admin
     unless current_user && current_user.admin?
-      redirect_to root_path, notice: "Some message"
+      redirect_to root_path
     end
   end
 
