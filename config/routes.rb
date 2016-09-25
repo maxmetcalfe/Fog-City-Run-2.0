@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     resource :results
     collection { post :import }
   end
+
+  resources :users do
+  end
  
   root 'welcome#index'
   get 'welcome/index'
