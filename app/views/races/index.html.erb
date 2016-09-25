@@ -45,6 +45,9 @@
       <tr>
         <th>Date</th>
         <th>Racer Count</th>
+        <% if current_user and current_user.admin? %>
+        <th>Actions</th>
+        <% end %>
       </tr>
       </thead>
       <tbody>
@@ -52,6 +55,10 @@
         <tr>
           <td><%= link_to Race.find(result[0]).date, race_path(Race.find(result[0])) %></td>
           <td><%= result[1] %></td>
+          <% if current_user and current_user.admin? %>
+            <td><%= link_to 'Edit', race_path(Race.find(result[0])) %> | <%= link_to 'Destroy',
+                  race_path(Race.find(result[0])), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         </tr>
       <% end %>
       </tbody>

@@ -18,6 +18,7 @@ class RacesController < ApplicationController
   # Delete race
   def destroy
     @race = Race.find(params[:id])
+    @race.results.destroy_all
     @race.destroy
 
     redirect_to races_path

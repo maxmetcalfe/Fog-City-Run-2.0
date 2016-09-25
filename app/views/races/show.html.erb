@@ -35,7 +35,9 @@
     <th>Group</th>
     <th>Racer</th>
     <th>Time</th>
-    <th>Actions</th>
+    <% if current_user and current_user.admin? %>
+      <th>Actions</th>
+    <% end %>
   </tr>
   </thead>
   <tbody>
@@ -46,7 +48,7 @@
       <td><%= result.group_name %></td>
       <td><%= link_to result.racer.first_name + ' ' + result.racer.last_name, racer_path(result.racer)%></td>
       <td><%= result.time %></td>
-      <td><%= link_to 'Edit', edit_result_path(result) %> |   <%= link_to 'Destroy', 
+      <td><%= link_to 'Edit', edit_result_path(result) %> |   <%= link_to 'Destroy',
               result_path(result), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
