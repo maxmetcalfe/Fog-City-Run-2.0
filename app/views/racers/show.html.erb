@@ -37,7 +37,15 @@
       <h4>Races: <%= @racer.results.count %></h4>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
       <h4>Loop-Beer Runs: <%= @racer.results.where("group_name = ?", "Loop-Beer").count %></h4>
-      </div>
+      <% if !current_user.nil? and current_user.racer_id.to_i == @racer.id.to_i %>
+      (This is you) <%= link_to "Edit", edit_user_path %>
+      <%= link_to image_tag("icon-strava-blue.svg", height: 18), current_user.strava_link, :class => "fa-fw fa-lg" %>
+      <% elsif User.all(&:racer_id).include? @racer.id %>
+      Another user has claimed this racer.
+      <% elsif !current_user.nil? %>
+      <%= link_to("Claim this racer", user_path(current_user, :racer_id => @racer.id), :method => :put, :confirm => "Are you sure?")%>
+      <% end %>
+       </div>
       </div>
     </div>
     <div class="col-sm-5">

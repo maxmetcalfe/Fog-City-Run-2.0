@@ -43,19 +43,19 @@
     <table class="table table-hover table-bordered">
       <thead>
       <tr>
-        <th>Racer</th>
-        <th>Results</th>
+        <th>Name</th>
+        <th>Admin Permissions </th>
+        <th>Racer ID</th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
-      <% @racers.joins(:results).group("racer_id").count(:racer_id).sort_by {|_key, value| value}.reverse.each do |result| %>
-
+      <% @users.each do |user| %>
         <tr>
-          <td><%= link_to Racer.find(result[0]).first_name + " " + Racer.find(result[0]).last_name, racer_path(Racer.find(result[0])) %>
-          <% if !current_user.nil? and !User.where(racer_id: Racer.find(result[0]).id).pluck(:strava_link).empty? %>
-          <%= link_to image_tag("icon-strava-blue.svg", height: 18), current_user.strava_link, :class => "fa-fw fa-lg" %></td>
-          <% end %>
-          <td><%= result[1] %></td>
+          <td><%= user.name %></td>
+          <td><%= user.admin %></td>
+          <td><%= user.racer_id %></td>
+          <td><%= link_to "View", user_path(user) %></td>
       <% end %>
       </tbody>
     </table>

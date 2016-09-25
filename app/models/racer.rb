@@ -11,7 +11,7 @@ class Racer < ActiveRecord::Base
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       Racer.create!(:first_name => row.to_hash["first_name"], :last_name => row.to_hash["last_name"], :id => Racer.maximum(:id).next)
-	end
+	  end
   end
 
   validates :first_name, presence: true
