@@ -24,9 +24,11 @@
     <li class="nav-item">
       <a class="nav-link" <%= link_to 'Loop-Beer-Loop', loop_beer_path %></a>
     </li>
+    <% if current_user %>
     <li class="nav-item active">
       <a class="nav-link" <%= link_to 'Import', '/import' %></a>
     </li>
+    <% end %>
   </ul>
   <ul class="nav navbar-nav navbar-right">
     <% if current_user %>
@@ -51,15 +53,6 @@
         <%=submit_tag "Import"%>
       <% end %>
     </div>
-<!--   <div class="row">
-    <div class="col-lg-5"> 
-    <h2> Edit </h2>
-        <%= form_tag(:action => "read_import") do %>
-          <%= text_area_tag 'body', @results, size: "100x10" %>
-        <%=submit_tag "Submit"%>
-        <% end %>
-    </div>
-  </div> -->
 </div>
 </body>
 </html>

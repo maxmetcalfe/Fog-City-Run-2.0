@@ -18,9 +18,11 @@
     <li class="nav-item">
       <a class="nav-link" <%= link_to 'Racer Count', count_path %></a>
     </li>
-    <li class="nav-item active">
-      <a class="nav-link" <%= link_to 'Import', import_path %></a>
+    <% if current_user.admin? %>
+    <li class="nav-item">
+      <a class="nav-link" <%= link_to 'Import', '/import' %></a>
     </li>
+    <% end %>
   </ul>
 </nav>
 <body style="padding-top: 60px">

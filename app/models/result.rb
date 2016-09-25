@@ -8,7 +8,7 @@ class Result < ActiveRecord::Base
       out_string = ""
       new_results = []
 
-      puts "Uploading results for date: " + date
+      puts "Uploading results for date: " + date.to_s
 
       if file
         CSV.foreach(file.path, headers: true) do |row|
