@@ -43,7 +43,7 @@
       <% elsif User.all(&:racer_id).include? @racer.id %>
       Another user has claimed this racer.
       <% elsif !current_user.nil? %>
-      <%= link_to("Claim this racer", user_path(current_user, :racer_id => @racer.id), :method => :put, :confirm => "Are you sure?")%>
+      <%= link_to("Claim this racer", edit_user_path(current_user.id), :method => :put, :confirm => "Are you sure?")%>
       <% end %>
        </div>
       </div>
