@@ -49,7 +49,7 @@
       <td><%= link_to result.racer.first_name + ' ' + result.racer.last_name, racer_path(result.racer)%></td>
       <td><%= result.time %></td>
       <td><%= link_to 'Edit', edit_result_path(result) %> |   <%= link_to 'Destroy',
-              result_path(result), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              result_path(result), method: :delete, data: { confirm: 'Are you sure you want to delete the result for ' + result.racer.first_name.to_s + ' ' + result.racer.last_name.to_s } %></td>
     </tr>
   <% end %>
   </tbody>
