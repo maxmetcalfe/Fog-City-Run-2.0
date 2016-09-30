@@ -42,6 +42,7 @@
   </p>
   </p>
     <strong>Strava Link:</strong>
+    <%= link_to image_tag("icon-strava-blue.svg", height: 18), current_user.strava_link, :class => "fa-fw fa-lg" %>
     <%= @user.strava_link %>
   </p>
   <%= link_to 'Back to racers', racers_path %></a>
