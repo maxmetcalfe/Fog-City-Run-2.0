@@ -24,49 +24,62 @@
 </nav>
 <body style="padding-top: 60px">
 <div class="container-fluid">
-<h2> New Result </h2>
-<%= form_for @result do |r| %>
- 
-  <% if @result.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@result.errors.count, "error") %> prohibited
-        this result from being saved:
-      </h2>
-      <ul>
-        <% @result.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <h2> New Result </h2>
     </div>
-  <% end %>
-  <p>
-    <%= r.label :rank %><br>
-    <%= r.text_field :rank %>
-  </p>
-  <p>
-    <%= r.label :bib %><br>
-    <%= r.text_field :bib %>
-  </p>
-  <p>
-    <%= r.label :racer_id %><br>
-    <%= r.text_field :racer_id %>
-  </p>
-  <p>
-    <%= r.label :group_name %><br>
-    <%= r.text_field :group_name, :value => 'ALL' %>
-  </p>
-  <p>
-    <%= r.label :time %><br>
-    <%= r.text_field :time, :value => '00:00:00.0' %>
-  </p>
-  <p>
-    <%= r.label :race_id %><br>
-    <%= r.text_field :race_id, :value => params[:race_id] %>
-  </p>
-  <p>
-    <%=button_tag "Submit", class: "btn btn-default"%>
-  </p>
+  </div>
+  <%= form_for @result, :html => {:class => "form-horizontal "} do |r| %>
+    <% if @result.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@result.errors.count, "error") %> prohibited
+          this result from being saved:
+        </h2>
+        <ul>
+          <% @result.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <div class="form-group">
+    <%= r.label :bib, "Bib:", class: "col-md-1 control-label" %>
+      <div class="col-md-3">
+        <%= r.text_field :bib, class: "form-control", :value => Result.where(:race_id => params[:race_id]).maximum(:bib) + 1 %>
+      </div>
+      ** Auto: Highest bib number in race + 1
+  </div>
+  <div class="form-group">
+    <%= r.label :racer_id, "Racer:", class: "col-md-1 control-label" %>
+      <div class="col-md-3">
+        <%= r.text_field :racer_id, class: "form-control" %>
+      </div>
+      ** racer_id, not name
+  </div>
+  <div class="form-group">
+    <%= r.label :group_name, "Group Name:", class: "col-md-1 control-label" %>
+      <div class="col-md-3">
+        <%= r.text_field :group_name, class: "form-control", :value => 'ALL' %>
+      </div>
+  </div>
+  <div class="form-group">
+    <%= r.label :time, "Time:", class: "col-md-1 control-label" %>
+      <div class="col-md-3">
+        <%= r.text_field :time, class: "form-control", :value => '00:00:00.0' %>
+      </div>
+  </div>
+  <div class="form-group">
+    <%= r.label :race_id, "Race:", class: "col-md-1 control-label" %>
+      <div class="col-md-3">
+        <%= r.text_field :race_id, class: "form-control", :value => params[:race_id] %>
+      </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-1 col-md-offset-1">
+    <%=button_tag "Submit", class: "btn btn-success"%>
+    </div>
+  </div>
   </div>
   <% end %>
 </body>

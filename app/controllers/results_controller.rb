@@ -21,6 +21,7 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     @race_id = @result.race_id
     @result.destroy
+    validate_ranks(@result.race_id)
 
     redirect_to Race.find(@race_id)
   end
@@ -32,7 +33,10 @@ class ResultsController < ApplicationController
 
   def create
   	@result = Result.new(result_params)
+    @result.rank = 0
+    @result.id = Result.maximum(:id).next
     if @result.save
+      validate_ranks(@result.race_id)
       redirect_to Race.find(@result.race_id)
     else
       render 'new'
@@ -48,7 +52,7 @@ class ResultsController < ApplicationController
   def update
     @result = Result.find(params[:id])
     if @result.update(result_params)
-      puts result_params
+      validate_ranks(@result.race_id)
       redirect_to Race.find(@result.race_id)
     else
       render 'edit'
@@ -58,7 +62,6 @@ class ResultsController < ApplicationController
   # import JSON
   def import
     Result.import(params)
-    #render plain: "Reponse from results import"
     redirect_to root_url, notice: "Results imported successfully"
   end
 
@@ -75,10 +78,21 @@ class ResultsController < ApplicationController
     puts "We just uploaded the following results: " + @result.to_s
   end
 
+  # Basic admin permissions
   def must_be_admin
     unless current_user && current_user.admin?
       redirect_to root_path
     end
+  end
+
+  # Sort and save the ranks for a particular race
+  def validate_ranks(race_id)
+     @results = Result.where(:race_id => race_id)
+     @sorted = @results.sort_by {|result| result.time}
+     for r in @sorted
+       r.rank = @sorted.index(r) + 1
+       r.save!
+     end
   end
 
   #Permit parameters when creating result
