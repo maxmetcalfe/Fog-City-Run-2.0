@@ -19,9 +19,10 @@ class ResultsController < ApplicationController
   # Delete result
   def destroy
     @result = Result.find(params[:id])
+    @race_id = @result.race_id
     @result.destroy
 
-    redirect_to racers_path
+    redirect_to Race.find(@race_id)
   end
 
   # Edit result
@@ -32,7 +33,7 @@ class ResultsController < ApplicationController
   def create
   	@result = Result.new(result_params)
     if @result.save
-      redirect_to @result
+      redirect_to Race.find(@result.race_id)
     else
       render 'new'
     end
@@ -40,7 +41,7 @@ class ResultsController < ApplicationController
 
   # New result
   def new
-  	@result = Result.new(result_params)
+    @result = Result.new
   end
 
   # Update result
@@ -82,6 +83,6 @@ class ResultsController < ApplicationController
   #Permit parameters when creating result
   private
   def result_params
-    params.permit(:rank, :bib, :racer_id, :group_name, :time, :race_id)
+    params.require(:result).permit(:rank, :bib, :racer_id, :group_name, :time, :race_id)
   end
 end
