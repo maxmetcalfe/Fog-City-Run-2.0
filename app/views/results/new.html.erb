@@ -31,7 +31,7 @@
     <div id="error_explanation">
       <h2>
         <%= pluralize(@result.errors.count, "error") %> prohibited
-        this article from being saved:
+        this result from being saved:
       </h2>
       <ul>
         <% @result.errors.full_messages.each do |msg| %>
@@ -54,11 +54,11 @@
   </p>
   <p>
     <%= r.label :group_name %><br>
-    <%= r.text_field :group_name %>
+    <%= r.text_field :group_name, :value => 'ALL' %>
   </p>
   <p>
     <%= r.label :time %><br>
-    <%= r.text_field :time %>
+    <%= r.text_field :time, :value => '00:00:00.0' %>
   </p>
   <p>
     <%= r.label :race_id %><br>

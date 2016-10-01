@@ -1,6 +1,6 @@
 class Result < ActiveRecord::Base
-    belongs_to :racer
-    belongs_to :race
+  belongs_to :racer
+  belongs_to :race
 
   require 'csv'
   require 'date'
