@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
   end
 
-  # New user
+  # New users
   def new
   	@user = User.new
   end

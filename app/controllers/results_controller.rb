@@ -29,7 +29,6 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
   end
 
-  # Create article
   def create
   	@result = Result.new(result_params)
     if @result.save
@@ -41,7 +40,7 @@ class ResultsController < ApplicationController
 
   # New result
   def new
-  	@result = Result.new
+  	@result = Result.new(result_params)
   end
 
   # Update result
@@ -83,6 +82,6 @@ class ResultsController < ApplicationController
   #Permit parameters when creating result
   private
   def result_params
-    params.require(:result).permit(:rank, :bib, :racer_id, :group_name, :time, :race_id)
+    params.permit(:rank, :bib, :racer_id, :group_name, :time, :race_id)
   end
 end

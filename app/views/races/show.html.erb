@@ -27,33 +27,38 @@
 </nav>
 <body style="padding-top: 60px">
 <div class="container-fluid">
-<table class="table table-hover table-bordered">
-  <thead>
-  <tr>
-    <th>Rank</th>
-    <th>Bib</th>
-    <th>Group</th>
-    <th>Racer</th>
-    <th>Time</th>
-    <% if current_user and current_user.admin? %>
-      <th>Actions</th>
-    <% end %>
-  </tr>
-  </thead>
-  <tbody>
-  <% @race.results.order(:rank).each do |result| %>
+  <div class="row">
+  <table class="table table-hover table-bordered">
+    <thead>
     <tr>
-      <td><%= result.rank %></td>
-      <td><%= result.bib %></td>
-      <td><%= result.group_name %></td>
-      <td><%= link_to result.racer.first_name + ' ' + result.racer.last_name, racer_path(result.racer)%></td>
-      <td><%= result.time %></td>
-      <td><%= link_to 'Edit', edit_result_path(result) %> |   <%= link_to 'Destroy',
-              result_path(result), method: :delete, data: { confirm: 'Are you sure you want to delete the result for ' + result.racer.first_name.to_s + ' ' + result.racer.last_name.to_s } %></td>
+      <th>Rank</th>
+      <th>Bib</th>
+      <th>Group</th>
+      <th>Racer</th>
+      <th>Time</th>
+      <% if current_user and current_user.admin? %>
+        <th>Actions</th>
+      <% end %>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <% @race.results.order(:rank).each do |result| %>
+      <tr>
+        <td><%= result.rank %></td>
+        <td><%= result.bib %></td>
+        <td><%= result.group_name %></td>
+        <td><%= link_to result.racer.first_name + ' ' + result.racer.last_name, racer_path(result.racer)%></td>
+        <td><%= result.time %></td>
+        <td><%= link_to 'Edit', edit_result_path(result) %> |   <%= link_to 'Destroy',
+                result_path(result), method: :delete, data: { confirm: 'Are you sure you want to delete the result for ' + result.racer.first_name.to_s + ' ' + result.racer.last_name.to_s } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
+  <div class="row text-center">
+  <%= link_to 'New Result', new_result_path(@race.date), :class => "btn btn-success" %>
+  </div>
 </div>
 </body>
 </html>
