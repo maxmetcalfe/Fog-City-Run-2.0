@@ -38,6 +38,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:name, :racer_id, :strava_link)
+    params.require(:user).permit(:name, :racer_id, :strava_link)
   end
 end

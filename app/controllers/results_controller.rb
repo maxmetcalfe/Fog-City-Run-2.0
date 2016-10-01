@@ -48,6 +48,7 @@ class ResultsController < ApplicationController
   def update
     @result = Result.find(params[:id])
     if @result.update(result_params)
+      puts result_params
       redirect_to Race.find(@result.race_id)
     else
       render 'edit'
