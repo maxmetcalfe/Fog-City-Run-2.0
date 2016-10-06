@@ -28,6 +28,9 @@ class UsersController < ApplicationController
 
   # Update user
   def update
+    if !params[:user].nil?
+      params[:strava_link] = params[:user][:strava_link]
+    end
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to @user
@@ -38,6 +41,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :racer_id, :strava_link)
+    params.permit(:name, :racer_id, :strava_link)
   end
 end
