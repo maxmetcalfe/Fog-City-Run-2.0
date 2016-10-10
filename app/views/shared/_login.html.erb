@@ -1,11 +1,9 @@
-  <ul class="nav navbar-nav navbar-right">
-    <% if current_user and current_user.admin? %>
-    <%= current_user.name %></i> (Admin) |  
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-    <% elsif current_user %>
-    <%= current_user.name %> </i> |
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-    <% else %>
-    <%= link_to "Sign in", "/auth/facebook", id: "sign_in" %>
-    <% end %>
-</ul>
+<% if current_user and current_user.admin? %>
+<%= current_user.name %></i> (Admin) |  
+<%= link_to "Sign out", signout_path, id: "sign_out" %>
+<% elsif current_user %>
+<%= current_user.name %> </i> |
+<%= link_to "Sign out", signout_path, id: "sign_out" %>
+<% else %>
+<%= link_to "Sign in", "/auth/facebook", id: "sign_in" %>
+<% end %>

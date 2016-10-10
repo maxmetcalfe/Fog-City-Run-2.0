@@ -4,28 +4,6 @@
   <title>Racers</title>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <a class="navbar-brand" href="<%= root_path %>"><b>Fog City Run</b> </a>
-  <ul class="nav navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" <%= link_to 'Racers', racers_path %></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" <%= link_to 'Races', races_path %></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" <%= link_to 'Racer Count', count_path %></a>
-    </li>
-      <li class="nav-item">
-      <a class="nav-link" <%= link_to 'Records', records_path %></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" <%= link_to 'Loop-Beer-Loop', loop_beer_path %></a>
-    </li>
-    <%= render "shared/import_button" %>
-  </ul>
-  <%= render "shared/login" %>
-</nav>
 <body style="padding-top: 70px">
 <div class="container-fluid">
   <div class="row">
