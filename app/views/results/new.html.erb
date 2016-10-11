@@ -30,14 +30,12 @@
       <div class="col-md-3">
         <%= r.text_field :bib, class: "form-control", :value => Result.where(:race_id => params[:race_id]).maximum(:bib) + 1 %>
       </div>
-      ** Auto: Highest bib number in race + 1
   </div>
   <div class="form-group">
     <%= r.label :racer_id, "Racer:", class: "col-md-1 control-label" %>
       <div class="col-md-3">
-        <%= r.text_field :racer_id, class: "form-control" %>
+        <%= r.text_field :racer_id, class: "form-control", placeholder: "racer id" %>
       </div>
-      ** racer_id, not name
   </div>
   <div class="form-group">
     <%= r.label :group_name, "Group Name:", class: "col-md-1 control-label" %>

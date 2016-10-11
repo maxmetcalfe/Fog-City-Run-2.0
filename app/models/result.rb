@@ -51,7 +51,7 @@ class Result < ActiveRecord::Base
           # Get next results id
           result_id = Result.maximum(:id).next
 
-          Result.create!(:rank => row["Final Position"], :bib => row["Bib Number"],  :racer_id => racer_id, :group_name => row["Group"], :time => row["Total Elapsed Time"],  :race_id => race_id, :id => result_id)
+          Result.create!(:rank => row["Final Position"], :bib => row["Bib Number"],  :racer_id => racer_id, :group_name => row["Team"], :time => row["Total Elapsed Time"],  :race_id => race_id, :id => result_id)
 
           new_results.push(result_id)
         end
