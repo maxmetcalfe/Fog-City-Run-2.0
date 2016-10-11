@@ -9,4 +9,8 @@ class PagesController < ApplicationController
   def records
   end
 
+  def safety
+    render :layout => false
+  end
+
 end

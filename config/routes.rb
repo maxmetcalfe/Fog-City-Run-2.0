@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get '/records' => 'pages#records'
   get '/import' => 'results#upload'
   get '/loop_beer' => 'pages#loop_beer'
+  get '/safety' => 'pages#safety'
 
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
