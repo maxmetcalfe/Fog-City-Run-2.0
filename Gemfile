@@ -16,6 +16,7 @@ gem 'chartkick'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'rails_12factor'
 
 group :development, :test do
   gem 'byebug'
