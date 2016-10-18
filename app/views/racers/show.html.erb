@@ -21,7 +21,7 @@
       Another user has claimed this racer.
       <%= link_to image_tag("icon-strava-blue.svg", height: 30), User.where(:racer_id => @racer.id).first.strava_link, :class => "fa-fw fa-lg" %>
       <% elsif !current_user.nil? %>
-      <%= link_to("Claim", user_path(current_user.id, :racer_id => @racer.id ), :method => :put, :confirm => "Are you sure?", :class => "btn btn-success")%>
+      <%= link_to("Claim", edit_user_path(current_user), :class => "btn btn-success")%>
       <% end %>
       <h4>Races: <%= @racer.results.count %></h4>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>

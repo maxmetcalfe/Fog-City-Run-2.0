@@ -51,6 +51,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:first_name, :last_name, :password, :email, :strava_link, :racer_id)
+    params.require(:user).permit(:first_name, :last_name, :password, :email, :strava_link, :racer_id)
   end
 end
