@@ -1,6 +1,0 @@
-#Fog City Run#
-
-www.fogcityrun.com
-
-[id]: app/assets/images/photo.jpg  "Optional title attribute"
-![alt text][id]
