@@ -6,15 +6,16 @@
 </head>
 <body style="padding-top: 60px">
 <div class="container-fluid">
-  <h2> Your Profile </h2>
+  <h2> User </h2>
   <p>
-    <strong>Name:</strong>
-    <%= @user.name %>
+    <strong>First Name:</strong>
+    <%= @user.first_name %>
   </p>
   <p>
-    <strong>Provider:</strong>
-    <%= @user.provider %>
+    <strong>Last Name:</strong>
+    <%= @user.last_name %>
   </p>
+  <p>
     <strong>Admin:</strong>
     <%= @user.admin %>
   </p>
@@ -24,10 +25,9 @@
   </p>
   </p>
     <strong>Strava Link:</strong>
-    <%= link_to image_tag("icon-strava-blue.svg", height: 18), current_user.strava_link, :class => "fa-fw fa-lg" %>
     <%= @user.strava_link %>
   </p>
-  <%= link_to 'Back to racers', racers_path %></a>
+  <%= link_to 'Back to user', users_path %></a>
   </div>
 </body>
 </html>

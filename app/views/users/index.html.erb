@@ -9,7 +9,8 @@
     <table class="table table-hover table-bordered">
       <thead>
       <tr>
-        <th>Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
         <th>Admin Permissions </th>
         <th>Racer ID</th>
         <th>Actions</th>
@@ -18,10 +19,12 @@
       <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td><%= user.name %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
           <td><%= user.admin %></td>
           <td><%= user.racer_id %></td>
-          <td><%= link_to "View", user_path(user) %></td>
+          <td><%= link_to "View", user_path(user) %><%= link_to 'Destroy',
+                  user_path(user), method: :delete %></td>
       <% end %>
       </tbody>
     </table>

@@ -26,10 +26,9 @@ Rails.application.routes.draw do
   get '/import' => 'results#upload'
   get '/loop_beer' => 'pages#loop_beer'
   get '/safety' => 'pages#safety'
-
-  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
-  match 'auth/failure', to: redirect('/'), via: [:get, :post]
-  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
-  match 'sessions/:id/claim' => 'sessions#claim', via: [:patch, :put], as: :claim
+  get '/singup' => 'sessions#new'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
 
 end

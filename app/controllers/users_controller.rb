@@ -26,7 +26,17 @@ class UsersController < ApplicationController
   	@user = User.new
   end
 
-  # Update user
+  # Create user
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      flash[:notice] = "You signed up successfully"
+      redirect_to  login_path
+    else
+      render 'new'
+    end
+  end
+
   def update
     if !params[:user].nil?
       params[:strava_link] = params[:user][:strava_link]
@@ -41,6 +51,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:name, :racer_id, :strava_link)
+    params.require(:user).permit(:first_name, :last_name, :password, :email, :strava_link, :racer_id)
   end
 end
