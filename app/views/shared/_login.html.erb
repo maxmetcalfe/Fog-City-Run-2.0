@@ -1,8 +1,9 @@
 <% if current_user and current_user.admin? %>
-<%= current_user.first_name %> <%= current_user.last_name %></i> |  Admin
-<%= link_to "Log out", logout_path, method: :delete %>
+<%= current_user.first_name %> <%= current_user.last_name %></i> (Admin) |
+<%= link_to "Edit", edit_user_path(current_user) %> | <%= link_to "Log out", logout_path, method: :delete %>
 <% elsif current_user %>
-<%= current_user.first_name %> <%= current_user.last_name %></i>
+<%= current_user.first_name %> <%= current_user.last_name %></i> |
+<%= link_to "Log out", logout_path, method: :delete %>
 <% else %>
 <%= link_to "Log in", login_path %>
 <% end %>
