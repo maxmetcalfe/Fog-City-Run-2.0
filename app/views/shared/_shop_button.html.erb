@@ -1,0 +1,5 @@
+<% if current_user.present? %>
+<li class="nav-item">
+  <a class="nav-link" <%= link_to 'Shop', '/shop' %></a>
+</li>
+<% end %>

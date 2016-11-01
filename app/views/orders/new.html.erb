@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Orders</title>
+  <%= render "shared/navbar" %>
+</head>
+<body style="padding-top: 60px">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <h2> New Order </h2>
+    </div>
+  </div>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        The form contains <%= pluralize(@order.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form_for @order, :html => {:class => "form-horizontal "} do |u| %>
+  <div class="form-group">
+    <%= u.label :user_id, "User ID", class: "col-md-1 control-label" %>
+      <div class="col-md-3">
+        <%= u.text_field :user_id, class: "form-control", :value => params[:user_id]%>
+      </div>
+  </div>
+  <div class="form-group">
+    <%= u.label :item, "Item", class: "col-md-1 control-label" %>
+      <div class="col-md-3">
+        <%= u.text_field :item, class: "form-control", :value => params[:item] %>
+      </div>
+  </div>
+  <div class="form-group">
+    <%= u.label :size, "Size", class: "col-md-1 control-label" %>
+      <div class="col-md-3">
+        <%= u.text_field :size, class: "form-control", :value => params[:size] %>
+      </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-1 col-md-offset-1">
+    <%=button_tag "Submit", class: "btn btn-success"%>
+    </div>
+  </div>
+  <% end %>
+</body>
+</html>

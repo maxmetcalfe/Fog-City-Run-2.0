@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Orders</title>
+  <%= render "shared/navbar" %>
+</head>
+<body style="padding-top: 60px">
+<div class="container-fluid">
+    <table class="table table-hover table-bordered">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Item</th>
+        <th>Size</th>
+        <th>User</th>
+        <th>Delivered</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.item %></td>
+          <td><%= order.size %></td>
+          <td><%= order.user_id %></td>
+          <td><%= order.delivered %></td>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

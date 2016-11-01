@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   resources :users do
   end
+
+  resources :orders do
+  end
  
   root 'welcome#index'
   get 'welcome/index'
@@ -28,6 +31,7 @@ Rails.application.routes.draw do
   get '/safety' => 'pages#safety'
   get '/singup' => 'sessions#new'
   get '/login' => 'sessions#new'
+  get '/shop' => 'pages#shop'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 

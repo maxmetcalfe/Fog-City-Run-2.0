@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017014811) do
+ActiveRecord::Schema.define(version: 20161101125349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 20161017014811) do
 
   add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
 
+  create_table "orders", force: :cascade do |t|
+    t.string   "item"
+    t.integer  "user_id"
+    t.boolean  "delivered"
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "size"
+  end
+
   create_table "racers", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -41,8 +51,7 @@ ActiveRecord::Schema.define(version: 20161017014811) do
   end
 
   create_table "races", force: :cascade do |t|
-    t.integer  "race_id"
-    t.datetime "date"
+    t.date     "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -53,11 +62,12 @@ ActiveRecord::Schema.define(version: 20161017014811) do
     t.integer  "racer_id"
     t.string   "group_name"
     t.string   "time"
-    t.string   "date"
+    t.integer  "race_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "results", ["race_id"], name: "index_results_on_race_id", using: :btree
   add_index "results", ["racer_id"], name: "index_results_on_racer_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -72,6 +82,4 @@ ActiveRecord::Schema.define(version: 20161017014811) do
     t.string   "password_digest"
   end
 
-  add_foreign_key "comments", "articles"
-  add_foreign_key "results", "racers"
 end
