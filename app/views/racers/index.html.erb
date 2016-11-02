@@ -19,7 +19,7 @@
         <tr>
           <td><%= link_to Racer.find(result[0]).first_name + " " + Racer.find(result[0]).last_name, racer_path(Racer.find(result[0])) %>
           <% if !current_user.nil? and !User.where(racer_id: Racer.find(result[0]).id).pluck(:strava_link).empty? %>
-          <%= link_to image_tag("icon-strava-blue.svg", height: 18), current_user.strava_link, :class => "fa-fw fa-lg" %></td>
+          <%= link_to image_tag("icon-strava-blue.svg", height: 18), User.where(:racer_id => result[0]).first.strava_link, :class => "fa-fw fa-lg" %></td>
           <% end %>
           <td><%= result[1] %></td>
       <% end %>

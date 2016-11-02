@@ -16,7 +16,7 @@
       Please login.
       <% elsif !current_user.nil? and current_user.racer_id.to_i == @racer.id.to_i %>
       <%= link_to "Edit", edit_user_path, :class => "btn btn-warning" %>
-      <%= link_to image_tag("icon-strava-blue.svg", height: 30), current_user.strava_link, :class => "fa-fw fa-lg" %>
+      <%= link_to image_tag("icon-strava-blue.svg", height: 30), User.where(:racer_id => @racer.id).first.strava_link, :class => "fa-fw fa-lg" %>
       <% elsif !current_user.nil? and User.pluck(:racer_id).include? @racer.id %>
       Another user has claimed this racer.
       <%= link_to image_tag("icon-strava-blue.svg", height: 30), User.where(:racer_id => @racer.id).first.strava_link, :class => "fa-fw fa-lg" %>
