@@ -54,7 +54,9 @@ class RacersController < ApplicationController
     @racer = Racer.find(params[:id])
     @results_to_show = @racer.results.joins(:race).where(group_name: "ALL").map {|result| [Race.find(result.race_id).date, to_seconds(result.time)] }
     @longest_streak_count, @current_streak_count = get_streak_calendar()
+    if current_user
     @user_order = Order.where(:user_id => current_user.id).first
+    end
   end
 
   # Delete racer
