@@ -34,6 +34,10 @@ class OrdersController < ApplicationController
     if !@user_order.nil?
       Order.destroy(@user_order.id)
     end
+    # If someone tries to order something for someone else. Change user back to current_user
+    if @order.user_id != current_user.id
+      @order.user_id = current_user.id
+    end
     if @order.save  
       redirect_to shop_path
     else

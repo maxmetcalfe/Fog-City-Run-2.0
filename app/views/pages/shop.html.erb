@@ -76,7 +76,7 @@
           <%= image_tag "fcr_hat_v4.png" %>
           <br><br>
           <% if current_user and !@user_shop_blocked %>
-          <%= link_to 'One Size Fits All', new_order_path(:item => "The Buchanan", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'Select', new_order_path(:item => "The Buchanan", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
         </div>
       </div>
