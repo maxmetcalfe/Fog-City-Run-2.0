@@ -9,11 +9,11 @@
 <body>
   <div class="container">
     <div class="row">
-      <% if @user_shop_blocked %>
+      <% if current_user and @user_shop_blocked %>
       <div class="alert alert-danger">
         You need to have comleted 30 or more races before you can place an order.
       </div>
-      <% elsif !@user_shop_blocked and @user_order.nil?%>
+      <% elsif current_user and !@user_shop_blocked and @user_order.nil?%>
       <div class="alert alert-info">
         You have completed enough races. Please place an order.
       </div>
@@ -23,6 +23,10 @@
           <%= @user_order.item %> in size <%= @user_order.size %>.
           Select a new item below to modify your selection.
         </div>
+      <% else %>
+      <div class="alert alert-info">
+        Please login to place an order.
+      </div>
       <% end %>
     <div class="text-center">
       <br>  
@@ -35,8 +39,8 @@
           <br>
           <%= image_tag "fcr_hat_v1.png" %>
           <br><br>
-          <% if !@user_shop_blocked %>
-          <%= link_to 'Select', new_order_path(:item => "TheNeon", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <% if current_user and !@user_shop_blocked %>
+          <%= link_to 'Select', new_order_path(:item => "The Divis", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
         </div>
         <div class="col-md-3">
@@ -47,8 +51,8 @@
           <br>
           <%= image_tag "fcr_hat_v2.png" %>
           <br><br>
-          <% if !@user_shop_blocked %>
-          <%= link_to 'Select', new_order_path(:item => "TheNeon", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <% if current_user and !@user_shop_blocked %>
+          <%= link_to 'Select', new_order_path(:item => "The Lombard Gate", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
         </div>
         <div class="col-md-3">
@@ -59,8 +63,8 @@
           <br>
           <%= image_tag "fcr_hat_v3.png" %>
           <br><br>
-          <% if !@user_shop_blocked %>
-          <%= link_to 'Select', new_order_path(:item => "Trucker Hat - Green", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <% if current_user and !@user_shop_blocked %>
+          <%= link_to 'Select', new_order_path(:item => "The Filbert St. Hop", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
         </div>
         <div class="col-md-3">
@@ -71,8 +75,8 @@
           <br>
           <%= image_tag "fcr_hat_v4.png" %>
           <br><br>
-          <% if !@user_shop_blocked %>
-          <%= link_to 'One Size Fits All', new_order_path(:item => "Trucker Hat - Blue", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <% if current_user and !@user_shop_blocked %>
+          <%= link_to 'One Size Fits All', new_order_path(:item => "The Buchanan", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
         </div>
       </div>
