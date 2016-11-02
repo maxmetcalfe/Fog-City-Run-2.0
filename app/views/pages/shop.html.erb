@@ -11,7 +11,7 @@
     <div class="row">
       <% if current_user and @user_shop_blocked %>
       <div class="alert alert-danger">
-        You need to have comleted 30 or more races before you can place an order.
+        You need to have comleted 15 or more races before you can place an order.
       </div>
       <% elsif current_user and !@user_shop_blocked and @user_order.nil?%>
       <div class="alert alert-info">
