@@ -24,52 +24,52 @@
           Select a new item below to modify your selection.
         </div>
       <% end %>
-      <div class="text-center">
-        <div class="row">
-          <b>FCR Old School T-Shirt </b>
-        </div>
-        <br>
-        <div class="row">
-        <%= image_tag "hat1.png" %>
-        </div>
-      </div>
-      <br>
-    </div>
-    <% if !@user_shop_blocked %>
-      <div class="row">
-        <div class="text-center">
-          <%= link_to 'S', new_order_path(:item => "Red Shirt", :size => "S", :user_id => current_user.id ), :class => "btn btn-default" %>
-          <%= link_to 'M', new_order_path(:item => "Red Shirt", :size => "M", :user_id => current_user.id ), :class => "btn btn-default" %>
-          <%= link_to 'L', new_order_path(:item => "Red Shirt", :size => "L", :user_id => current_user.id ), :class => "btn btn-default" %>
-          <%= link_to 'XL', new_order_path(:item => "Red Shirt", :size => "XL", :user_id => current_user.id ), :class => "btn btn-default" %>
-          <%= link_to 'XXL', new_order_path(:item => "Red Shirt", :size => "XXL", :user_id => current_user.id ), :class => "btn btn-default" %>
-        </div>
-      </div>
-    <% end %>
-    <br>
-    <br>
     <div class="text-center">
-      <div class="row">
-        <b>FCR Trucker Hat </b>
-      </div>
       <br>  
       <div class="row">
-        <div class="col-md-4">
-          <%= image_tag "hat1.png" %>
+        <div class="col-md-3">
+          <b>The Divis</b>
+          <br>
+          <i>(District Neon Flat Bill Snapback Hat)</i>
+          <br>
+          <br>
+          <%= image_tag "fcr_hat_v1.png" %>
           <br><br>
           <% if !@user_shop_blocked %>
-          <%= link_to 'One Size Fits All', new_order_path(:item => "Trucker Hat - Pink", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'Select', new_order_path(:item => "TheNeon", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
         </div>
-        <div class="col-md-4">
-          <%= image_tag "hat1.png" %>
+        <div class="col-md-3">
+          <b>The Lombard Gate</b>
+          <br>
+          <i>(Sportsman Vintage Trucker Hat)</i>
+          <br>
+          <br>
+          <%= image_tag "fcr_hat_v2.png" %>
           <br><br>
           <% if !@user_shop_blocked %>
-          <%= link_to 'One Size Fits All', new_order_path(:item => "Trucker Hat - Green", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'Select', new_order_path(:item => "TheNeon", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
         </div>
-        <div class="col-md-4">
-          <%= image_tag "hat1.png" %>
+        <div class="col-md-3">
+          <b>The Filbert St. Hop</b>
+          <br>
+          <i>(Sportsman Vintage Trucker Hat)</i>
+          <br>
+          <br>
+          <%= image_tag "fcr_hat_v3.png" %>
+          <br><br>
+          <% if !@user_shop_blocked %>
+          <%= link_to 'Select', new_order_path(:item => "Trucker Hat - Green", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <% end %>
+        </div>
+        <div class="col-md-3">
+          <b>The Buchanan</b>
+          <br>
+          <i>(Yupoong Retro Trucker Hat)</i>
+          <br>
+          <br>
+          <%= image_tag "fcr_hat_v4.png" %>
           <br><br>
           <% if !@user_shop_blocked %>
           <%= link_to 'One Size Fits All', new_order_path(:item => "Trucker Hat - Blue", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
