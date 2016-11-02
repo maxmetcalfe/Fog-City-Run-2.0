@@ -1,9 +1,13 @@
-<% if current_user and current_user.admin? %>
+<% if current_user and current_user.admin? and !current_user.id.nil? %>
 <%= current_user.first_name %> <%= current_user.last_name %></i> (Admin) |
-<%= link_to "Show", racer_path(current_user.racer_id) %> | <%= link_to "Edit", edit_user_path(current_user) %> | <%= link_to "Log out", logout_path, method: :delete %>
-<% elsif current_user %>
+<% elsif current_user and !current_user.id.nil? %>
 <%= current_user.first_name %> <%= current_user.last_name %></i> |
-<%= link_to "Show", racer_path(current_user.racer_id) %> | <%= link_to "Edit", edit_user_path(current_user) %> | <%= link_to "Log out", logout_path, method: :delete %>
+<% end %>
+<% if current_user and !current_user.racer_id.nil? %>
+<%= link_to "Show", racer_path(current_user.racer_id) %> |
+<%= link_to "Edit", edit_user_path(current_user) %> | <%= link_to "Log out", logout_path, method: :delete %>
+<% elsif current_user %>
+<%= link_to "Edit", edit_user_path(current_user) %> | <%= link_to "Log out", logout_path, method: :delete %>
 <% else %>
 <%= link_to "Log in", login_path %>
 <% end %>
