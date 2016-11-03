@@ -26,9 +26,6 @@
       <h4>Races: <%= @racer.results.count %></h4>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
       <h4>Loop-Beer Runs: <%= @racer.results.where("group_name = ?", "Loop-Beer").count %></h4>
-      <% if !@user_order.nil? %>
-      <h4>Order: <%= @user_order.item %> / <%= @user_order.size %></h4>
-      <% end %>
       <%= @users_race_count %>
        </div>
       </div>
