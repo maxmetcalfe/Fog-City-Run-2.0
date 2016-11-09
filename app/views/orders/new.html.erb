@@ -25,9 +25,8 @@
   <% end %>
   <%= form_for @order, :html => {:class => "form-horizontal "} do |u| %>
   <div class="form-group">
-    <%= u.label :user_id, "User ID", class: "col-md-1 control-label" %>
       <div class="col-md-3">
-        <%= u.text_field :user_id, class: "form-control", :value => params[:user_id]%>
+        <%= u.text_field :user_id, class: "form-control", type: "hidden", :value => params[:user_id]%>
       </div>
   </div>
   <div class="form-group">
