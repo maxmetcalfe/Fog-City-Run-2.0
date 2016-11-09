@@ -29,7 +29,7 @@ class RacersController < ApplicationController
     while @open_dates[-1] < Date.today - 1.week
       @open_dates = @open_dates.push @open_dates[-1].advance(:weeks => 1)
     end
-    @races_run = @racer.results.joins(:race).map {|result| Race.find(result.race_id).date }
+    @races_run = racer.results.joins(:race).map {|result| Race.find(result.race_id).date }
     @longest_streak_count = 0
     @streak = []
     @current_streak = 0
