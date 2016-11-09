@@ -6,22 +6,20 @@
 </head>
 <body style="padding-top: 60px">
 <div class="container-fluid">
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered sortable">
       <thead>
       <tr>
         <th>Racer</th>
+        <th>Longest Streak</th>
         <th>Results</th>
       </tr>
       </thead>
       <tbody>
-      <% @racers.joins(:results).group("racer_id").count(:racer_id).sort_by {|_key, value| value}.reverse.each do |result| %>
-
-        <tr>
-          <td><%= link_to Racer.find(result[0]).first_name + " " + Racer.find(result[0]).last_name, racer_path(Racer.find(result[0])) %>
-          <% if !current_user.nil? and !User.where(racer_id: Racer.find(result[0]).id).pluck(:strava_link).empty? %>
-          <%= link_to image_tag("icon-strava-blue.svg", height: 18), User.where(:racer_id => result[0]).first.strava_link, :class => "fa-fw fa-lg" %></td>
-          <% end %>
-          <td><%= result[1] %></td>
+      <% @output.each do |result| %>
+      <tr>
+      <td><%= link_to result[0].first_name + " " + result[0].last_name, racer_path(result[0]) %>
+      <td><%= result[1] %></td>
+      <td><%= result[2] %></td>
       <% end %>
       </tbody>
     </table>

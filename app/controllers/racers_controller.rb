@@ -3,6 +3,12 @@ class RacersController < ApplicationController
   # Show all racers
   def index
     @racers = Racer.all
+    @output = []
+    for r in @racers
+      long_streak = get_streak_calendar(r.id)[0]
+      race_count = Result.where(:racer_id => r.id).count
+      @output.push [r, long_streak, race_count]
+    end
     if params[:search]
       @racers = Racer.search(params[:search])
     end
@@ -17,8 +23,8 @@ class RacersController < ApplicationController
     return hours.to_i * 3600 + minutes.to_i * 60 + seconds.to_i
   end
 
-  def get_streak_calendar()
-    @racer = Racer.find(params[:id])
+  def get_streak_calendar(racer_id)
+    @racer = Racer.find(racer_id)
     open_dates = []
     @open_dates = open_dates.push '2013-01-16'.to_date
     while @open_dates[-1] < Date.today - 1.week
@@ -53,7 +59,7 @@ class RacersController < ApplicationController
   def show
     @racer = Racer.find(params[:id])
     @results_to_show = @racer.results.joins(:race).where(group_name: "ALL").map {|result| [Race.find(result.race_id).date, to_seconds(result.time)] }
-    @longest_streak_count, @current_streak_count = get_streak_calendar()
+    @longest_streak_count, @current_streak_count = get_streak_calendar(params[:id])
     if current_user
     @user_order = Order.where(:user_id => current_user.id).first
     end
