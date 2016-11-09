@@ -18,6 +18,9 @@
       <% @output.each do |result| %>
       <tr>
       <td><%= link_to result[0].first_name + " " + result[0].last_name, racer_path(result[0]) %>
+      <% if !current_user.nil? and !User.where(racer_id: Racer.find(result[0]).id).pluck(:strava_link).empty? %>
+      <%= link_to image_tag("icon-strava-blue.svg", height: 18), User.where(:racer_id => result[0]).first.strava_link, :class => "fa-fw fa-lg" %></td>
+      <% end %>
       <td><%= result[1] %></td>
       <td><%= result[2] %></td>
       <% end %>
