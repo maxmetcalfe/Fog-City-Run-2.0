@@ -22,6 +22,7 @@ class ResultsController < ApplicationController
     @race_id = @result.race_id
     @result.destroy
     validate_ranks(@result.race_id)
+    update_race_count()
 
     redirect_to Race.find(@race_id)
   end
@@ -31,10 +32,21 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
   end
 
+  # Calculate new race counts
+  def update_race_count()
+    @racers = Racer.all
+    for r in @racers
+      race_count = Result.where(racer_id: r.id).count
+      r.update_attribute(:race_count, race_count)
+    end
+  end
+
   def create
   	@result = Result.new(result_params)
     @result.rank = 0
     @result.id = Result.maximum(:id).next
+    update_race_count()
+
     if @result.save
       validate_ranks(@result.race_id)
       redirect_to Race.find(@result.race_id)
@@ -53,6 +65,7 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     if @result.update(result_params)
       validate_ranks(@result.race_id)
+      update_race_count()
       redirect_to Race.find(@result.race_id)
     else
       render 'edit'
@@ -68,6 +81,7 @@ class ResultsController < ApplicationController
   # import file
   def upload
     @result = Result.upload(params[:file], params[:date])
+    update_race_count()
     if @result == "FAILURE_DATE"
       flash.now[:danger] = "Invalid Date"
     elsif @result == "FAILURE_FILE"
