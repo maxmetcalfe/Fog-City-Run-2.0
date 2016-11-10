@@ -32,15 +32,6 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
   end
 
-  # Calculate new race counts
-  def update_race_count()
-    @racers = Racer.all
-    for r in @racers
-      race_count = Result.where(racer_id: r.id).count
-      r.update_attribute(:race_count, race_count)
-    end
-  end
-
   def create
   	@result = Result.new(result_params)
     @result.rank = 0
