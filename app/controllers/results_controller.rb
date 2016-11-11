@@ -9,6 +9,9 @@ class ResultsController < ApplicationController
   # Show all results
   def index
     @results = Result.all
+    # Refresh all counts
+    update_race_count()
+    update_streak_calendar([@results.pluck(:racer_id)])
   end
 
   # Show result by id
@@ -76,13 +79,13 @@ class ResultsController < ApplicationController
   # import file
   def upload
     @result = Result.upload(params[:file], params[:date])
-    update_race_count()
-    update_streak_calendar([@result.racer_id])
     if @result == "FAILURE_DATE"
       flash.now[:danger] = "Invalid Date"
     elsif @result == "FAILURE_FILE"
       flash.now[:danger] = "Ooops. You forgot a file!"
     elsif @result.any?
+      update_race_count()
+      update_streak_calendar([@result])
       flash.now[:success] = "Success"
     end
     puts "We just uploaded the following results: " + @result.to_s
