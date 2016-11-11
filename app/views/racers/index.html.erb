@@ -11,18 +11,20 @@
       <tr>
         <th>Racer</th>
         <th>Longest Streak</th>
+        <th>Current Streak</th>
         <th>Results</th>
       </tr>
       </thead>
       <tbody>
-      <% @output.each do |result| %>
+      <% @racers.each do |racer| %>
       <tr>
-      <td><%= link_to result[0].first_name + " " + result[0].last_name, racer_path(result[0]) %>
-      <% if !current_user.nil? and !User.where(racer_id: Racer.find(result[0]).id).pluck(:strava_link).empty? %>
-      <%= link_to image_tag("icon-strava-blue.svg", height: 18), User.where(:racer_id => result[0]).first.strava_link, :class => "fa-fw fa-lg" %></td>
+      <td><%= link_to racer.first_name + " " + racer.last_name, racer_path(racer) %>
+      <% if !current_user.nil? and !User.where(racer_id: Racer.find(racer).id).pluck(:strava_link).empty? %>
+      <%= link_to image_tag("icon-strava-blue.svg", height: 18), User.where(:racer_id => racer).first.strava_link, :class => "fa-fw fa-lg" %></td>
       <% end %>
-      <td><%= result[1] %></td>
-      <td><%= result[2] %></td>
+      <td><%= racer.longest_streak %></td>
+      <td><%= racer.current_streak %></td>
+      <td><%= racer.race_count %></td>
       <% end %>
       </tbody>
     </table>

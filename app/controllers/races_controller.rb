@@ -18,9 +18,11 @@ class RacesController < ApplicationController
   # Delete race
   def destroy
     @race = Race.find(params[:id])
+    racer_ids = Result.where(:race_id => @race.id).pluck(:racer_id)
     @race.results.destroy_all
     @race.destroy
     update_race_count()
+    update_streak_calendar(racer_ids)
 
     redirect_to races_path
   end
