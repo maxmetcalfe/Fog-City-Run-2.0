@@ -7,7 +7,7 @@
 <%= link_to "Show", racer_path(current_user.racer_id) %> |
 <%= link_to "Edit", edit_user_path(current_user, :racer_id => current_user.racer_id) %> | <%= link_to "Log out", logout_path, method: :delete %>
 <% elsif current_user %>
-<%= link_to "Edit", edit_user_path(:user => current_user) %> | <%= link_to "Log out", logout_path, method: :delete %>
+<%= link_to "Edit", edit_user_path(current_user) %> | <%= link_to "Log out", logout_path, method: :delete %>
 <% else %>
 <%= link_to "Log in", login_path %>
 <% end %>
