@@ -24,7 +24,7 @@ class PagesController < ApplicationController
     end
     @total_orders = Order.all.count
     @eligible_users = Racer.where("race_count >= ?", 15).count
-    @percent_valid = (@total_orders.to_f / @eligible_users.to_f) * 100
+    @percent_valid = ((@total_orders.to_f / @eligible_users.to_f) * 100).to_i
   end
 
 end
