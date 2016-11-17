@@ -42,7 +42,7 @@
           <% if current_user and !@user_shop_blocked %>
           <%= link_to 'Select', new_order_path(:item => "The Divis", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
-          <% if current_user.admin? %>
+          <% if current_user && current_user.admin? %>
           <h4> Order Count: <%= Order.where(:item => "The Divis").count %> </h4>
           <% end %>
         </div>
@@ -57,7 +57,7 @@
           <% if current_user and !@user_shop_blocked %>
           <%= link_to 'Select', new_order_path(:item => "The Lombard Gate", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
-          <% if current_user.admin? %>
+          <% if current_user && current_user.admin? %>
           <h4> Order Count: <%= Order.where(:item => "The Lombard Gate").count %> </h4>
           <% end %>
         </div>
@@ -72,7 +72,7 @@
           <% if current_user and !@user_shop_blocked %>
           <%= link_to 'Select', new_order_path(:item => "The Filbert St. Hop", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
-          <% if current_user.admin? %>
+          <% if current_user && current_user.admin? %>
           <h4> Order Count: <%= Order.where(:item => "The Filbert St. Hop").count %> </h4>
           <% end %>
         </div>
@@ -87,13 +87,13 @@
           <% if current_user and !@user_shop_blocked %>
           <%= link_to 'Select', new_order_path(:item => "The Buchanan", :size => "One Size Fits All", :user_id => current_user.id ), :class => "btn btn-default" %>
           <% end %>
-          <% if current_user.admin? %>
+          <% if current_user && current_user.admin? %>
           <h4> Order Count: <%= Order.where(:item => "The Buchanan").count %> </h4>
           <% end %>
         </div>
       </div>
       <div class="row">
-        <% if current_user.admin? %>
+        <% if current_user && current_user.admin? %>
         <h3> Orders: <%= @total_orders %> </h3>
         <h3> Eligible Users: <%= @eligible_users %> </h3>
         <h3> <%= @percent_valid %> % of eligible users have ordered. </h3>
