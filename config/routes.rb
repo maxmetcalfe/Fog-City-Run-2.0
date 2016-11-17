@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :orders do
   end
+  
+  resources :account_activations, only: [:edit]
  
   root 'welcome#index'
   get 'welcome/index'
