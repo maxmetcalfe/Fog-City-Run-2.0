@@ -7,7 +7,7 @@ class AccountActivationsController < ApplicationController
       user.update_attribute(:activated_at, Time.zone.now)
       log_in user
       flash[:success] = "Account activated!"
-      redirect_to user
+      redirect_to racers_path
     else
       flash[:danger] = "Invalid activation link"
       redirect_to root_url

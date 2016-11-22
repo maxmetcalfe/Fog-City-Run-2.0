@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true
   
-  
+
   class << self
     # Returns the hash digest of the given string.
     def digest(string)
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(token)
+    BCrypt::Password.new(digest).is_password?(token)
   end
   
   # Forget user
