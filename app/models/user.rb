@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    BCrypt::Password.new(remember_digest).is_password?(token)
   end
   
   # Forget user
