@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   resources :racers do
     resource :results
     collection { post :import }
@@ -23,6 +27,7 @@ Rails.application.routes.draw do
   end
   
   resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
  
   root 'welcome#index'
   get 'welcome/index'
