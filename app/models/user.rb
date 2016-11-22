@@ -10,6 +10,16 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true
   
+  # Activates an account.
+  def activate
+    update_attribute(:activated,    true)
+    update_attribute(:activated_at, Time.zone.now)
+  end
+
+  # Sends activation email.
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
 
   class << self
     # Returns the hash digest of the given string.
