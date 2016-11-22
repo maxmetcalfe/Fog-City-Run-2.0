@@ -1,10 +1,14 @@
-<h1>Fog City Run</h1>
+Fog City Run
 
-<p>Hi <%= @user.first_name %>,</p>
+<p>Hi <%= @user.first_name %></p>
 
 <p>
-Welcome to the Fog City Run app! Click on the link below to activate your account:
+Welcome to the Fog City Run! Click on the link below to activate your account:
 </p>
 
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token,
                                                     email: @user.email) %>
+
+Thanks,
+
+Fog City Run
