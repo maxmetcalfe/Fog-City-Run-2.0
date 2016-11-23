@@ -78,14 +78,14 @@ class ResultsController < ApplicationController
 
   # import file
   def upload
-    @result = Result.upload(params[:file], params[:date])
-    if @result == "FAILURE_DATE"
+    @status = Result.upload(params[:file], params[:date])
+    if @status == "FAILURE_DATE"
       flash.now[:danger] = "Invalid Date"
-    elsif @result == "FAILURE_FILE"
+    elsif @status == "FAILURE_FILE"
       flash.now[:danger] = "Ooops. You forgot a file!"
-    elsif @result.any?
+    elsif @status.any?
       update_race_count()
-      update_streak_calendar([@result])
+      update_streak_calendar([@status])
       flash.now[:success] = "Success"
     end
     puts "We just uploaded the following results: " + @result.to_s

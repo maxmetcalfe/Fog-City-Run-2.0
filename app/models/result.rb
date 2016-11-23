@@ -7,7 +7,7 @@ class Result < ActiveRecord::Base
 
   def self.upload(file, date)
       out_string = ""
-      new_results = []
+      uploaded_racer_ids = []
 
       puts "Uploading results for date: " + date.to_s
 
@@ -53,10 +53,10 @@ class Result < ActiveRecord::Base
 
           Result.create!(:rank => row["Final Position"], :bib => row["Bib Number"],  :racer_id => racer_id, :group_name => row["Team"], :time => row["Total Elapsed Time"],  :race_id => race_id, :id => result_id)
 
-          new_results.push(result_id)
+          uploaded_racer_ids.push(racer_id)
         end
       end
-      return new_results
+      return uploaded_racer_ids
   end
 
   validates :rank, presence: true
