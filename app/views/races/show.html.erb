@@ -38,6 +38,7 @@
   <% if current_user and current_user.admin? %>
     <div class="row text-center">
     <%= link_to 'New Result', new_result_path(:race_id => @race.id), :class => "btn btn-success" %>
+    <%= link_to 'Send Email', send_results_email_path(:race_id => @race), :class => "btn btn-danger" %>
     </div>
   <% end %>
 </div>

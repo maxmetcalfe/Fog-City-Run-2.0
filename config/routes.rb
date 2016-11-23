@@ -41,5 +41,6 @@ Rails.application.routes.draw do
   get '/shop' => 'pages#shop'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
+  get :send_results_email, to: 'races#send_results_email', as: :send_results_email
 
 end

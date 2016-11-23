@@ -65,8 +65,24 @@ class RacesController < ApplicationController
     redirect_to races_url, notice: "Races imported successfully"
   end
 
-  #Permit parameters when creating article
+  def send_results_email
+    results = Result.where(:race_id => params[:race_id])
+    for r in results
+      @user = User.where(:racer_id => r.racer_id)
+      # Send email if we find a user for the racer
+      if @user and @user.first.try(:email)
+        ResultMailer.results_email(r, @user.first.email).deliver
+      else
+        puts "Could not send an email for this result: " + r.to_s
+      end
+    end
+    redirect_to races_path
+    flash[:success] = "Emails have been sent."
+  end
+
+  #Permit parameters when creating race
   private
+
   def race_params
     params.require(:race).permit(:date)
   end
