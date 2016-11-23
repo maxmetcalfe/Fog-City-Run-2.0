@@ -40,7 +40,7 @@ class Result < ActiveRecord::Base
           end
 
           # Handle race
-          found_race = Race.where(date: date)
+          found_race = Race.where(date: Date.parse(date.to_s))
           if found_race.blank?
             race_id = Race.maximum(:id).next
             Race.create!(:date => date, :id => Race.maximum(:id).next)
