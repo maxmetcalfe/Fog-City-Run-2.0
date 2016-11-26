@@ -33,13 +33,14 @@ class ApplicationController < ActionController::Base
   def update_streak_calendar(racer_ids)
     open_dates = []
     racers = Racer.find(racer_ids)
+    open_dates = open_dates.push '2013-01-16'.to_date
+    while open_dates[-1] < Date.today - 1.week
+      open_dates = open_dates.push open_dates[-1].advance(:weeks => 1)
+    end
     for racer in racers
-      open_dates = open_dates.push '2013-01-16'.to_date
-      while open_dates[-1] < Date.today - 1.week
-        open_dates = open_dates.push open_dates[-1].advance(:weeks => 1)
-      end
       races_run = racer.results.joins(:race).map {|result| Race.find(result.race_id).date }
       longest_streak_count = 0
+      longest_streak = []
       streak = []
       current_streak = 0
       for o in open_dates
@@ -49,6 +50,7 @@ class ApplicationController < ActionController::Base
             streak = streak.push r
             if streak.length > longest_streak_count
               longest_streak_count = streak.length
+              longest_streak = streak
             end
             found = 1
             if open_dates[-1] == streak[-1]
@@ -63,5 +65,6 @@ class ApplicationController < ActionController::Base
       attributes = {:longest_streak => longest_streak_count,:current_streak => current_streak}
       racer.update_attributes(attributes)
     end
+    return longest_streak, streak
   end
 end

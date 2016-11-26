@@ -20,6 +20,9 @@ class RacersController < ApplicationController
   # Show racer by id
   def show
     @racer = Racer.find(params[:id])
+    longest_streak, current_streak = update_streak_calendar([@racer.id])
+    @longest_streak_for_view = "(" + longest_streak[0].to_s + " through " + longest_streak[-1].to_s + ")"
+    @current_streak_for_view = "(no current streak)"
     @results_to_show = @racer.results.joins(:race).where(group_name: "ALL").map {|result| [Race.find(result.race_id).date, to_seconds(result.time)] }
     if current_user
     @user_order = Order.where(:user_id => current_user.id).first

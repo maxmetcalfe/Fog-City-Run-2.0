@@ -34,11 +34,13 @@
     <div class="panel panel-default">
     <div class="panel-heading">Streak Info</div>
     <div class="panel-body">
-    <h3 style="color:#f6b417"><i class="fa fa-trophy fa-2x" style="color:#f6b417"></i>Current: <%= @racer.current_streak.to_s %></h3>
-    <h3 style="color:red"><i class="fa fa-trophy fa-2x" style="color:red"></i>Longest: <%= @racer.longest_streak.to_s %></h3>
-      </div>
-      </div>
-
+    <i class="fa fa-trophy fa-2x"></i>
+    <h3 style="color:#f6b417">Current: <%= @racer.current_streak.to_s %></h3>
+    <h6 style="color:#f6b417"><%= @current_streak_for_view %></h6>
+    <h3 style="color:red">Longest: <%= @racer.longest_streak.to_s %></h3>
+    <h6 style="color:red"><%= @longest_streak_for_view %></h6>
+    </div>
+    </div>
     </div>
   </div>
   <div class="row">
