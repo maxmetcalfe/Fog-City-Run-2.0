@@ -9,5 +9,21 @@
   <div class="row">
     <%= column_chart Result.group(:race_id).count, min: 0, max: 22, colors: ["grey"] %>
   </div>
+  <table class="table table-hover table-bordered sortable">
+    <thead>
+    <tr>
+      <th>Year</th>
+      <th>Avg. Racer Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @output.each do |item| %>
+      <tr>
+        <td><%= item['date_part'] %></td>
+        <td><%= item['average_count'] %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </body>
 </html>

@@ -3,7 +3,18 @@ class PagesController < ApplicationController
   def show
   end
 
+  # Get average racer count by year (for use in pages/count)
   def count
+    connection = ActiveRecord::Base.connection
+    query = 'SELECT extract(year from p.date), round(avg(p.count), 2) as average_count '\
+      'FROM'\
+      '(SELECT races.date, count(*) as count '\
+      'FROM results '\
+      'LEFT JOIN races on (results.race_id = races.id) '\
+      'GROUP BY races.date) as p '\
+      'GROUP BY extract(year from p.date) '\
+      'ORDER by average_count DESC;'
+    @output = connection.exec_query(query)
   end
 
   def records
