@@ -19,6 +19,7 @@ gem 'omniauth-facebook', '1.4.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'rails_12factor', group: :production
 gem 'bcrypt', '3.1.11'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'byebug'
