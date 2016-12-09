@@ -3,9 +3,12 @@
 <head>
   <title>Racers</title>
   <%= render "shared/navbar" %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body style="padding-top: 60px">
 <div class="container-fluid">
+  <% if @has_results %>
+  <h2> Results </h2>
   <table class="table table-hover table-bordered sortable">
     <thead>
     <tr>
@@ -20,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-    <% @race.results.order(:rank).each do |result| %>
+    <% @race_results.each do |result| %>
       <tr>
         <td><%= result.rank %></td>
         <td><%= result.bib %></td>
@@ -40,6 +43,33 @@
     <%= link_to 'New Result', new_result_path(:race_id => @race.id), :class => "btn btn-success" %>
     <%= link_to 'Send Email', send_results_email_path(:race_id => @race), :class => "btn btn-danger" %>
     </div>
+  <% end %>
+  <% end %>
+  <% if @has_start_items %>
+  <h2> Start List </h2>
+  <table class="table table-hover table-bordered sortable">
+    <thead>
+    <tr>
+      <th>Racer ID</th>
+      <th>Start Time</th>
+      <th>Finish Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @start_items.each do |item| %>
+      <tr>
+        <td><%= Racer.find(item.racer_id).first_name  %></td>
+        <td><%= item.start_time %></td>
+        <td><%= item.end_time %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% if current_user %>
+    <div class="row text-center">
+    <%= link_to 'Register', new_start_item_url(:race_id=>"TEst"), :class => "btn btn-success" %>
+    </div>
+  <% end %>
   <% end %>
 </div>
 </body>

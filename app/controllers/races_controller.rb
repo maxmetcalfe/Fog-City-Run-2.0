@@ -13,6 +13,18 @@ class RacesController < ApplicationController
   # Show race by id
   def show
     @race = Race.find(params[:id])
+    @race_results = @race.results.order(:rank)
+    if @race_results.length > 0
+      @has_results = true
+    else
+      @has_results = false
+    end
+    @start_items = StartItem.where(:race_id=>params[:id])
+    if @start_items.length > 0
+      @has_start_items = true
+    else
+      @has_start_items = false
+    end
   end
 
   # Delete race

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122121836) do
+ActiveRecord::Schema.define(version: 20161207053104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(version: 20161122121836) do
 
   add_index "results", ["race_id"], name: "index_results_on_race_id", using: :btree
   add_index "results", ["racer_id"], name: "index_results_on_racer_id", using: :btree
+
+  create_table "start_items", force: :cascade do |t|
+    t.integer  "racer_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "bib"
+    t.integer  "race_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

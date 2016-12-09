@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     resource :results
     collection { post :import }
   end
+  
+  resources :start_items do
+  end
 
   resources :users do
   end
