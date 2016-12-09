@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>New Racer</title>
+  <title>Users</title>
   <%= render "shared/navbar" %>
 </head>
 <body style="padding-top: 60px">
@@ -11,30 +11,36 @@
       <h2> Registration </h2>
     </div>
   </div>
-  <%= form_for @racer, :html => {:class => "form-horizontal "} do |r| %>
-    <% if @racer.errors.any? %>
+  <%= form_for @start_item, :html => {:class => "form-horizontal "} do |i| %>
+    <% if @start_item.errors.any? %>
       <div id="error_explanation">
         <h2>
-          <%= pluralize(@racer.errors.count, "error") %> prohibited
+          <%= pluralize(@start_item.errors.count, "error") %> prohibited
           this start_item from being saved:
         </h2>
         <ul>
-          <% @racer.errors.full_messages.each do |msg| %>
+          <% @start_item.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
         </ul>
       </div>
     <% end %>
       <div class="form-group">
-        <%= r.label :first_name, "First Name:", class: "col-md-1 control-label" %>
+        <%= i.label :bib, "Bib:", class: "col-md-1 control-label" %>
           <div class="col-md-3">
-            <%= r.text_field :first_name, class: "form-control" %>
+            <%= i.text_field :bib, class: "form-control" %>
           </div>
       </div>
       <div class="form-group">
-        <%= r.label :last_name, "Last Name:", class: "col-md-1 control-label" %>
+        <%= i.label :racer_id, "Racer ID:", class: "col-md-1 control-label" %>
           <div class="col-md-3">
-            <%= r.text_field :last_name, class: "form-control" %>
+            <%= i.text_field :racer_id, class: "form-control", :value => params[:racer_id] %>
+          </div>
+      </div>
+      <div class="form-group">
+        <%= i.label :race_id, "Race ID:", class: "col-md-1 control-label" %>
+          <div class="col-md-3">
+            <%= i.text_field :race_id, class: "form-control", :value => params[:race_id] %>
           </div>
       </div>
       <div class="form-group">
@@ -43,10 +49,12 @@
         </div>
       </div>
   <% end %>
+  <% if current_user and current_user.admin? %>
   <div class="row">
     <div class="col-md-3 col-md-offset-1">
       <%= link_to 'Add new racer', new_racer_path(), :class => "btn btn-default" %>
     </div>
   </div>
+  <% end %>
 </body>
 </html>
