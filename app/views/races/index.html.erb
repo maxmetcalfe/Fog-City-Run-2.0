@@ -6,6 +6,26 @@
 </head>
 <body style="padding-top: 60px">
   <div class="container-fluid">
+    <h2> Upcomming Races </h2>
+    <table class="table table-hover table-bordered sortable">
+      <thead>
+      <tr>
+        <th>Race</th>
+        <th>Entries</th>
+        <th>Link</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @upcomming_races_to_show.each do |race| %>
+        <tr>
+          <td><%= link_to race.date, race_path(race) %></td>
+          <td><%= StartItem.where(race_id: race.id).count %></td>
+          <td><%= link_to 'Register', race_path(race.id), :class => "btn btn-success btn-xs" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <h2> Past Races </h2>
     <table class="table table-hover table-bordered sortable">
       <thead>
       <tr>
@@ -17,13 +37,13 @@
       </tr>
       </thead>
       <tbody>
-      <% @races.joins(:results).group("race_id").count(:race_id).sort_by { |k| k[0]}.reverse.each do |result| %>
+      <% @races_to_show.each do |race| %>
         <tr>
-          <td><%= link_to Race.find(result[0]).date, race_path(Race.find(result[0])) %></td>
-          <td><%= result[1] %></td>
+          <td><%= link_to Race.find(race[0]).date, race_path(Race.find(race[0])) %></td>
+          <td><%= race[1] %></td>
           <% if current_user and current_user.admin? %>
-            <td><%= link_to 'Edit', race_path(Race.find(result[0])) %> | <%= link_to 'Destroy',
-                  race_path(Race.find(result[0])), method: :delete, data: { confirm: 'Are you sure you want to delete ' + Race.find(result[0]).date.to_s + '?'  } %></td>
+            <td><%= link_to 'Edit', race_path(Race.find(race[0])), :class => 'btn btn-warning btn-xs' %> <%= link_to 'Destroy',
+                  race_path(Race.find(race[0])), method: :delete, data: { confirm: 'Are you sure you want to delete ' + Race.find(race[0]).date.to_s + '?'  }, :class => 'btn btn-danger btn-xs' %></td>
           <% end %>
         </tr>
       <% end %>

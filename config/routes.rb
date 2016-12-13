@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
-
   resources :racers do
     resource :results
     collection { post :import }
@@ -18,6 +14,7 @@ Rails.application.routes.draw do
   resources :races do
     resource :results
     collection { post :import }
+    collection { patch :start }
   end
   
   resources :start_items do
@@ -42,8 +39,14 @@ Rails.application.routes.draw do
   get '/singup' => 'sessions#new'
   get '/login' => 'sessions#new'
   get '/shop' => 'pages#shop'
+  get 'password_resets/new'
+  get 'password_resets/edit'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
   get :send_results_email, to: 'races#send_results_email', as: :send_results_email
+  put 'races/:id/start' => 'races#start_race', :as => 'start_race'
+  put 'races/:id/stop' => 'races#stop_race', :as => 'stop_race'
+  post 'start_items/:id/collect_time' => 'start_items#collect_time', :as => 'collect_time'
+  post 'start_items/:id/continue_time' => 'start_items#continue_time', :as => 'continue_time'
 
 end

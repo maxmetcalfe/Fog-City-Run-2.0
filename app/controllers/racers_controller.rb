@@ -8,15 +8,6 @@ class RacersController < ApplicationController
     end
   end
 
-  # Convert raw time to seconds to use in ChartKick
-  def to_seconds(raw_time)
-    time_split = raw_time.split(":")
-    hours = time_split[0]
-    minutes = time_split[1]
-    seconds = time_split[2]
-    return hours.to_i * 3600 + minutes.to_i * 60 + seconds.to_i
-  end
-
   # Show racer by id
   def show
     @racer = Racer.find(params[:id])

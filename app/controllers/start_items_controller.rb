@@ -2,7 +2,6 @@ class StartItemsController < ApplicationController
 
   # Show all start_items
   def index
-    puts params
     @start_items = StartItem.all
   end
 
@@ -15,6 +14,7 @@ class StartItemsController < ApplicationController
   def destroy
     @start_item = StartItem.find(params[:id])
     @start_item.destroy
+    redirect_to :action => 'index'
   end
 
   # Edit race
@@ -22,13 +22,11 @@ class StartItemsController < ApplicationController
     @race = StartItem.find(params[:id])
   end
 
-  # Create race
+  # Create start_item
   def create
-    puts start_item_params
   	@start_item = StartItem.new(start_item_params)
-    puts "Creating new"
     if @start_item.save
-      redirect_to @start_item
+      redirect_to races_path
     else
       render 'new'
     end
@@ -36,12 +34,12 @@ class StartItemsController < ApplicationController
 
   # New start_item
   def new
-  	@start_item = Race.new
+    @start_item = StartItem.new
   end
 
   # Update race
   def update
-    @start_item = Race.find(params[:id])
+    @start_item = StartItem.find(params[:id])
     if @start_item.update(start_item_params)
       redirect_to @start_item
     else
@@ -49,9 +47,30 @@ class StartItemsController < ApplicationController
     end
   end
 
+  # Stop race. Set finish_time
+  def collect_time
+    @start_item = StartItem.find(params[:id])
+    @start_item.update(end_time: DateTime.now, finished: true)
+    @race = Race.find(@start_item.race_id)
+    finish_time = from_seconds(@start_item.end_time - @start_item.start_time)
+    @result = Result.create(:rank => 0, :id => Result.maximum(:id).next, :group_name => "ALL", :bib => @start_item.bib, :time => Date.today, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
+    @result.save
+    validate_ranks(@race.id)
+    redirect_to @race
+  end
+
+  # Flip start_item.finished to false
+  def continue_time
+    @start_item = StartItem.find(params[:id])
+    @race = Race.find(@start_item.race_id)
+    @start_item.finished = false
+    @start_item.save
+    redirect_to @race
+  end
+
   private
 
   def start_item_params
-    params.require(:start_item).permit(:race_id)
+    params.require(:start_item).permit(:race_id, :racer_id, :bib)
   end
 end

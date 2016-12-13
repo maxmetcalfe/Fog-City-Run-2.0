@@ -5,6 +5,8 @@ class RacesController < ApplicationController
   # Show all races
   def index
     @races = Race.all
+    @races_to_show = @races.joins(:results).group("race_id").count(:race_id).sort_by { |k| k[0]}.reverse
+    @upcomming_races_to_show = Race.where("date > ?", Date.today)
     if params[:search]
       @races = Race.search(params[:search])
     end
@@ -25,6 +27,9 @@ class RacesController < ApplicationController
     else
       @has_start_items = false
     end
+    @current_user_registered = is_current_user_registered()
+    @race_in_progess = race_in_progess
+    puts @race_in_progess.to_s
   end
 
   # Delete race
@@ -90,6 +95,37 @@ class RacesController < ApplicationController
     end
     redirect_to races_path
     flash[:success] = "Emails have been sent."
+  end
+
+  def is_current_user_registered
+
+    if current_user and StartItem.where(:race_id => @race.id).pluck(:racer_id).include? current_user.racer_id
+      return true
+    else
+      return false
+    end
+  end
+
+  # Start race. Set start_time to DateTime.now for this race's start items.
+  def start_race
+    @race = Race.find(params[:id])
+    StartItem.where('race_id = ?', @race.id).update_all(start_time: DateTime.now)
+    @race.update(in_progress: true)
+    redirect_to @race
+  end
+
+  # Stop race.
+  def stop_race
+    @race = Race.find(params[:id])
+    StartItem.where('race_id = ?', @race.id).update_all(start_time: DateTime.now)
+    @race.update(in_progress: false)
+    redirect_to @race
+  end
+
+  # Check if race is in progress
+  def race_in_progess
+    @race = Race.find(params[:id])
+    return @race.in_progress
   end
 
   #Permit parameters when creating race
