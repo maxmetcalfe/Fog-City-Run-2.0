@@ -5,7 +5,7 @@ T = {} ;
 T.timerDiv = document.getElementById('timer');
 
 function displayTimer() {
-console.log("TEs")
+console.log(T.timerDiv);
 // initilized all local variables:
 var hours='00', minutes='00',
 miliseconds=0, seconds='00',

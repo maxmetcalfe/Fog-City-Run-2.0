@@ -29,7 +29,8 @@ class RacesController < ApplicationController
     end
     @current_user_registered = is_current_user_registered()
     @race_in_progess = race_in_progess
-    puts @race_in_progess.to_s
+    # Starting time for timer
+    @start_time = @start_items[0].start_time.to_time.to_i
   end
 
   # Delete race

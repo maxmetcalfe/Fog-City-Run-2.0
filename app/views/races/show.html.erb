@@ -6,19 +6,25 @@
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body style="padding-top: 60px">
-  <div id='timer'>00:00:00:00</div>
-  <div id='labels'>
-    <span id='hh'>Hours</span>
-    <span id='mm'>Minutes</span>
-    <span id='ss'>Seconds</span>
-    <span id='ms'>Centiseconds</span>
-  </div>
-<div id='controls'>
-<button onclick='startTimer()' id='go'>Go</button>
-<button onclick='stopTimer()'  id='stop'>Stop</button>
-<button onclick='clearTimer()' id='clear'>Clear</button>
-</div>
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-5">
+      <div id='timer'>00:00:00:00</div>
+    </div>
+    <script>
+       var startTime = <%= @start_time %>;
+       var inProgress = <%= @race_in_progess %>;
+    </script>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-5">
+      <div id='controls'>
+        <button onclick='startTimer()' id='go' class="btn btn-default">Go</button>
+        <button onclick='stopTimer()'  id='stop' class="btn btn-default">Stop</button>
+        <button onclick='clearTimer()' id='clear' class="btn btn-default">Clear</button>
+      </div>
+    </div>
+  </div>
   <h2> Start List </h2>
   <table class="table table-hover table-bordered sortable">
     <thead>
@@ -118,4 +124,119 @@
   <% end %>
 </div>
 </body>
+<script>
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+
+// global object
+T = {} ;
+T.timerDiv = document.getElementById('timer');
+
+function displayTimer() {
+// initilized all local variables:
+var hours='00', minutes='00',
+miliseconds=0, seconds='01',
+time = '',
+timeNow = new Date().getTime();
+console.log("Start: " + T.timerStarted);
+console.log("Current: " + timeNow.toString());
+
+T.difference = timeNow - T.timerStarted;
+
+console.log("T: " + T.difference);
+
+// seconds
+if(T.difference > 1000) {
+seconds = Math.floor(T.difference / 1000);
+if (seconds > 60) {
+seconds = seconds % 60;
+}
+if(seconds < 10) {
+seconds = '0'+String(seconds);
+}
+}
+
+// minutes
+if(T.difference > 60000) {
+minutes = Math.floor(T.difference/60000);
+if (minutes > 60) {
+minutes = minutes % 60;
+}
+if(minutes < 10) {
+minutes = '0'+String(minutes);
+}
+}
+
+// hours
+if(T.difference > 3600000) {
+hours = Math.floor(T.difference/3600000);
+// if (hours > 24) {
+// 	hours = hours % 24;
+// }
+if(hours < 10) {
+hours = '0'+String(hours);
+}
+}
+
+time  =  hours   + ':'
+time += minutes + ':'
+time += seconds;
+
+console.log("H: " + hours);
+console.log("M: " + minutes);
+console.log("S: " + seconds);
+
+T.timerDiv.innerHTML = time;
+}
+
+function startTimer() {
+// save start time
+T.timerStarted = startTime / 1000;
+
+if (T.difference > 0) {
+T.timerStarted = T.timerStarted - T.difference
+}
+// update timer periodically
+T.timerInterval = setInterval(function() {
+displayTimer()
+}, 10);
+
+// show / hide the relevant buttons:
+document.getElementById('go').style.display="none";
+document.getElementById('stop').style.display="inline";
+document.getElementById('clear').style.display="none";
+}
+
+function stopTimer() {
+clearInterval(T.timerInterval); // stop updating the timer
+
+document.getElementById('stop').style.display="none";
+document.getElementById('go').style.display="inline";
+document.getElementById('clear').style.display="inline";
+}
+
+function clearTimer() {
+clearInterval(T.timerInterval);
+T.timerDiv.innerHTML = "00:00:00:00";
+T.difference = 0;
+
+document.getElementById('stop').style.display="none";
+document.getElementById('go').style.display="inline";
+document.getElementById('clear').style.display="none";
+}
+
+// Run the timer if the race is in progress
+if (inProgress) {
+startTimer()
+}
+
+</script>
+<style>
+#timer { 
+    width: 200px; 
+    font-size: 40px;
+    background-color: white;
+    color: black;
+    padding: 5px;
+}
+</style>
 </html>
