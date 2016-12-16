@@ -29,21 +29,22 @@ class ApplicationController < ActionController::Base
   def from_seconds(time_in_seconds)
     m, s = time_in_seconds.divmod(60)
     h, m = m.divmod(60)
-    puts h, m, s
     # Format time
     if h < 10
       h = "0" + h.to_s
+    else
+      h = h.to_s
     end
     if m < 10
       m = "0" + m.to_s
+    else
+      m = m.to_s
     end
     if s < 10
-      s = "0" + s.round.to_s
+      s = "0" + s.round(1).to_s
+    else
+      s = s.round(1).to_s
     end
-    h = h.to_s
-    m = m.to_s
-    s = s.to_s
-    puts h, m, s
     return h + ":" + m + ":" + s
   end
 

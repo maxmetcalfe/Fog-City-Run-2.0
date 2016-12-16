@@ -5,22 +5,14 @@ T = {} ;
 T.timerDiv = document.getElementById('timer');
 
 function displayTimer() {
-console.log(T.timerDiv);
 // initilized all local variables:
 var hours='00', minutes='00',
-miliseconds=0, seconds='00',
+miliseconds=0, seconds='01',
 time = '',
-timeNow = new Date().getTime(); // timestamp (miliseconds)
+timeNow = new Date().getTime();
 
 T.difference = timeNow - T.timerStarted;
 
-// milliseconds
-if(T.difference > 10) {
-miliseconds = Math.floor((T.difference % 1000) / 10);
-if(miliseconds < 10) {
-miliseconds = '0'+String(miliseconds);
-}
-}
 // seconds
 if(T.difference > 1000) {
 seconds = Math.floor(T.difference / 1000);
@@ -56,17 +48,14 @@ hours = '0'+String(hours);
 
 time  =  hours   + ':'
 time += minutes + ':'
-time += seconds + ':'
-time += miliseconds;
+time += seconds;
 
 T.timerDiv.innerHTML = time;
-console.log(T.timerDiv.innerHTML);
 }
 
 function startTimer() {
 // save start time
-T.timerStarted = new Date().getTime()
-console.log('T.timerStarted: '+T.timerStarted)
+T.timerStarted = startTime * 1000;
 
 if (T.difference > 0) {
 T.timerStarted = T.timerStarted - T.difference
@@ -98,4 +87,9 @@ T.difference = 0;
 document.getElementById('stop').style.display="none";
 document.getElementById('go').style.display="inline";
 document.getElementById('clear').style.display="none";
+}
+
+// Run the timer if the race is in progress
+if (inProgress) {
+startTimer()
 }

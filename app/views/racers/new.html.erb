@@ -1,33 +1,52 @@
-<h1>New Racer</h1>
-
-<%= form_for @racer do |r| %>
- 
-  <% if @racer.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@racer.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @racer.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Racer</title>
+  <%= render "shared/navbar" %>
+</head>
+<body style="padding-top: 60px">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <h2> Registration </h2>
     </div>
+  </div>
+  <%= form_for @racer, :html => {:class => "form-horizontal "} do |r| %>
+    <% if @racer.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@racer.errors.count, "error") %> prohibited
+          this start_item from being saved:
+        </h2>
+        <ul>
+          <% @racer.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+      <div class="form-group">
+        <%= r.label :first_name, "First Name:", class: "col-md-1 control-label" %>
+          <div class="col-md-3">
+            <%= r.text_field :first_name, class: "form-control" %>
+          </div>
+      </div>
+      <div class="form-group">
+        <%= r.label :last_name, "Last Name:", class: "col-md-1 control-label" %>
+          <div class="col-md-3">
+            <%= r.text_field :last_name, class: "form-control" %>
+          </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-1 col-md-offset-1">
+        <%=button_tag "Submit", class: "btn btn-default"%>
+        </div>
+      </div>
   <% end %>
- 
-  <p>
-    <%= r.label :First %><br>
-    <%= r.text_field :first_name %>
-  </p>
- 	
-  <p>
-    <%= r.label :Last %><br>
-    <%= r.text_field :last_name %>
-  </p>
- 
-  <p>
-    <%= r.submit %>
-  </p>
- 
-<% end %>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <%= link_to 'Add new racer', new_racer_path(), :class => "btn btn-default" %>
+    </div>
+  </div>
+</body>
+</html>

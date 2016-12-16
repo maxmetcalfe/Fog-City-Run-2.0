@@ -47,8 +47,9 @@ class RacersController < ApplicationController
   # Create article
   def create
   	@racer = Racer.new(racer_params)
+    @racer.id = Racer.maximum(:id).next
     if @racer.save
-      redirect_to @racer
+      redirect_to races_path
     else
       render 'new'
     end

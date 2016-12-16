@@ -30,7 +30,9 @@ class RacesController < ApplicationController
     @current_user_registered = is_current_user_registered()
     @race_in_progess = race_in_progess
     # Starting time for timer
-    @start_time = @start_items[0].start_time.to_time.to_i
+    if @has_start_items
+      @start_time = @start_items[0].start_time.to_time.utc.to_i
+    end
   end
 
   # Delete race
@@ -99,7 +101,6 @@ class RacesController < ApplicationController
   end
 
   def is_current_user_registered
-
     if current_user and StartItem.where(:race_id => @race.id).pluck(:racer_id).include? current_user.racer_id
       return true
     else
