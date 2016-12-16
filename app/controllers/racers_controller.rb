@@ -31,6 +31,9 @@ class RacersController < ApplicationController
     if current_user
     @user_order = Order.where(:user_id => current_user.id).first
     end
+    if @results_to_show.length > 0
+      @has_results = true
+    end
   end
 
   # Delete racer
