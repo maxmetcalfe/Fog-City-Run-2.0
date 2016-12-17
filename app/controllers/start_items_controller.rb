@@ -30,9 +30,7 @@ class StartItemsController < ApplicationController
     @start_item.start_time = DateTime.now
     race = Race.find(@start_item.race_id)
     existing_start_item = StartItem.where(:racer_id => @start_item.racer_id, :race_id => @start_item.race_id)
-    puts existing_start_item
     if existing_start_item == 1
-      puts "EEEEEEEE"
       to_edit = existing_start_item.first
       to_edit.update(bib: start_item_params[:bib])
       to_edit.save
