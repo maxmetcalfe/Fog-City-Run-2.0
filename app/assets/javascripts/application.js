@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require highcharts
 //= require chartkick
-//= require timer
 //= require sortable.js
 //= require bootstrap-sprockets
 //= require_tree .
