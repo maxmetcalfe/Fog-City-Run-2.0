@@ -16,9 +16,37 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
-  private
+  # Convert raw time to seconds to use in ChartKick
+  def to_seconds(raw_time)
+    time_split = raw_time.split(":")
+    hours = time_split[0]
+    minutes = time_split[1]
+    seconds = time_split[2]
+    return hours.to_i * 3600 + minutes.to_i * 60 + seconds.to_i
+  end
 
-  helper_method :current_user
+  # Convert seconds to time
+  def from_seconds(time_in_seconds)
+    m, s = time_in_seconds.divmod(60)
+    h, m = m.divmod(60)
+    # Format time
+    if h < 10
+      h = "0" + h.to_s
+    else
+      h = h.to_s
+    end
+    if m < 10
+      m = "0" + m.to_s
+    else
+      m = m.to_s
+    end
+    if s < 10
+      s = "0" + s.round(1).to_s
+    else
+      s = s.round(1).to_s
+    end
+    return h + ":" + m + ":" + s
+  end
 
   # Calculate new race counts
   def update_race_count()
@@ -67,4 +95,19 @@ class ApplicationController < ActionController::Base
     end
     return longest_streak, streak
   end
+
+  # Sort and save the ranks for a particular race
+  def validate_ranks(race_id)
+     @results = Result.where(:race_id => race_id)
+     @sorted = @results.sort_by {|result| result.time}
+     for r in @sorted
+       r.rank = @sorted.index(r) + 1
+       r.save!
+     end
+  end
+
+  private
+
+  helper_method :current_user
+
 end

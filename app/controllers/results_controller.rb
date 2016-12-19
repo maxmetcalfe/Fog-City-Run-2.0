@@ -98,16 +98,6 @@ class ResultsController < ApplicationController
     end
   end
 
-  # Sort and save the ranks for a particular race
-  def validate_ranks(race_id)
-     @results = Result.where(:race_id => race_id)
-     @sorted = @results.sort_by {|result| result.time}
-     for r in @sorted
-       r.rank = @sorted.index(r) + 1
-       r.save!
-     end
-  end
-
   #Permit parameters when creating result
   private
   def result_params

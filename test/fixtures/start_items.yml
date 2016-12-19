@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  racer_id: 1
+  start_time: 2016-12-06 21:31:04
+  end_time: 2016-12-06 21:31:04
+  bib: 1
+  race_id: 1
+
+two:
+  racer_id: 1
+  start_time: 2016-12-06 21:31:04
+  end_time: 2016-12-06 21:31:04
+  bib: 1
+  race_id: 1
