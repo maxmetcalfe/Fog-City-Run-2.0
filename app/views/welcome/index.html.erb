@@ -16,6 +16,8 @@
     <h1><b>Fog City Run</b></h1>
     <p>A weekly running race in San Francisco, CA</p>
     <br>
+      <h4> Next Race: <%= @next_race.date %> - <%= link_to "Register", race_path(@next_race) %> </h4>
+    <br>
     </div>
     <div class="text-left">
     <p><b><i class="fa fa-calendar"></i>&nbsp; When:</b> The race is every Wednesday @ 6:30pm. Rain or shine. Best to arrive at 6:15pm.</P>
@@ -25,9 +27,6 @@
     <p><b><i class="fa fa-bar-chart-o"></i>&nbsp;&nbsp;How many people come?</b> 5-20. You can view the race results <%= link_to "here", races_path %> </a> and our <a href=http://www.strava.com/segments/7613369>Strava.</a></P>
     <p><i class="fa fa-suitcase"></i><b>&nbsp;&nbsp;A locked closet is available for any extra belongings.</b></P>
     <p><a href="http://facebook.com/FogCityRun"><i class="fa fa-facebook-square"></i>&nbsp;&nbsp;Go to our Facebook page. </a></P>
-    </div>
-    <div class="text-center">
-      <h4> <%= Racer.first.id %> </h4>
     </div>
     <div class="text-center">
       <i><%= link_to "Terms and Conditions", safety_path, :class => "terms_link" %></i>
