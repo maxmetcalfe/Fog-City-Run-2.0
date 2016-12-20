@@ -11,10 +11,6 @@
     <div class="col-md-3">
       <div id='timer'>00:00:00</div>
     </div>
-    <script>
-       var startTime = <%= @start_time %>;
-       var inProgress = <%= @race_in_progess %>;
-    </script>
   </div>
   <% if @has_start_items %>
   <h2> Start List </h2>
@@ -110,6 +106,16 @@
   <% end %>
 </div>
 </body>
+<script>
+  var startTime = <%= @start_time %>;
+  var inProgress = <%= @race_in_progess %>;
+  $( document ).ready(function() {
+    // Run the timer if the race is in progress
+    if (inProgress) {
+      startTimer()
+    }
+  });
+</script>
 <style>
 #timer { 
     font-size: 60px;
