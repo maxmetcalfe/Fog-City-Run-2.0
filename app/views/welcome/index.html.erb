@@ -16,7 +16,9 @@
     <h1><b>Fog City Run</b></h1>
     <p>A weekly running race in San Francisco, CA</p>
     <br>
-      <h4> Next Race: <%= @next_race.date %> - <%= link_to "Register", race_path(@next_race) %> </h4>
+      <% if @next_race %>
+        <h4> Next Race: <%= @next_race.date %> - <%= link_to "Register", race_path(@next_race) %> </h4>
+      <% end %>
     <br>
     </div>
     <div class="text-left">
