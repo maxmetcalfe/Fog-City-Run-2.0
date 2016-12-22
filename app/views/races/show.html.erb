@@ -68,7 +68,7 @@
       <% elsif current_user and current_user.racer_id and !@race_in_progess and @current_user_registered %>
         <%= link_to 'Already registered', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default disabled" %>
       <% elsif !@race_in_progess %>
-        <%= link_to 'Register Yourself', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default disabled" %>
+        Please log in.
       <% end %>
       <% if current_user and current_user.admin? and !@race_in_progess %>
         <%= link_to 'Start', start_race_path(), method: :put, :class => "btn btn-default" %>
