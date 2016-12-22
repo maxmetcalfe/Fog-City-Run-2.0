@@ -12,7 +12,7 @@
       <tr>
         <th>Race</th>
         <th>Entries</th>
-        <% if current_user %>
+        <% if current_user and current_user.racer_id %>
         <th>Link</th>
         <% end %>
       </tr>
@@ -22,7 +22,7 @@
         <tr>
           <td><%= link_to race.date, race_path(race) %></td>
           <td><%= StartItem.where(race_id: race.id).count %></td>
-          <% if current_user %>
+          <% if current_user and current_user.racer_id %>
           <td><%= link_to 'Register', new_start_item_path(:race_id => race.id, :racer_id => current_user.racer_id), :class => "btn btn-default btn-xs" %></td>
           <% end %>
         </tr>

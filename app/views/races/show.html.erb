@@ -55,23 +55,27 @@
       </tr>
     <% end %>
     </tbody>
+  <% end %>
   </table>
-  <% if current_user %>
     <div class="row text-center">
-      <% if current_user.admin? and !@race_in_progess %>
-      <%= link_to 'Register Racer', new_start_item_path(:race_id => @race.id), :class => "btn btn-default" %>
-      <%= link_to 'Register Yourself', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default" %>
-      <% elsif !@current_user_registered and !@race_in_progess %>
-      <%= link_to 'Register Yourself', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default" %>
+      <!-- Admin + User with racer_id -->
+      <% if current_user and current_user.admin? and !@race_in_progess %>
+        <%= link_to 'Register Racer', new_start_item_path(:race_id => @race.id), :class => "btn btn-default" %>
+      <% end %>
+      <!-- Admin + User without racer_id -->
+      <% if current_user and current_user.racer_id and !@race_in_progess and !@current_user_registered %>
+        <%= link_to 'Register Yourself', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default" %>
+      <% elsif current_user and current_user.racer_id and !@race_in_progess and @current_user_registered %>
+        <%= link_to 'Already registered', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default disabled" %>
+      <% elsif !@race_in_progess %>
+        <%= link_to 'Register Yourself', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default disabled" %>
       <% end %>
       <% if current_user and current_user.admin? and !@race_in_progess %>
-      <%= link_to 'Start', start_race_path(), method: :put, :class => "btn btn-default" %>
-      <% else %>
-      <%= link_to 'Stop Race', stop_race_path(), method: :put, :class => "btn btn-default" %>
+        <%= link_to 'Start', start_race_path(), method: :put, :class => "btn btn-default" %>
+      <% elsif current_user and current_user.admin? and @race_in_progess %>
+        <%= link_to 'Stop Race', stop_race_path(), method: :put, :class => "btn btn-default" %>
       <% end %>
     </div>
-  <% end %>
-  <% end %>
   <% if @has_results %>
     <h2> Results </h2>
     <table class="table table-hover table-bordered sortable">
