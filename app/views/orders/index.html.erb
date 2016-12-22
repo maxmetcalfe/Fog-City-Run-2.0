@@ -10,20 +10,24 @@
       <thead>
       <tr>
         <th>ID</th>
+        <th>User</th>
+        <th>Racer ID</th>
         <th>Item</th>
         <th>Size</th>
-        <th>User</th>
         <th>Delivered</th>
+        <th>Action</th>
       </tr>
       </thead>
       <tbody>
       <% @orders.each do |order| %>
         <tr>
           <td><%= order.id %></td>
+          <td><%= User.find(order.user_id).first_name %> <%= User.find(order.user_id).last_name %></td>
+          <td><%= User.find(order.user_id).racer_id %></td>
           <td><%= order.item %></td>
           <td><%= order.size %></td>
-          <td><%= order.user_id %></td>
           <td><%= order.delivered %></td>
+          <td><%= link_to "Edit", edit_order_path(order) %></td>
       <% end %>
       </tbody>
     </table>

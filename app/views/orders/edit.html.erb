@@ -1,63 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Users</title>
+  <title>Orders</title>
   <%= render "shared/navbar" %>
 </head>
 <body style="padding-top: 60px">
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3 col-md-offset-1">
-      <h2> Edit User </h2>
+      <h2> Edit Order </h2>
     </div>
   </div>
-  <% if @user.errors.any? %>
+  <% if @order.errors.any? %>
     <div id="error_explanation">
       <div class="alert alert-danger">
         The form contains <%= pluralize(@user.errors.count, "error") %>.
       </div>
       <ul>
-      <% @user.errors.full_messages.each do |msg| %>
+      <% @order.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-  <%= form_for @user, :html => {:class => "form-horizontal "} do |u| %>
+  <%= form_for @order, :html => {:class => "form-horizontal "} do |u| %>
   <div class="form-group">
-    <%= u.label :first_name, "First Name:", class: "col-md-1 control-label" %>
+    <%= u.label :id, "id:", class: "col-md-1 control-label" %>
       <div class="col-md-3">
-        <%= u.text_field :first_name, class: "form-control" %>
+        <%= u.text_field :id, class: "form-control" %>
       </div>
   </div>
   <div class="form-group">
-    <%= u.label :last_name, "Last Name:", class: "col-md-1 control-label" %>
+    <%= u.label :user, "user_id:", class: "col-md-1 control-label" %>
       <div class="col-md-3">
-        <%= u.text_field :last_name, class: "form-control" %>
+        <%= u.text_field :user_id, class: "form-control" %>
       </div>
   </div>
   <div class="form-group">
-    <%= u.label :email, "Email:", class: "col-md-1 control-label" %>
+    <%= u.label :item, "item:", class: "col-md-1 control-label" %>
       <div class="col-md-3">
-        <%= u.text_field :email, class: "form-control" %>
+        <%= u.text_field :item, class: "form-control" %>
       </div>
   </div>
   <div class="form-group">
-    <%= u.label :racer_id, "Racer ID", class: "col-md-1 control-label" %>
+    <%= u.label :delivered, "delivered:", class: "col-md-1 control-label" %>
       <div class="col-md-3">
-        <%= u.text_field :racer_id, class: "form-control"%>
-      </div>
-  </div>
-  <div class="form-group">
-    <%= u.label :strava_link, "Strave Link:", class: "col-md-1 control-label" %>
-      <div class="col-md-3">
-        <%= u.text_field :strava_link, class: "form-control"%>
-      </div>
-  </div>
-  <div class="form-group">
-    <%= u.label :password, "Password:", class: "col-md-1 control-label" %>
-      <div class="col-md-3">
-        <%= u.text_field :password, class: "form-control"%>
+        <%= u.text_field :delivered, class: "form-control" %>
       </div>
   </div>
   <div class="form-group">
