@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html>
 <head>
   <title>Forgot Password</title>
   <%= render "shared/navbar" %>
 </head>
-<body style="padding-top: 60px">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Forgot Password</h2>
-        <%= form_for(:password_reset, url: password_resets_path) do |f| %>
-          <%= f.label :email %>
-          <%= f.email_field :email, class: 'form-control' %>
-          <br>
-          <%= f.submit "Submit", class: "btn btn-primary" %>
-        <% end %>
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h2>Forgot Password</h2>
+      <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+        <br>
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
-</body>
-</html>
+</div>

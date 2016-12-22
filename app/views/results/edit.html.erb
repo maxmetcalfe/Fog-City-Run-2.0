@@ -1,46 +1,41 @@
-<!DOCTYPE html>
-<html>
 <head>
   <title>Races</title>
   <%= render "shared/navbar" %>
 </head>
-<body style="padding-top: 60px">
 <div class="container-fluid">
-<%= form_for :result, url: result_path(@result), method: :patch do |f| %>
-  <% if @result.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@result.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @result.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+  <%= form_for :result, url: result_path(@result), method: :patch do |f| %>
+    <% if @result.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@result.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h2>
+        <ul>
+          <% @result.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <p>
+      <%= f.label :bib %><br>
+      <%= f.text_field :bib %>
+    </p>
+     <p>
+      <%= f.label :group_Name %><br>
+      <%= f.text_field :group_name %>
+    </p>
+     <p>
+      <%= f.label :racer_id %><br>
+      <%= f.text_field :racer_id %>
+    </p>
+     <p>
+      <%= f.label :time %><br>
+      <%= f.text_field :time %>
+    </p>
+   
+    <p>
+      <%= f.submit %>
+    </p>
   <% end %>
-  <p>
-    <%= f.label :bib %><br>
-    <%= f.text_field :bib %>
-  </p>
-   <p>
-    <%= f.label :group_Name %><br>
-    <%= f.text_field :group_name %>
-  </p>
-   <p>
-    <%= f.label :racer_id %><br>
-    <%= f.text_field :racer_id %>
-  </p>
-   <p>
-    <%= f.label :time %><br>
-    <%= f.text_field :time %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-  </div>
-</body>
-</html>
+</div>

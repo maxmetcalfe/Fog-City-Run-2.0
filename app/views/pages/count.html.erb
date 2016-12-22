@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Races</title>
-  <%= render "shared/navbar" %>
+<title>Races</title>
+<%= render "shared/navbar" %>
 </head>
-<body style="padding-top: 60px">
 <div class="container-fluid">
   <div class="row">
     <%= column_chart Result.group(:race_id).count, min: 0, max: 22, colors: ["grey"] %>
@@ -25,5 +21,4 @@
     <% end %>
     </tbody>
   </table>
-</body>
-</html>
+</div>

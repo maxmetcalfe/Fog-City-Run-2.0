@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html>
 <head>
   <title>Loop - Beer - Loop Records</title>
   <%= render "shared/navbar" %>
 </head>
-<body style="padding-top: 60px">
 <div class="container-fluid">
-    <table class="table table-hover table-bordered sortable">
-      <thead>
+  <table class="table table-hover table-bordered sortable">
+    <thead>
+    <tr>
+      <th>Racer</th>
+      <th>PR Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% Result.where("group_name = ?", "Loop-Beer").group(:racer_id).pluck('racer_id', 'min(time)').sort_by {|_key, value| value}.each do |result| %>
       <tr>
-        <th>Racer</th>
-        <th>PR Time</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% Result.where("group_name = ?", "Loop-Beer").group(:racer_id).pluck('racer_id', 'min(time)').sort_by {|_key, value| value}.each do |result| %>
-        <tr>
-          <td><%= link_to Racer.find(result[0]).first_name + " " + Racer.find(result[0]).last_name, racer_path(Racer.find(result[0])) %></td>
-          <td><%= result[1] %>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-</body>
-</html>
+        <td><%= link_to Racer.find(result[0]).first_name + " " + Racer.find(result[0]).last_name, racer_path(Racer.find(result[0])) %></td>
+        <td><%= result[1] %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

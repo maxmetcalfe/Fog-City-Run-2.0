@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html>
 <head>
   <title>Password Reset</title>
   <%= render "shared/navbar" %>
 </head>
-<body style="padding-top: 60px">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
-          <%= hidden_field_tag :email, @user.email %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+        <%= hidden_field_tag :email, @user.email %>
 
-          <%= f.label :password %>
-          <%= f.password_field :password, class: 'form-control' %>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
 
-          <%= f.label :password_confirmation, "Confirmation" %>
-          <%= f.password_field :password_confirmation, class: 'form-control' %>
-          <br>
-          <%= f.submit "Update password", class: "btn btn-primary" %>
-        <% end %>
-      </div>
+        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+        <br>
+        <%= f.submit "Update password", class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
-</body>
-</html>
+</div>

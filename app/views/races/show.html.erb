@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html>
 <head>
   <title>Racers</title>
   <%= render "shared/navbar" %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
-<body style="padding-top: 60px">
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
@@ -115,7 +113,6 @@
     <% end %>
   <% end %>
 </div>
-</body>
 <script>
   var startTime = <%= @start_time %>;
   var inProgress = <%= @race_in_progess %>;
@@ -134,4 +131,3 @@
     padding: 10 px;
 }
 </style>
-</html>
