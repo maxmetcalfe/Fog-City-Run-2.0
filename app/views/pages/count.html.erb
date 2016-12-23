@@ -3,6 +3,29 @@
 </head>
 <div class="container-fluid">
   <div class="row">
+    <%= line_chart @racer_count_series, xtitle: "Date", ytitle: "# of Races", legend: false %>
+  </div>
+  <div class="row text-center">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <b>Filter Plot
+        <br>
+        <br>
+        Race count >
+        <div class="btn-group" role="group">
+        <%= link_to '0 (ALL)', count_path(:filter => [0]), :class => "btn btn-default" %>
+        <%= link_to '20', count_path(:filter => [20]), :class => "btn btn-default" %>
+        <%= link_to '40', count_path(:filter => [40]), :class => "btn btn-default" %>
+        <%= link_to '60', count_path(:filter => [80]), :class => "btn btn-default" %>
+        <%= link_to '80', count_path(:filter => [80]), :class => "btn btn-default" %>
+        <%= link_to '100', count_path(:filter => [100]), :class => "btn btn-default" %>
+        </div>
+        </b>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
     <%= column_chart Result.group(:race_id).count, min: 0, max: 22, colors: ["grey"] %>
   </div>
   <table class="table table-hover table-bordered sortable">

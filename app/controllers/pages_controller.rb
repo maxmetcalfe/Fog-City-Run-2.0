@@ -15,6 +15,42 @@ class PagesController < ApplicationController
       'GROUP BY extract(year from p.date) '\
       'ORDER by average_count DESC;'
     @output = connection.exec_query(query)
+    # @racer_count_series = Racer.first.results.joins(:race).where(group_name: "ALL").map {|result| [Race.find(result.race_id).date, to_seconds(result.time)] }
+    @racer_count_series = gather_racer_count_series
+  end
+
+  # Create series for racer count plot.
+  def gather_racer_count_series
+    open_dates = []
+    data = []
+    open_dates = open_dates.push '2013-01-16'.to_date
+    while open_dates[-1] < Date.today - 1.week
+      open_dates = open_dates.push open_dates[-1].advance(:weeks => 1)
+    end
+    # Set default filter for initial page load
+    if params[:filter].nil?
+      filter = 80
+    else
+      filter = params[:filter]
+    end
+    for r in Racer.where("race_count >= ?", filter)
+      races_run = r.results.joins(:race).map {|result| Race.find(result.race_id).date }
+      series_name = r.first_name + " " + r.last_name[0] + "."
+      race_count = 0
+      series_data = []
+      for o in open_dates
+        for r in races_run
+          if o == r
+            race_count = race_count + 1
+            series_data.push [o,race_count]
+          else
+            series_data.push [o,race_count]
+          end
+        end
+      end
+    data << {name: series_name, data: series_data}
+    end
+    return data
   end
 
   def records
