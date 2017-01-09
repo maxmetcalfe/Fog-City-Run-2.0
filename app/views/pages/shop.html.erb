@@ -7,16 +7,32 @@
     <div class="row">
       <% if current_user and @user_shop_blocked %>
       <div class="alert alert-danger">
-        You need to have comleted 15 or more races before you can place an order.
+        You need to have comleted 15 or more races before you can place a hat order.
       </div>
-      <% elsif current_user and !@user_shop_blocked and @user_order.nil?%>
+      <% elsif current_user and !@user_shop_blocked and @user_orders.nil?%>
       <div class="alert alert-info">
-        You have completed enough races. Please place an order.
+        You have completed enough races. Please place a hat order and/or a t-shirt order.
       </div>
-      <% elsif !@user_shop_blocked and !@user_order.nil? %>
+      <% elsif !@user_shop_blocked and !@user_orders.nil? %>
         <div class="alert alert-info">
-          <b>Your current order:</b>
-          <%= @user_order.item %> in size <%= @user_order.size %>.
+          <b>Your current orders:</b>
+          <br>
+          <table class="table table-hover table sortable">
+            <thead>
+            <tr>
+              <th>Item</th>
+              <th>Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @user_orders.each do |order| %>
+              <tr>
+                <td><%= order.item %></td>
+                <td><%= order.size %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
           Select a new item below to modify your selection.
         </div>
       <% else %>
@@ -100,13 +116,80 @@
           <% end %>
         </div>
       </div>
+      <% if current_user && current_user.admin? %>
       <div class="row">
-        <% if current_user && current_user.admin? %>
-        <h3> Orders: <%= @total_orders %> </h3>
-        <h3> Eligible Users: <%= @eligible_users %> </h3>
-        <h3> <%= @percent_valid %> % of eligible users have ordered. </h3>
-        <% end %>
+        <div class="panel panel-info">
+          <div class="panel-heading">Order Admin Info</div>
+          <div class="panel-body">
+            <h3> <%= @percent_valid %> % of eligible users have ordered their hats (<%= @total_hat_orders %>/<%= @eligible_users %> ) </h3>
+        </div>
       </div>
+      </div>
+      <% end %>
+      <div class="row">
+        <b>Year 4 T-Shirt</b>
+        <br>
+        <i>(Imported from Brazil)</i>
+        <br>
+        <br>
+        <%= image_tag "fcr_4y_shirt" %>
+      </div>
+      <br>
+      <div class="row">
+        <% if current_user and !@user_shop_blocked %>
+        <div class="btn-group">
+          <%= link_to 'Female', new_order_path(:item => "4YT-Shirt", :size => "F-small", :user_id => current_user.id ), :class => "btn btn-info disabled" %>
+          <%= link_to 'S', new_order_path(:item => "4YT-Shirt", :size => "F-small", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'M', new_order_path(:item => "4YT-Shirt", :size => "F-medium", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'L', new_order_path(:item => "4YT-Shirt", :size => "F-large", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'XL', new_order_path(:item => "4YT-Shirt", :size => "F-xlarge", :user_id => current_user.id ), :class => "btn btn-default" %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="btn-group">
+          <%= link_to 'Male', new_order_path(:item => "4YT-Shirt", :size => "M-small", :user_id => current_user.id ), :class => "btn btn-info disabled" %>
+          <%= link_to 'S', new_order_path(:item => "4YT-Shirt", :size => "M-small", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'M', new_order_path(:item => "4YT-Shirt", :size => "M-medium", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'L', new_order_path(:item => "4YT-Shirt", :size => "M-large", :user_id => current_user.id ), :class => "btn btn-default" %>
+          <%= link_to 'XL', new_order_path(:item => "4YT-Shirt", :size => "M-xlarge", :user_id => current_user.id ), :class => "btn btn-default" %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <% end %>
+        <% if current_user && current_user.admin? %>
+        <div class="panel panel-info">
+          <div class="panel-heading">Order Admin Info</div>
+          <div class="panel-body">
+            <h3>
+              <div class="row">
+                Female Shirt Count:
+                S: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").count %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").count / 6.0) * 100.0).round(2)%>%),
+                M: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").count %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").count / 6.0) * 100.0).round(2)%>%),
+                L: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").count %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").count / 6.0) * 100.0).round(2)%>%)
+                XL: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").count %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").count / 2.0) * 100.0).round(2)%>%)
+              </div>
+              <br>
+              <div class="row">
+                Male Shirt Count:
+                S: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-small").count %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-small").count / 5.0) * 100.0).round(2)%>%),
+                M: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-medium").count %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-medium").count / 10.0) * 100.0).round(2)%>%),
+                L: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-large").count %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-large").count / 10.0) * 100.0).round(2)%>%)
+                XL: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-xlarge").count %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-xlarge").count / 5.0) * 100.0).round(2)%>%)
+              </div>
+            </h3>
+          </div>
+        </div>
+        <% end %>
     </div>
     <br>
   </div>

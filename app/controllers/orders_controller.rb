@@ -29,11 +29,24 @@ class OrdersController < ApplicationController
 
   # Create order
   def create
+    hats = ["The Divis", "The Buchanan", "The Filbert St. Hop", "The Lombard Gate"]
+    shirts = ["4YT-Shirt"]
     @order = Order.new(order_params)
-    @user_order = Order.where(:user_id => current_user.id).first
-    if !@user_order.nil?
-      Order.destroy(@user_order.id)
+    # Only allow user to order a single hat
+    @user_orders = Order.where(:user_id => current_user.id)
+    hat_orders = @user_orders.select{|x| hats.include? x.item}
+    shirt_orders = @user_orders.select{|x| shirts.include? x.item}
+
+    # Only allow the user to order a single shirt
+    if shirt_orders.size > 0 and shirts.include? order_params[:item]
+      Order.destroy(shirt_orders.map(&:id))
     end
+
+    # Only allow the user to order a single hat
+    if hat_orders.size > 0 and hats.include? order_params[:item]
+      Order.destroy(hat_orders.map(&:id))
+    end
+
     # If someone tries to order something for someone else. Change user back to current_user
     if @order.user_id != current_user.id
       @order.user_id = current_user.id

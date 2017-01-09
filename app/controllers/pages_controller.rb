@@ -61,17 +61,23 @@ class PagesController < ApplicationController
   end
 
   def shop
+  hats = ["The Divis", "The Buchanan", "The Filbert St. Hop", "The Lombard Gate"]
+  shirts = ["4YT-Shirt"]
     if current_user
-      @user_order = Order.where(:user_id => current_user.id).first
+      @user_orders = Order.where(:user_id => current_user.id)
+      # Force to nil if none exist.
+      if @user_orders.size == 0
+        @user_orders = nil
+      end
       # Only racers with 30 or more races can place an order.
       @user_shop_blocked = false
       if Result.where(:racer_id => current_user.racer_id).count <= 15
         @user_shop_blocked = true
       end
     end
-    @total_orders = Order.all.count
+    @total_hat_orders = Order.all.select{|x| hats.include? x.item}.size
     @eligible_users = Racer.where("race_count >= ?", 15).count
-    @percent_valid = ((@total_orders.to_f / @eligible_users.to_f) * 100).to_i
+    @percent_valid = ((@total_hat_orders.to_f / @eligible_users.to_f) * 100).to_i
   end
 
 end
