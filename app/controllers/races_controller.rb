@@ -21,7 +21,7 @@ class RacesController < ApplicationController
     else
       @has_results = false
     end
-    @start_items = StartItem.where(:race_id=>params[:id])
+    @start_items = StartItem.where(:race_id=>params[:id]).order(:bib)
     if @start_items.length > 0
       @has_start_items = true
     else
