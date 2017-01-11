@@ -16,6 +16,7 @@
     <thead>
     <tr>
       <th>Bib</th>
+      <th>Group</th>
       <th>Name</th>
       <th>Stop </th>
       <% if !@race_in_progess %>
@@ -27,6 +28,7 @@
     <% @start_items.each do |item| %>
       <tr>
         <td><%= item.bib %></td>
+        <td><%= item.group %></td>
         <td><%= Racer.find(item.racer_id).first_name %> <%= Racer.find(item.racer_id).last_name %></td>
         <% if (current_user and current_user.racer_id == item.racer_id) or (current_user and current_user.admin?) %>
           <% if @race_in_progess and !item.finished %>
