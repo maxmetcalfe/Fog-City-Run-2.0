@@ -18,9 +18,9 @@ class StartItemsController < ApplicationController
     redirect_to race
   end
 
-  # Edit race
+  # Edit start_item
   def edit
-    @race = StartItem.find(params[:id])
+    @start_item = StartItem.find(params[:id])
   end
 
   # Create start_item
@@ -55,13 +55,14 @@ class StartItemsController < ApplicationController
     @start_item = StartItem.new
   end
 
-  # Update race
+  # Update start_item
   def update
     @start_item = StartItem.find(params[:id])
+    race = Race.find(@start_item.race_id)
     if @start_item.update(start_item_params)
-      redirect_to @start_item
+      redirect_to race_path(race)
     else
-      render 'edit'
+      render race_path(race)
     end
   end
 
