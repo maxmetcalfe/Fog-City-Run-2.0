@@ -8,3 +8,10 @@
   padding: 0px;
   margin-top: 15px;
 }
+
+#timer {
+    font-size: 60px;
+    background-color: white;
+    color: black;
+    padding: 10 px;
+}
