@@ -3,12 +3,17 @@
   <%= render "shared/navbar" %>
 </head>
 <div class="container-fluid">
-  <%= form_for :result, url: result_path(@result), method: :patch do |f| %>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <h2> Edit Result </h2>
+    </div>
+  </div>
+  <%= form_for @result, :html => {:class => "form-horizontal "} do |r| %>
     <% if @result.errors.any? %>
       <div id="error_explanation">
         <h2>
           <%= pluralize(@result.errors.count, "error") %> prohibited
-          this article from being saved:
+          this result from being saved:
         </h2>
         <ul>
           <% @result.errors.full_messages.each do |msg| %>
@@ -17,25 +22,40 @@
         </ul>
       </div>
     <% end %>
-    <p>
-      <%= f.label :bib %><br>
-      <%= f.text_field :bib %>
-    </p>
-     <p>
-      <%= f.label :group_Name %><br>
-      <%= f.text_field :group_name %>
-    </p>
-     <p>
-      <%= f.label :racer_id %><br>
-      <%= f.text_field :racer_id %>
-    </p>
-     <p>
-      <%= f.label :time %><br>
-      <%= f.text_field :time %>
-    </p>
-   
-    <p>
-      <%= f.submit %>
-    </p>
+    <div class="form-group">
+      <%= r.label :bib, "Bib:", class: "col-md-1 control-label" %>
+        <div class="col-md-3">
+          <%= r.text_field :bib, class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+      <%= r.label :racer_id, "Racer:", class: "col-md-1 control-label" %>
+        <div class="col-md-3">
+          <%= r.text_field :racer_id, class: "form-control", placeholder: "racer id" %>
+        </div>
+    </div>
+    <div class="form-group">
+      <%= r.label :group_name, "Group Name:", class: "col-md-1 control-label" %>
+        <div class="col-md-3">
+          <%= r.text_field :group_name, class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+      <%= r.label :time, "Time:", class: "col-md-1 control-label" %>
+        <div class="col-md-3">
+          <%= r.text_field :time, class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+      <%= r.label :race_id, "Race:", class: "col-md-1 control-label" %>
+        <div class="col-md-3">
+          <%= r.text_field :race_id, class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-1 col-md-offset-1">
+      <%=button_tag "Submit", class: "btn btn-default"%>
+      </div>
+    </div>
   <% end %>
 </div>
