@@ -79,6 +79,8 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (6.0.1)
+      railties (>= 3.2.16)
     json (1.8.3)
     jwt (0.1.13)
       multi_json (>= 1.5)
@@ -140,6 +142,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails4-autocomplete (1.1.1)
+      rails (>= 3.0)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -203,11 +207,13 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   less-rails
   omniauth
   omniauth-facebook (= 1.4.0)
   pg
   rails (= 4.2.6)
+  rails4-autocomplete
   rails_12factor
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

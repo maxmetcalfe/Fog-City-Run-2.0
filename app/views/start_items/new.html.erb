@@ -35,9 +35,9 @@
           </div>
       </div>
       <div class="form-group">
-        <%= i.label :racer_id, "Racer ID:", class: "col-md-1 control-label" %>
+        <%= i.label :racer_id, "Racer:", class: "col-md-1 control-label" %>
           <div class="col-md-3">
-            <%= i.text_field :racer_id, class: "form-control", :value => params[:racer_id] %>
+            <%= i.autocomplete_field :racer_id, autocomplete_racer_racers_path, class: "form-control" %>
           </div>
       </div>
       <div class="form-group">

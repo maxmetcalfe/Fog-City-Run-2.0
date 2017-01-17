@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   resources :racers do
     resource :results
-    collection { post :import }
+    collection do
+      post :import
+      get 'autocomplete_racer'
+    end
   end
 
   resources :results do

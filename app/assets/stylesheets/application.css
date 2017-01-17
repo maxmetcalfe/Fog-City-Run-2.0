@@ -13,3 +13,5 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .ui-helper-hidden-accessible { display:none; }

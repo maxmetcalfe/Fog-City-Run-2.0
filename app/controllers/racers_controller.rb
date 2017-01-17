@@ -1,5 +1,19 @@
 class RacersController < ApplicationController
 
+  def autocomplete_racer
+    term = params[:term]
+    racers = Racer.where(
+        'LOWER(first_name) LIKE LOWER(?) OR LOWER(last_name) LIKE LOWER(?)',
+        "%#{term}%", "%#{term}%"
+        ).order(:id).all
+    respond_to do |format|
+      format.html
+      format.json {
+        puts render :json => racers.map { |racer| racer.first_name + " " + racer.last_name }
+      }
+    end
+  end
+
   # Show all racers
   def index
     @racers = Racer.all
