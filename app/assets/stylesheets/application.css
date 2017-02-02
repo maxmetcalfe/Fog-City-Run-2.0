@@ -14,4 +14,8 @@
  *= require_self
  */
  
+ /*
+ *= require font-awesome
+ */
+
  .ui-helper-hidden-accessible { display:none; }

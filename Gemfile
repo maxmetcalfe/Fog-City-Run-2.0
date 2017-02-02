@@ -8,6 +8,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer', platforms: :ruby
 gem 'font-awesome-less', '~> 4.6.2'
+gem 'font-awesome-rails'
 gem "less-rails"
 gem 'jquery-rails'
 gem 'turbolinks'

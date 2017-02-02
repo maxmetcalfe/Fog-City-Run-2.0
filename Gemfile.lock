@@ -64,6 +64,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     font-awesome-less (4.6.2)
       less (>= 2.4.0)
+    font-awesome-rails (4.7.0.1)
+      railties (>= 3.2, < 5.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
@@ -204,6 +206,7 @@ DEPENDENCIES
   chartkick
   coffee-rails (~> 4.1.0)
   font-awesome-less (~> 4.6.2)
+  font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
