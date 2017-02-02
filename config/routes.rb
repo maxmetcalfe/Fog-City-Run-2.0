@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   get :send_results_email, to: 'races#send_results_email', as: :send_results_email
   put 'races/:id/start' => 'races#start_race', :as => 'start_race'
   put 'races/:id/stop' => 'races#stop_race', :as => 'stop_race'
+  put 'races/:id/save' => 'races#save_race', :as => 'save_race'
+  put 'races/:id/enable' => 'races#enable_race', :as => 'enable_race'
   post 'start_items/:id/collect_time' => 'start_items#collect_time', :as => 'collect_time'
   post 'start_items/:id/continue_time' => 'start_items#continue_time', :as => 'continue_time'
 

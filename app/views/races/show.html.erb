@@ -4,115 +4,11 @@
   <%= render "shared/navbar" %>
 </head>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3">
-      <div id='timer'>00:00:00</div>
-    </div>
-  </div>
-  <% if @has_start_items %>
-  <h2> Start List </h2>
-  <table class="table table-hover table-bordered sortable">
-    <thead>
-    <tr>
-      <th>Bib</th>
-      <th>Group</th>
-      <th>Name</th>
-      <th>Stop </th>
-      <% if !@race_in_progess %>
-      <th>Action</th>
-      <% end %>
-    </tr>
-    </thead>
-    <tbody>
-    <% @start_items.each do |item| %>
-      <tr>
-        <td><%= item.bib %></td>
-        <td><%= item.group %></td>
-        <td><%= Racer.find(item.racer_id).first_name %> <%= Racer.find(item.racer_id).last_name %></td>
-        <% if (current_user and current_user.racer_id == item.racer_id) or (current_user and current_user.admin?) %>
-          <% if @race_in_progess and !item.finished %>
-            <td><%= link_to 'Stop', collect_time_path(item), method: :post, :class => "btn btn-default" %></td>
-          <% elsif @race_in_progess and item.finished %>
-            <td>
-            <%= link_to 'Finished', collect_time_path(item), method: :post, :class => "btn btn-danger disabled" %>
-            <%= link_to 'Continue', continue_time_path(item), method: :post, :class => "btn btn-default" %>
-            </td>
-          <% elsif !@race_in_progess and item.finished %>
-            <td><button class="btn btn-default">Finished</button></td>
-          <% else %>
-            <td><button class="btn btn-default">Not started</button></td>
-          <% end %>
-          <% if !@race_in_progess %>
-            <td><%= link_to 'Edit', edit_start_item_path(item), :class => "btn btn-default" %> <%= link_to 'Destroy', start_item_path(item), method: :delete, data: { confirm: 'Are you sure you want to delete this start entry.'}, :class => "btn btn-default" %></li></td>
-          <% end %>
-        <% else %>
-          <td><%= link_to 'Stop', collect_time_path(item), method: :post, :class => "btn btn-default disabled" %></td>
-          <% if !@race_in_progess %>
-            <td><%= link_to 'Edit', edit_start_item_path(item), :class => "btn btn-default disabled" %> <%= link_to 'Destroy', start_item_path(item), method: :delete, data: { confirm: 'Are you sure you want to delete this start entry.'}, :class => "btn btn-default disabled" %></li></td>
-          <% end %>
-        <% end %>
-      </tr>
-    <% end %>
-    </tbody>
+  <% if @is_current_race %>
+    <%= render "shared/timer" %>
   <% end %>
-  </table>
-    <div class="row text-center">
-      <!-- Admin + User with racer_id -->
-      <% if current_user and current_user.admin? and !@race_in_progess %>
-        <%= link_to 'Register Racer', new_start_item_path(:race_id => @race.id), :class => "btn btn-default" %>
-      <% end %>
-      <!-- Admin + User without racer_id -->
-      <% if current_user and current_user.racer_id and !@race_in_progess and !@current_user_registered %>
-        <%= link_to 'Register Yourself', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default" %>
-      <% elsif current_user and current_user.racer_id and !@race_in_progess and @current_user_registered %>
-        <%= link_to 'Already registered', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default disabled" %>
-      <% elsif !@race_in_progess %>
-        Please log in.
-      <% end %>
-      <% if current_user and current_user.admin? and !@race_in_progess %>
-        <%= link_to 'Start', start_race_path(), method: :put, :class => "btn btn-default" %>
-      <% elsif current_user and current_user.admin? and @race_in_progess %>
-        <%= link_to 'Stop Race', stop_race_path(), method: :put, :class => "btn btn-default" %>
-      <% end %>
-    </div>
-  <% if @has_results %>
-    <h2> Results </h2>
-    <table class="table table-hover table-bordered sortable">
-      <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Bib</th>
-        <th>Group</th>
-        <th>Racer</th>
-        <th>Time</th>
-        <% if current_user and current_user.admin? %>
-          <th>Actions</th>
-        <% end %>
-      </tr>
-      </thead>
-      <tbody>
-      <% @race_results.each do |result| %>
-        <tr>
-          <td><%= result.rank %></td>
-          <td><%= result.bib %></td>
-          <td><%= result.group_name %></td>
-          <td><%= link_to result.racer.first_name + ' ' + result.racer.last_name, racer_path(result.racer)%></td>
-          <td><%= result.time %></td>
-          <% if current_user and current_user.admin? %>
-          <td><%= link_to 'Edit', edit_result_path(result), :class => "btn btn-default" %> <%= link_to 'Destroy',
-                  result_path(result), method: :delete, data: { confirm: 'Are you sure you want to delete the result for ' + result.racer.first_name.to_s + ' ' + result.racer.last_name.to_s }, :class => "btn btn-default" %></td>
-          <% end %>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-    <% if current_user and current_user.admin? and !@race_in_progess %>
-      <div class="row text-center">
-      <%= link_to 'New Result', new_result_path(:race_id => @race.id), :class => "btn btn-success" %>
-      <%= link_to 'Send Email', send_results_email_path(:race_id => @race), :class => "btn btn-danger" %>
-      </div>
-    <% end %>
-  <% end %>
+  <%= render "shared/start_list" %>
+  <%= render "shared/results_list" %>
 </div>
 <script>
   var startTime = <%= @start_time %>;

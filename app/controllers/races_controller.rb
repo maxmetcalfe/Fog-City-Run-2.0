@@ -16,22 +16,18 @@ class RacesController < ApplicationController
   def show
     @race = Race.find(params[:id])
     @race_results = @race.results.order(:rank)
-    if @race_results.length > 0
-      @has_results = true
-    else
-      @has_results = false
-    end
-    @start_items = StartItem.where(:race_id=>params[:id]).order(:bib)
-    if @start_items.length > 0
-      @has_start_items = true
-    else
-      @has_start_items = false
-    end
+    @race_results_length = @race_results.length
     @current_user_registered = is_current_user_registered()
+    @is_current_race = is_current_race
     @race_in_progess = race_in_progess
-    # Starting time for timer
-    if @has_start_items
+    @start_items = StartItem.where(:race_id=>params[:id]).order(:bib)
+    @start_items_length = @start_items.length
+    # Only show start items if race is current and if start items exist
+    if @start_items.length > 0 and is_current_race
+      @show_start_items = true
       @start_time = @start_items[0].start_time.to_time.utc.to_i
+    else
+      @show_start_items = false
     end
   end
 
@@ -112,7 +108,7 @@ class RacesController < ApplicationController
   def start_race
     @race = Race.find(params[:id])
     StartItem.where('race_id = ?', @race.id).update_all(start_time: DateTime.now)
-    @race.update(in_progress: true)
+    @race.update(state: 'IN_PROGRESS')
     redirect_to @race
   end
 
@@ -120,14 +116,42 @@ class RacesController < ApplicationController
   def stop_race
     @race = Race.find(params[:id])
     StartItem.where('race_id = ?', @race.id).update_all(start_time: DateTime.now)
-    @race.update(in_progress: false)
+    @race.update(state: 'STOPPED')
+    redirect_to @race
+  end
+  
+  # Stop race.
+  def save_race
+    @race = Race.find(params[:id])
+    @race.update(state: 'FINISHED')
+    redirect_to @race
+  end
+  
+  # enable race.
+  def enable_race
+    @race = Race.find(params[:id])
+    @race.update(state: 'STOPPED')
     redirect_to @race
   end
 
+  # Check if race is in the current race
+  def is_current_race
+    @race = Race.find(params[:id])
+    if ['PLANNED','IN_PROGRESS','STOPPED'].include? @race.state
+      return true
+    else
+      return false
+    end
+  end
+  
   # Check if race is in progress
   def race_in_progess
     @race = Race.find(params[:id])
-    return @race.in_progress
+    if @race.state == 'IN_PROGRESS'
+      return true
+    else
+      return false
+    end
   end
 
   #Permit parameters when creating race
