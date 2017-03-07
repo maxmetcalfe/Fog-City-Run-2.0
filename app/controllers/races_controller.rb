@@ -51,6 +51,8 @@ class RacesController < ApplicationController
   # Create race
   def create
   	@race = Race.new(race_params)
+    @race.id = Race.maximum(:id).next
+    @race.state = 'PLANNED'
     if @race.save
       update_race_count()
       redirect_to @race
