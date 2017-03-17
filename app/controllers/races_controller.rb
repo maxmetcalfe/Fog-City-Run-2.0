@@ -37,7 +37,7 @@ class RacesController < ApplicationController
     racer_ids = Result.where(:race_id => @race.id).pluck(:racer_id)
     @race.results.destroy_all
     @race.destroy
-    update_race_count()
+    update_race_count(racer_ids)
     update_streak_calendar(racer_ids)
 
     redirect_to races_path
@@ -54,7 +54,6 @@ class RacesController < ApplicationController
     @race.id = Race.maximum(:id).next
     @race.state = 'PLANNED'
     if @race.save
-      update_race_count()
       redirect_to @race
     else
       render 'new'
@@ -70,7 +69,6 @@ class RacesController < ApplicationController
   def update
     @race = Race.find(params[:id])
     if @race.update(race_params)
-      update_race_count()
       redirect_to @race
     else
       render 'edit'

@@ -49,9 +49,9 @@ class ApplicationController < ActionController::Base
   end
 
   # Calculate new race counts
-  def update_race_count()
-    @racers = Racer.all
-    for r in @racers
+  def update_race_count(racer_ids)
+    racers = Racer.find(racer_ids)
+    for r in racers
       race_count = Result.where(racer_id: r.id).count
       r.update_attribute(:race_count, race_count)
     end

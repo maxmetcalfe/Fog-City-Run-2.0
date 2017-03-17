@@ -10,7 +10,7 @@ class ResultsController < ApplicationController
   def index
     @results = Result.all
     # Refresh all counts
-    update_race_count()
+    update_race_count([@results.pluck(:racer_id)])
     update_streak_calendar([@results.pluck(:racer_id)])
   end
 
@@ -51,7 +51,7 @@ class ResultsController < ApplicationController
     @result = Result.new(modify_result_params)
     @result.rank = 0
     @result.id = Result.maximum(:id).next
-    update_race_count()
+    update_race_count(@result.racer_id)
     update_streak_calendar([@result.racer_id])
 
     if @result.save
@@ -72,7 +72,7 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     if @result.update(result_params)
       validate_ranks(@result.race_id)
-      update_race_count()
+      update_race_count(@result.racer_id)
       update_streak_calendar([@result.racer_id])
 
       redirect_to Race.find(@result.race_id)
@@ -95,7 +95,7 @@ class ResultsController < ApplicationController
     elsif @status == "FAILURE_FILE"
       flash.now[:danger] = "Ooops. You forgot a file!"
     elsif @status.any?
-      update_race_count()
+      update_race_count(@result.racer_id)
       update_streak_calendar([@status])
       flash.now[:success] = "Success"
     end
