@@ -63,7 +63,9 @@ class RacersController < ApplicationController
   	@racer = Racer.new(racer_params)
     @racer.id = Racer.maximum(:id).next
     if @racer.save
-      redirect_to races_path
+      next_race = Race.where("date >= ?", Date.today).first
+      full_name = @racer.first_name + " "+ @racer.last_name
+      redirect_to new_start_item_path(:race_id => next_race.id, :racer => full_name)
     else
       render 'new'
     end
