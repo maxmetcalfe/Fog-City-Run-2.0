@@ -17,7 +17,6 @@ class RacesController < ApplicationController
     @race = Race.find(params[:id])
     @race_results = @race.results.order(:rank)
     @race_results_length = @race_results.length
-    @current_user_registered = is_current_user_registered()
     @is_current_race = is_current_race
     @race_in_progess = race_in_progess
     @start_items = StartItem.where(:race_id=>params[:id]).order(:bib)
@@ -37,7 +36,7 @@ class RacesController < ApplicationController
     racer_ids = Result.where(:race_id => @race.id).pluck(:racer_id)
     @race.results.destroy_all
     @race.destroy
-    update_race_count(racer_ids)
+    update_racer_info(racer_ids)
     update_streak_calendar(racer_ids)
 
     redirect_to races_path
@@ -94,14 +93,6 @@ class RacesController < ApplicationController
     end
     redirect_to races_path
     flash[:success] = "Emails have been sent."
-  end
-
-  def is_current_user_registered
-    if current_user and StartItem.where(:race_id => @race.id).pluck(:racer_id).include? current_user.racer_id
-      return true
-    else
-      return false
-    end
   end
 
   # Start race. Set start_time to DateTime.now for this race's start items.

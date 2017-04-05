@@ -54,7 +54,7 @@ class StartItemsController < ApplicationController
       puts "ERROR: We have multiple start items for the same racer for this race."
     else
       if @start_item.save
-        redirect_to race
+        redirect_to(:back)
       else
         render 'new'
       end
@@ -64,6 +64,7 @@ class StartItemsController < ApplicationController
   # New start_item
   def new
     @start_item = StartItem.new
+    @likely_racers = get_likely_racers(params[:race_id])
   end
 
   # Update start_item
@@ -105,6 +106,17 @@ class StartItemsController < ApplicationController
     @start_item.finished = false
     @start_item.save
     redirect_to @race
+  end
+  
+  # Get a list of likely racers for a race.
+  # Likely racers are the top 12 racers with the most races, excluding those already registered.
+  def get_likely_racers(race_id)
+    already_registered = StartItem.where(:race_id => race_id).pluck(:racer_id)
+    likely_racers = Racer.where(["race_count > ? AND id not in (?)", 10, already_registered]).first(12)
+    if !is_current_user_registered(race_id)
+      likely_racers.insert(0, Racer.find(current_user.racer_id))
+    end
+    return likely_racers
   end
 
   private

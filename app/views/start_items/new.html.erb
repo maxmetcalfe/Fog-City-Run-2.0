@@ -6,57 +6,82 @@
   <div class="row">
     <div class="col-md-3 col-md-offset-1">
       <h2> Registration </h2>
+      <h3>Likely Racers</h3>
+      <div class="likely-table">
+        <table class="table table-hover table-bordered sortable" id="likely-table">
+          <thead>
+          <tr>
+            <th>Racer</th>
+            <th>Bib</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @likely_racers.each do |racer| %>
+            <tr>
+              <td><%= racer.first_name %> <%= racer.last_name %> </td>
+              <td><%= racer.fav_bib %> </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
-  <%= form_for @start_item, :html => {:class => "form-horizontal "} do |i| %>
-    <% if @start_item.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@start_item.errors.count, "error") %> prohibited
-          this start_item from being saved:
-        </h2>
-        <ul>
-          <% @start_item.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-      <div class="form-group">
-        <%= i.label :bib, "Bib:", class: "col-md-1 control-label" %>
-          <div class="col-md-3">
-            <%= i.text_field :bib, class: "form-control" %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+      <%= form_for @start_item, :html => {:class => "form-horizontal "} do |i| %>
+        <% if @start_item.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@start_item.errors.count, "error") %> prohibited
+              this start_item from being saved:
+            </h2>
+            <ul>
+              <% @start_item.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
           </div>
-      </div>
-      <div class="form-group">
-        <%= i.label :group, "Group:", class: "col-md-1 control-label" %>
-          <div class="col-md-3">
-            <%= i.select :group, options_for_select(['ALL','Canine','Loop-Beer']), {}, class: "form-control" %>
+        <% end %>
+          <div class="form-group">
+            <%= i.label :bib, "Bib:", class: "col-md-1 control-label" %>
+              <div class="col-md-3">
+                <%= i.text_field :bib, class: "form-control" %>
+              </div>
           </div>
-      </div>
-      <div class="form-group">
-        <%= i.label :racer_id, "Racer:", class: "col-md-1 control-label" %>
-          <div class="col-md-3">
-            <%= i.autocomplete_field :racer_id, autocomplete_racer_racers_path, class: "form-control", :value => params[:racer] %>
+          <div class="form-group">
+            <%= i.label :group, "Group:", class: "col-md-1 control-label" %>
+              <div class="col-md-3">
+                <%= i.select :group, options_for_select(['ALL','Canine','Loop-Beer']), {}, class: "form-control" %>
+              </div>
           </div>
-      </div>
-      <div class="form-group">
-        <%= i.label :race_id, "Race ID:", class: "col-md-1 control-label" %>
-          <div class="col-md-3">
-            <%= i.text_field :race_id, class: "form-control", :value => params[:race_id] %>
+          <div class="form-group">
+            <%= i.label :racer_id, "Racer:", class: "col-md-1 control-label" %>
+              <div class="col-md-3">
+                <%= i.autocomplete_field :racer_id, autocomplete_racer_racers_path, class: "form-control" %>
+              </div>
           </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-1 col-md-offset-1">
-        <%=button_tag "Submit", class: "btn btn-default"%>
+          <div class="form-group">
+            <%= i.label :race_id, "Race ID:", class: "col-md-1 control-label" %>
+              <div class="col-md-3">
+                <%= i.text_field :race_id, class: "form-control", :value => params[:race_id] %>
+              </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-1 col-md-offset-1">
+            <%=button_tag "Submit", class: "btn btn-default"%>
+            </div>
+          </div>
+      <% end %>
+      <% if current_user and current_user.admin? %>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+          <%= link_to 'Add new racer', new_racer_path(), :class => "btn btn-default" %>
+          <%= link_to 'Back to race', race_path(params[:race_id]), :class => "btn btn-default" %>
         </div>
       </div>
-  <% end %>
-  <% if current_user and current_user.admin? %>
-  <div class="row">
-    <div class="col-md-3 col-md-offset-1">
-      <%= link_to 'Add new racer', new_racer_path(), :class => "btn btn-default" %>
+      <% end %>
     </div>
   </div>
-  <% end %>
 </div>

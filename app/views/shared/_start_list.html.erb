@@ -59,17 +59,8 @@
         </tbody>
       </table>
       <div class="row text-center">
-        <!-- Admin + User with racer_id -->
         <% if current_user and current_user.admin? and @is_current_race %>
           <%= link_to 'Register Racer', new_start_item_path(:race_id => @race.id), :class => "btn btn-default" %>
-        <% end %>
-        <!-- Admin + User without racer_id -->
-        <% if current_user and current_user.racer_id and @is_current_race and !@current_user_registered %>
-          <%= link_to 'Register Yourself', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default" %>
-        <% elsif current_user and current_user.racer_id and @is_current_race and @current_user_registered %>
-          <%= link_to 'Already registered', new_start_item_path(:race_id => @race.id, :racer_id => current_user.racer_id), :class => "btn btn-default disabled" %>
-        <% elsif @is_current_race %>
-          Please log in.
         <% end %>
         <% if current_user and current_user.admin? and !@race_in_progess and @is_current_race %>
           <%= link_to 'Start', start_race_path(), method: :put, :class => "btn btn-default" %>
