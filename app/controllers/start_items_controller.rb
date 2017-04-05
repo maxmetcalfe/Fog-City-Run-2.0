@@ -64,6 +64,7 @@ class StartItemsController < ApplicationController
   # New start_item
   def new
     @start_item = StartItem.new
+    @likely_racers = get_likely_racers
   end
 
   # Update start_item
@@ -105,6 +106,11 @@ class StartItemsController < ApplicationController
     @start_item.finished = false
     @start_item.save
     redirect_to @race
+  end
+  
+  # Get a list of likely racers for a race.
+  def get_likely_racers
+    return Racer.where("race_count > ?", 10).first(12)
   end
 
   private

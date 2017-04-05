@@ -51,10 +51,13 @@ class ApplicationController < ActionController::Base
   # Calculate new race counts
   def update_race_count(racer_ids)
     racers = Racer.find(racer_ids)
+    # Calculate race count
     for r in racers
       race_count = Result.where(racer_id: r.id).count
+      frequent_bub = Result.where(racer_id: r.id).average.
       r.update_attribute(:race_count, race_count)
     end
+    # Calculate race count
   end
 
   # Update longest / current streak for a set of racer_ids.
