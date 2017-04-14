@@ -37,7 +37,7 @@ class RacesController < ApplicationController
     racer_ids = Result.where(:race_id => @race.id).pluck(:racer_id)
     @race.results.destroy_all
     @race.destroy
-    update_race_count(racer_ids)
+    update_racer_info(racer_ids)
     update_streak_calendar(racer_ids)
 
     redirect_to races_path
