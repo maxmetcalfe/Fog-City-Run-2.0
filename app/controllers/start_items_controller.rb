@@ -92,7 +92,7 @@ class StartItemsController < ApplicationController
     elsif existing_result.length > 1
       puts "ERROR: We have multiple results for the same racer for this race."
     else
-      @result = Result.create(:rank => 0, :id => Result.maximum(:id).next, :group_name => @start_item.group, :bib => @start_item.bib, :time => Date.today, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
+      @result = Result.create(:rank => 0, :id => Result.maximum(:id).next, :group_name => @start_item.group, :bib => @start_item.bib, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
       @result.save
     end
     validate_ranks(@race.id)
@@ -112,10 +112,12 @@ class StartItemsController < ApplicationController
   # Likely racers are the top 12 racers with the most races, excluding those already registered.
   def get_likely_racers(race_id)
     already_registered = StartItem.where(:race_id => race_id).pluck(:racer_id)
-    likely_racers = Racer.where(["race_count > ? AND id not in (?)", 10, already_registered]).first(12)
-    if !is_current_user_registered(race_id)
-      likely_racers.insert(0, Racer.find(current_user.racer_id))
+    if already_registered.length > 0
+      likely_racers = Racer.where(["race_count > ? AND id not in (?)", 10, already_registered]).first(12)
+    else
+      likely_racers = Racer.where("race_count > ?", 10).first(12)
     end
+    likely_racers.insert(0, Racer.find(current_user.racer_id))
     return likely_racers
   end
 
