@@ -117,7 +117,9 @@ class StartItemsController < ApplicationController
     else
       likely_racers = Racer.where("race_count > ?", 10).first(12)
     end
-    likely_racers.insert(0, Racer.find(current_user.racer_id))
+    if !already_registered.include? current_user.racer_id
+      likely_racers.insert(0, Racer.find(current_user.racer_id))
+    end
     return likely_racers
   end
 
