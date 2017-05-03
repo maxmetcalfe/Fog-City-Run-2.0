@@ -15,7 +15,7 @@ class RacesController < ApplicationController
   # Show race by id
   def show
     @race = Race.find(params[:id])
-    @race_results = @race.results.order(:rank)
+    @race_results = @race.results.order(:group_name, :rank)
     @race_results_length = @race_results.length
     @is_current_race = is_current_race
     @race_in_progess = race_in_progess

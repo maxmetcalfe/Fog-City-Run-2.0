@@ -99,12 +99,20 @@ class ApplicationController < ActionController::Base
     return longest_streak, streak
   end
 
-  # Sort and save the ranks for a particular race
+  # Sort by group and finish time for a race.
   def validate_ranks(race_id)
-     @results = Result.where(:race_id => race_id)
-     @sorted = @results.sort_by {|result| result.time}
-     for r in @sorted
-       r.rank = @sorted.index(r) + 1
+     results = Result.where(:race_id => race_id)
+     sorted = results.sort_by {|result| [result.time, -result.group_name] }
+     base = 0
+     groups = []
+     for r in sorted
+       if !groups.include? r.group_name
+         groups.push(r.group_name)
+         base = 0
+       else
+         base += 1
+       end
+       r.rank = base + 1
        r.save!
      end
   end
