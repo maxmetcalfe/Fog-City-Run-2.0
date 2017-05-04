@@ -101,20 +101,20 @@ class ApplicationController < ActionController::Base
 
   # Sort by group and finish time for a race.
   def validate_ranks(race_id)
-     results = Result.where(:race_id => race_id)
-     sorted = results.sort_by {|result| [result.time, -result.group_name] }
-     base = 0
-     groups = []
-     for r in sorted
-       if !groups.include? r.group_name
-         groups.push(r.group_name)
-         base = 0
-       else
-         base += 1
-       end
-       r.rank = base + 1
-       r.save!
-     end
+    results = Result.where(:race_id => race_id)
+    sorted = results.sort_by {|result| [result.group_name, result.time] }
+    base = 0
+    groups = []
+    for r in sorted
+      if !groups.include? r.group_name
+        groups.push(r.group_name)
+        base = 0
+      end
+
+      base += 1
+      r.rank = base
+      r.save
+    end
   end
 
   # Check if the current user is registered

@@ -12,6 +12,11 @@ class ResultsController < ApplicationController
     # Refresh all racer info
     update_racer_info([@results.pluck(:racer_id)])
     update_streak_calendar([@results.pluck(:racer_id)])
+    # TEMP: An easy way to fix ranks for all.
+    races = @results.pluck(:race_id)
+    for r in races
+      validate_ranks(r)
+    end
   end
 
   # Show result by id
