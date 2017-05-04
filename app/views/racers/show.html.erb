@@ -67,7 +67,7 @@
     </tr>
     </thead>
     <tbody>
-    <% @racer.results.includes(:race).order("races.date DESC").each do |result| %>
+    <% @racer.results.where("group_name != ?", "Loop-Beer").includes(:race).order("races.date DESC").each do |result| %>
       <tr>
         <td><%= link_to Race.find(result.race_id).date, race_path(Race.find(result.race_id)) %></td>
         <td><%= result.time %></td>
