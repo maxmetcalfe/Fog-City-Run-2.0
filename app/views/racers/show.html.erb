@@ -41,21 +41,23 @@
     </div>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-3">
       <%= bar_chart Result.where(racer_id: @racer.id).group(:rank).count, xtitle: "Finish Place", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["#52a351"]%>
     </div>
     <div class="col-md-3">
       <%= bar_chart Result.where(racer_id: @racer.id).group(:bib).count, xtitle: "Bib #{}", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["#ff8080"]%>
     </div>
-  </div>
+  </div> -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-large-1">
-      <%= line_chart @results_to_show, colors: ["#4689ce"], xtitle: "Date", ytitle: "Finish Time (seconds)" %>
+      <svg width="960" height="500"></svg>
+    </style>
+      <!-- <%= line_chart @results_to_show, colors: ["#4689ce"], xtitle: "Date", ytitle: "Finish Time (seconds)" %> -->
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-3">
     <h4>Races</h4>
     <br>  
@@ -75,8 +77,8 @@
     <% end %>
     </tbody>
     </table>
-    </div>
-  <div class="col-md-2">
+    </div> -->
+  <!-- <div class="col-md-2">
     <h4>Loop-Beer Runs</h4>
     <br>
       <table class="table table-hover table-bordered">
@@ -95,6 +97,63 @@
       <% end %>
       </tbody>
     </table>
-    </div>
+    </div> -->
     </div>
 </div>
+<script>
+var results_for_graph = <%= @results_for_graph %>;
+console.log(results_for_graph);
+console.log(typeof results_for_graph);
+// var svg = d3.select("svg"),
+//     margin = {top: 20, right: 20, bottom: 30, left: 50},
+//     width = +svg.attr("width") - margin.left - margin.right,
+//     height = +svg.attr("height") - margin.top - margin.bottom,
+//     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// 
+// var parseTime = d3.timeParse("%d-%b-%y");
+// 
+// var x = d3.scaleTime()
+//     .rangeRound([0, width]);
+// 
+// var y = d3.scaleLinear()
+//     .rangeRound([height, 0]);
+// 
+// var line = d3.line()
+//     .x(function(d) { return x(d.date); })
+//     .y(function(d) { return y(d.time); });
+
+// d3.json(results_for_graph, function(error, data) {
+//   console.log(d);
+// });
+// }, function(error, data) {
+//   if (error) throw error;
+// 
+//   x.domain(d3.extent(data, function(d) { return d.date; }));
+//   y.domain(d3.extent(data, function(d) { return d.time; }));
+  // 
+  // g.append("g")
+  //     .attr("transform", "translate(0," + height + ")")
+  //     .call(d3.axisBottom(x))
+  //   .select(".domain")
+  //     .remove();
+  // 
+  // g.append("g")
+  //     .call(d3.axisLeft(y))
+  //   .append("text")
+  //     .attr("fill", "#000")
+  //     .attr("transform", "rotate(-90)")
+  //     .attr("y", 6)
+  //     .attr("dy", "0.71em")
+  //     .attr("text-anchor", "end")
+  //     .text("Price ($)");
+  // 
+  // g.append("path")
+  //     .datum(data)
+  //     .attr("fill", "none")
+  //     .attr("stroke", "steelblue")
+  //     .attr("stroke-linejoin", "round")
+  //     .attr("stroke-linecap", "round")
+  //     .attr("stroke-width", 1.5)
+  //     .attr("d", line);
+// });
+</script>
