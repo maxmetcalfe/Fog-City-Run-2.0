@@ -12,6 +12,9 @@
       <% if current_user and current_user.racer_id %>
       <th>Link</th>
       <% end %>
+      <% if current_user and current_user.admin? %>
+      <th>Actions</th>
+      <% end %>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +24,10 @@
         <td><%= StartItem.where(race_id: race.id).count %></td>
         <% if current_user and current_user.racer_id %>
         <td><%= link_to 'Register', new_start_item_path(:race_id => race.id, :racer_id => current_user.racer_id), :class => "btn btn-default btn-xs" %></td>
+        <% end %>
+        <% if current_user and current_user.admin? %>
+        <td><%= link_to 'Edit', race_path(race), :class => 'btn btn-default btn-xs' %> <%= link_to 'Destroy',
+              race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + Race.find(race).date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %></td>
         <% end %>
       </tr>
     <% end %>

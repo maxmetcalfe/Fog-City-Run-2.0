@@ -53,7 +53,7 @@ class RacesController < ApplicationController
     @race.id = Race.maximum(:id).next
     @race.state = 'PLANNED'
     if @race.save
-      redirect_to @race
+      redirect_to races_path
     else
       render 'new'
     end
