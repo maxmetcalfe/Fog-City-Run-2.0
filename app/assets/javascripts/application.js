@@ -17,6 +17,7 @@
 //= require autocomplete-rails
 //= require highcharts
 //= require chartkick
+//= require d3
 //= require sortable.js
 //= require bootstrap-sprockets
 //= require_tree .

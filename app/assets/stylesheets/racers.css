@@ -1,0 +1,12 @@
+
+div.tooltip {
+    background: lightgrey;
+    position: absolute;
+    text-align: center;
+    width: 90px;
+    height: 45px;
+    font-size: 12pt;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.0;
+}
