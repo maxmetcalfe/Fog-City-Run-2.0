@@ -52,11 +52,9 @@ class ApplicationController < ActionController::Base
   def update_racer_info(racer_ids)
     racers = Racer.find(racer_ids)
     for r in racers
-      race_count = Result.where(racer_id: r.id).count
-      # sql = "SELECT bib, count(*) FROM results WHERE racer_id = " + r.id.to_s + " GROUP BY bib LIMIT 1"
-      fav_bib = Result.where(racer_id: r.id).group("bib").order("count_bib").count("bib").max_by{|k,v| v}[0]
-      r.update_attribute(:race_count, race_count)
-      r.update_attribute(:fav_bib, fav_bib)
+      results = Result.where(racer_id: r.id)
+      r.update_attribute(:race_count, results.count)
+      r.update_attribute(:fav_bib, results.includes(:race).order("races.date DESC").pluck(:bib).first)
     end
   end
 

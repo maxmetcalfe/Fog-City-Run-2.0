@@ -109,16 +109,14 @@ class StartItemsController < ApplicationController
   end
   
   # Get a list of likely racers for a race.
-  # Likely racers are the top 12 racers with the most races, excluding those already registered.
+  # Likely racers are the top 12 racers with more than 10 races OR
+  # a current streak of more than 1, excluding those already registered.
   def get_likely_racers(race_id)
     already_registered = StartItem.where(:race_id => race_id).pluck(:racer_id)
     if already_registered.length > 0
-      likely_racers = Racer.where(["race_count > ? AND id not in (?)", 10, already_registered]).first(12)
+      likely_racers = Racer.where(["(race_count > ? OR current_streak > ?) AND id not in (?)", 10, 1, already_registered]).order(race_count: :desc).first(12)
     else
-      likely_racers = Racer.where("race_count > ?", 10).first(12)
-    end
-    if !already_registered.include? current_user.racer_id
-      likely_racers.insert(0, Racer.find(current_user.racer_id))
+      likely_racers = Racer.where(["race_count > ? OR current_streak > ?", 10, 1]).order(race_count: :desc).first(12)
     end
     return likely_racers
   end
