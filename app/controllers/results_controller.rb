@@ -3,8 +3,8 @@ class ResultsController < ApplicationController
   @results = Result.includes(:racer)
   @results = Result.includes(:race)
 
-  skip_before_action :verify_authenticity_token, only: [:import]
-  before_filter :must_be_admin, only: [:edit, :import, :upload]
+  skip_before_action :verify_authenticity_token
+  before_filter :must_be_admin, only: [:edit]
 
   # Show all results
   def index
@@ -84,27 +84,6 @@ class ResultsController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  # import JSON
-  def import
-    Result.import(params)
-    redirect_to root_url, notice: "Results imported successfully"
-  end
-
-  # import file
-  def upload
-    @status = Result.upload(params[:file], params[:date])
-    if @status == "FAILURE_DATE"
-      flash.now[:danger] = "Invalid Date"
-    elsif @status == "FAILURE_FILE"
-      flash.now[:danger] = "Ooops. You forgot a file!"
-    elsif @status.any?
-      update_racer_info([@result.racer_id])
-      update_streak_calendar([@status])
-      flash.now[:success] = "Success"
-    end
-    puts "We just uploaded the following results: " + @result.to_s
   end
 
   # Basic admin permissions
