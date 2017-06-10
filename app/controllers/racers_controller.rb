@@ -16,9 +16,9 @@ class RacersController < ApplicationController
 
   # Show all racers
   def index
-    @racers = Racer.all
+    @racers = Racer.paginate(:page => params[:page])
     if params[:search]
-      @racers = Racer.search(params[:search])
+      @racers = Racer.search(params[:search]).paginate(:page => params[:page])
     end
   end
 

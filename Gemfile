@@ -24,6 +24,7 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
 gem "d3-rails"
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   gem 'byebug'
