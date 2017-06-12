@@ -25,6 +25,7 @@ gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
 gem "d3-rails"
 gem 'will_paginate', '~> 3.1.0'
+gem 'eslint-rails'
 
 group :development, :test do
   gem 'byebug'

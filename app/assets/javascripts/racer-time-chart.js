@@ -1,3 +1,4 @@
+"use strict";
 
 function displayRacerChart(data) {
   var parseDate = d3.timeParse("%Y-%m-%d");
@@ -135,10 +136,10 @@ function displayRacerChart(data) {
       .attr("cy", function(d) { return y(d.time) + 20; })
       .attr("date", function(d) { return d.date; })
       .attr("time", function(d) { return d.time; })
-      .on("mouseover", mouseover);
+      .on("mouseover", mouseover(event));
 
   // Handle what happens for a mouseover
-  function mouseover() {
+  function mouseover(event) {
     var date = formatDate(new Date(event.target.getAttribute("date")));
     var time = formatTime(Math.round(event.target.getAttribute("time")), 2);
     var xPosition = d3.mouse(this)[0];
