@@ -1,0 +1,17 @@
+
+language: ruby
+rvm:
+ - 2.2
+ - jruby
+ - rbx-2
+
+notifications:
+  email:
+    recipients:
+      - runfogcity@gmail.com
+    on_success: always
+    on_failure: always
+
+
+script: bundle exec rake test
+
