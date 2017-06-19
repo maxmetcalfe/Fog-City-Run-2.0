@@ -6,3 +6,12 @@ development:
   username: maxmetcalfe
   password:
   host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: fogcityrun_test
+  pool: 5
+  username: maxmetcalfe
+  password:
+  host: localhost

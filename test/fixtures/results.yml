@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  rank: 
-  bib: 
-  regeracer: 1
-  group: 
+  rank: 1
+  bib: 1
+  racer_id: 1
+  race_id: 2
+  group_name: ALL
   time: MyString
-  date: MyString
 
 two:
-  rank: 
-  bib: 
-  regeracer: 1
-  group: 
+  rank: 2
+  bib: 2
+  racer_id: 2
+  race_id: 2
+  group_name: ALL
   time: MyString
-  date: MyString
