@@ -2,8 +2,9 @@
 language: ruby
 rvm:
  - 2.3.2
- - jruby
- - rbx-2
+
+services:
+ - postgresql
 
 notifications:
   email:
@@ -12,6 +13,8 @@ notifications:
     on_success: always
     on_failure: always
 
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 script: bundle exec rake test
 

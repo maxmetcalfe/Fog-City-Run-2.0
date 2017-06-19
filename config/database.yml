@@ -10,8 +10,8 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: fogcityrun_test
+  database: travis_ci_test
   pool: 5
-  username: maxmetcalfe
+  username: postgres
   password:
   host: localhost
