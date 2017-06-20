@@ -94,7 +94,7 @@ class ApplicationController < ActionController::Base
       attributes = {:longest_streak => longest_streak_count,:current_streak => current_streak}
       racer.update_attributes(attributes)
     end
-    return longest_streak, streak
+    return attributes
   end
 
   # Sort by group and finish time for a race.

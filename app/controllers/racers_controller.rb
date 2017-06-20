@@ -25,7 +25,9 @@ class RacersController < ApplicationController
   # Show racer by id
   def show
     @racer = Racer.find(params[:id])
-    longest_streak, current_streak = update_streak_calendar([@racer.id])
+    attributes = update_streak_calendar([@racer.id])
+    longest_streak = attributes[:longest_streak]
+    current_streak = attributes[:current_streak]
     @longest_streak_for_view = "(" + longest_streak[0].to_s + " through " + longest_streak[-1].to_s + ")"
     if current_streak.length == 0
       @current_streak_for_view = "(no current streak)"

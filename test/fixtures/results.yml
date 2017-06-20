@@ -4,14 +4,14 @@ one:
   rank: 1
   bib: 1
   racer_id: 1
-  race_id: 2
+  race_id: 1
   group_name: ALL
-  time: MyString
+  time: 00:21:00.0
 
 two:
-  rank: 2
-  bib: 2
-  racer_id: 2
+  rank: 1
+  bib: 1
+  racer_id: 1
   race_id: 2
   group_name: ALL
-  time: MyString
+  time: 00:21:00.0

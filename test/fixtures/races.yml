@@ -1,1 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  date: 2017-05-31
+
+two:
+  id: 2
+  date: 2017-06-07
+
+three:
+  id: 3
+  date: 2017-06-14
