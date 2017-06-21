@@ -4,8 +4,10 @@ one:
   id: 1
   first_name: Max
   last_name: Metcalfe
+  race_count: 2
 
 two:
   id: 2
   first_name: Julia
   last_name: Metcalfe
+  race_count: 0
