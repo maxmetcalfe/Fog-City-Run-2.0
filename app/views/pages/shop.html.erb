@@ -56,8 +56,8 @@
           <% end %>
           <% if current_user && current_user.admin? %>
           <h4>
-            Order Count: <%= Order.where(:item => "The Divis").count %>
-            (<%= ((Order.where(:item => "The Divis").count / 10.0) * 100.0).round(2)%>%)
+            Order.sum(:quantity): <%= Order.where(:item => "The Divis").sum(:quantity) %>
+            (<%= ((Order.where(:item => "The Divis").sum(:quantity) / 10.0) * 100.0).round(2)%>%)
           </h4>
           <% end %>
         </div>
@@ -74,8 +74,8 @@
           <% end %>
           <% if current_user && current_user.admin? %>
           <h4>
-            Order Count: <%= Order.where(:item => "The Lombard Gate").count %>
-            (<%= ((Order.where(:item => "The Lombard Gate").count / 12.0) * 100.0).round(2)%>%)
+            Order.sum(:quantity): <%= Order.where(:item => "The Lombard Gate").sum(:quantity) %>
+            (<%= ((Order.where(:item => "The Lombard Gate").sum(:quantity) / 12.0) * 100.0).round(2)%>%)
           </h4>
           <% end %>
         </div>
@@ -92,8 +92,8 @@
           <% end %>
           <% if current_user && current_user.admin? %>
           <h4>
-            Order Count: <%= Order.where(:item => "The Filbert St. Hop").count %>
-            (<%= ((Order.where(:item => "The Filbert St. Hop").count / 12.0) * 100.0).round(2)%>%)
+            Order.sum(:quantity): <%= Order.where(:item => "The Filbert St. Hop").sum(:quantity) %>
+            (<%= ((Order.where(:item => "The Filbert St. Hop").sum(:quantity) / 12.0) * 100.0).round(2)%>%)
           </h4>
           <% end %>
         </div>
@@ -110,8 +110,8 @@
           <% end %>
           <% if current_user && current_user.admin? %>
           <h4>
-            Order Count: <%= Order.where(:item => "The Buchanan").count %>
-            (<%= ((Order.where(:item => "The Buchanan").count / 10.0) * 100.0).round(2)%>%)
+            Order.sum(:quantity): <%= Order.where(:item => "The Buchanan").sum(:quantity) %>
+            (<%= ((Order.where(:item => "The Buchanan").sum(:quantity) / 10.0) * 100.0).round(2)%>%)
           </h4>
           <% end %>
         </div>
@@ -164,27 +164,27 @@
           <div class="panel-body">
             <h3>
               <div class="row">
-                Female Shirt Count:
-                S: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").count %>
-                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").count / 6.0) * 100.0).round(2)%>%),
-                M: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").count %>
-                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").count / 6.0) * 100.0).round(2)%>%),
-                L: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").count %>
-                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").count / 6.0) * 100.0).round(2)%>%)
-                XL: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").count %>
-                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").count / 2.0) * 100.0).round(2)%>%)
+                Female Shirt.sum(:quantity):
+                S: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").sum(:quantity) %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").sum(:quantity) / 6.0) * 100.0).round(2)%>%),
+                M: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-medium").sum(:quantity) %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-medium").sum(:quantity) / 6.0) * 100.0).round(2)%>%),
+                L: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-large").sum(:quantity) %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-large").sum(:quantity) / 6.0) * 100.0).round(2)%>%)
+                XL: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-xlarge").sum(:quantity) %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-xlarge").sum(:quantity) / 2.0) * 100.0).round(2)%>%)
               </div>
               <br>
               <div class="row">
-                Male Shirt Count:
-                S: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-small").count %>
-                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-small").count / 5.0) * 100.0).round(2)%>%),
-                M: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-medium").count %>
-                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-medium").count / 10.0) * 100.0).round(2)%>%),
-                L: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-large").count %>
-                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-large").count / 10.0) * 100.0).round(2)%>%)
-                XL: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-xlarge").count %>
-                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-xlarge").count / 5.0) * 100.0).round(2)%>%)
+                Male Shirt.sum(:quantity):
+                S: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-small").sum(:quantity) %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-small").sum(:quantity) / 5.0) * 100.0).round(2)%>%),
+                M: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-medium").sum(:quantity) %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-medium").sum(:quantity) / 10.0) * 100.0).round(2)%>%),
+                L: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-large").sum(:quantity) %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-large").sum(:quantity) / 10.0) * 100.0).round(2)%>%)
+                XL: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-xlarge").sum(:quantity) %>
+                (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-xlarge").sum(:quantity) / 5.0) * 100.0).round(2)%>%)
               </div>
             </h3>
           </div>
