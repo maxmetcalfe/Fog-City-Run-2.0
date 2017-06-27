@@ -164,7 +164,7 @@
           <div class="panel-body">
             <h3>
               <div class="row">
-                Female Shirt.sum(:quantity):
+                Female Shirt Count - 
                 S: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-small").sum(:quantity) %>
                 (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "F-small").sum(:quantity) / 6.0) * 100.0).round(2)%>%),
                 M: <%= Order.where(:item => "4YT-Shirt").where(:size => "F-medium").sum(:quantity) %>
@@ -176,7 +176,7 @@
               </div>
               <br>
               <div class="row">
-                Male Shirt.sum(:quantity):
+                Male Shirt Count - 
                 S: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-small").sum(:quantity) %>
                 (<%= ((Order.where(:item => "4YT-Shirt").where(:size => "M-small").sum(:quantity) / 5.0) * 100.0).round(2)%>%),
                 M: <%= Order.where(:item => "4YT-Shirt").where(:size => "M-medium").sum(:quantity) %>
