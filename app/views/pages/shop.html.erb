@@ -56,7 +56,7 @@
           <% end %>
           <% if current_user && current_user.admin? %>
           <h4>
-            Order.sum(:quantity): <%= Order.where(:item => "The Divis").sum(:quantity) %>
+            Count: <%= Order.where(:item => "The Divis").sum(:quantity) %>
             (<%= ((Order.where(:item => "The Divis").sum(:quantity) / 10.0) * 100.0).round(2)%>%)
           </h4>
           <% end %>
@@ -74,7 +74,7 @@
           <% end %>
           <% if current_user && current_user.admin? %>
           <h4>
-            Order.sum(:quantity): <%= Order.where(:item => "The Lombard Gate").sum(:quantity) %>
+            Count: <%= Order.where(:item => "The Lombard Gate").sum(:quantity) %>
             (<%= ((Order.where(:item => "The Lombard Gate").sum(:quantity) / 12.0) * 100.0).round(2)%>%)
           </h4>
           <% end %>
@@ -92,7 +92,7 @@
           <% end %>
           <% if current_user && current_user.admin? %>
           <h4>
-            Order.sum(:quantity): <%= Order.where(:item => "The Filbert St. Hop").sum(:quantity) %>
+            Count: <%= Order.where(:item => "The Filbert St. Hop").sum(:quantity) %>
             (<%= ((Order.where(:item => "The Filbert St. Hop").sum(:quantity) / 12.0) * 100.0).round(2)%>%)
           </h4>
           <% end %>
@@ -110,7 +110,7 @@
           <% end %>
           <% if current_user && current_user.admin? %>
           <h4>
-            Order.sum(:quantity): <%= Order.where(:item => "The Buchanan").sum(:quantity) %>
+            Count: <%= Order.where(:item => "The Buchanan").sum(:quantity) %>
             (<%= ((Order.where(:item => "The Buchanan").sum(:quantity) / 10.0) * 100.0).round(2)%>%)
           </h4>
           <% end %>
