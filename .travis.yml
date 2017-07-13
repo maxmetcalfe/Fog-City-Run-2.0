@@ -1,20 +1,17 @@
-
 language: ruby
 rvm:
- - 2.3.2
-
+- 2.3.2
 services:
- - postgresql
-
+- postgresql
 notifications:
   email:
     recipients:
-      - runfogcity@gmail.com
+    - runfogcity@gmail.com
     on_success: always
     on_failure: always
-
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-
+- psql -c 'create database travis_ci_test;' -U postgres
 script: bundle exec rake test
-
+deploy:
+  api_key:
+    secure: iOXb19oOziYFgxehCeN5eGlVUW4TYT88ah44N2O/NIu8T8uQkzZT6+kW+t2gFxdvEyXRyflV3xUHv7hyhGXsEyU2iIhT/WI4Rq4H4BtR3FxCOu29J/WjAerFNKxdJNCAqG2SluT3Zo9R6Vf1euVroRw6XmcL45D+lvNNKQPdXbre6slAWucphV63yci8DnB18QZcKULIhkLc2mdVKZTNvnneT1sniXu8oODxNjmcVi292GSu6wg0y3+xD5ssnGIl1jR1GhrCYShFYV/XIrUkr5vXzG/bRWoiMZ2Qaxnitn2PsEX8iDmUizh9ZylCK9vXIL1A/QDGf4BSh8cPXGx7E50QP563nQNTlQRDPML3POOi03AzSqdTPggflhNsYPQVJFsMgdT72DjyuSxzbXIg5wbsbWb7PvQKifa+jUiIhM4SY2yaQmjT7chxU6dy2d5uUOsu0t8aE8My2gRrH0RgRdLYA7fu1122zCo3eRbzoTfILFpQlTr08IBY+Pk6uVxXckqkHG3W7bXOMWGKhwl4z7WkHMzsx0Kwqb0WEaTuRQWTr8m4bz6/ft2wgWIbp12IR6Uzwytsxm4G7+lEvJvi/3bY12O9WNgnRfTMkCv72aW5uZYP/vChhaFKeYwDZTNz9rEud3znOF7q+f+LAyb5PB/1O7yukwi5Jyq6bkhzZ9U=
