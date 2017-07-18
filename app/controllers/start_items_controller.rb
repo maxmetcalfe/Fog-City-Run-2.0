@@ -98,15 +98,6 @@ class StartItemsController < ApplicationController
     validate_ranks(@race.id)
     redirect_to @race
   end
-
-  # Flip start_item.finished to false
-  def continue_time
-    @start_item = StartItem.find(params[:id])
-    @race = Race.find(@start_item.race_id)
-    @start_item.finished = false
-    @start_item.save
-    redirect_to @race
-  end
   
   # Get a list of likely racers for a race.
   # Likely racers are the top 12 racers with more than 10 races OR

@@ -19,7 +19,7 @@ class RacesController < ApplicationController
     @race_results_length = @race_results.length
     @is_current_race = is_current_race
     @race_in_progess = race_in_progess
-    @start_items = StartItem.where(:race_id=>params[:id]).order(:bib)
+    @start_items = StartItem.where(:race_id=>params[:id]).where(:finished=>false).order(:bib)
     @start_items_length = @start_items.length
     # Only show start items if race is current and if start items exist
     if @start_items.length > 0 and is_current_race

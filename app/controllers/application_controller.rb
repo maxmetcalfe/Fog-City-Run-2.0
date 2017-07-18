@@ -124,6 +124,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Continue timing a result by toggling the start item, found by racer_id and racer_id.
+  def continue_time
+    result = Result.find(params[:id])
+    start_item = StartItem.where(:race_id=>result.race_id).where(:racer_id=>result.racer_id)[0]
+    race = Race.find(start_item.race_id)
+    start_item.finished = false
+    start_item.save
+    result.destroy
+    redirect_to race
+  end
+
   private
 
   helper_method :current_user
