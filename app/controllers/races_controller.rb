@@ -49,13 +49,15 @@ class RacesController < ApplicationController
 
   # Create race
   def create
-  	@race = Race.new(race_params)
-    @race.id = Race.maximum(:id).next
-    @race.state = 'PLANNED'
-    if @race.save
-      redirect_to races_path
-    else
-      render 'new'
+    if current_user and current_user.admin?
+      @race = Race.new(race_params)
+      @race.id = Race.maximum(:id).next
+      @race.state = 'PLANNED'
+       if @race.save
+         redirect_to races_path
+       else
+         render 'new'
+       end
     end
   end
 

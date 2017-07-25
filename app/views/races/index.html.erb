@@ -3,7 +3,11 @@
     <%= render "shared/navbar_races" %>
 </head>
 <div class="container-fluid">
-  <h2> Upcoming Races <%= link_to '+', new_race_path() %> </h2>
+  <% if current_user and current_user.admin? %>
+    <h2> Upcoming Races <%= link_to '+', new_race_path() %> </h2>
+  <% else %>
+    <h2> Upcoming Races </h2>
+  <% end %>
   <table class="table table-hover table-bordered sortable">
     <thead>
     <tr>
