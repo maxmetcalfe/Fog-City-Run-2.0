@@ -76,8 +76,6 @@
       <div class="panel panel-default">
         <div class="panel-heading">Runs</div>
         <div class="panel-body">
-          <h4>Races</h4>
-          <br>
           <table class="table table-hover table-bordered">
           <thead>
           <tr>
@@ -127,7 +125,7 @@
 </div>
 <script>
 // Load the racer data to display racer-time-chart.js.
-var racerData = <%= @results_for_graph %>;
+var racerData = <%= @racer_data %>;
 $( document ).ready(function() {
     displayRacerChart(racerData);
 });

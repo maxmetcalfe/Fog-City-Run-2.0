@@ -32,11 +32,11 @@ class RacersController < ApplicationController
     else
       @current_streak_for_view = "(" + current_streak[0].to_s + " through " + current_streak[-1].to_s + ")"
     end
-    @results_for_graph = @racer.results.joins(:race).where(group_name: "ALL").map {|result| {:date => Race.find(result.race_id).date, :time => to_seconds(result.time) } }.to_json.html_safe
+    @racer_data = @racer.results.joins(:race).map {|result| {:date => Race.find(result.race_id).date, :time => to_seconds(result.time), :group_name => result.group_name } }.to_json.html_safe
     if current_user
     @user_order = Order.where(:user_id => current_user.id).first
     end
-    if @results_for_graph.length > 0
+    if @racer_data.length > 0
       @has_results = true
     end
   end

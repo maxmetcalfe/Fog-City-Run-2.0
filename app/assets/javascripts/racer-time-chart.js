@@ -127,11 +127,13 @@ function displayRacerChart(data) {
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 2.0)
       .attr("d", line);
-      
+
+  // Add scatter plot (dots).
   svg.selectAll("circle")
       .data(racerData)
     .enter().append("circle")
       .attr("r", 3)
+      .attr("fill", function(d) { return d.group_name !== "Loop-Beer" ? "#787878" : "#00FF00"; })
       .attr("cx", function(d) { return x(d.date) + 50; })
       .attr("cy", function(d) { return y(d.time) + 20; })
       .attr("date", function(d) { return d.date; })
