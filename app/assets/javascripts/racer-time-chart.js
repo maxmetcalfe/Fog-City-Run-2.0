@@ -138,12 +138,12 @@ function displayRacerChart(data) {
       .attr("cy", function(d) { return y(d.time) + 20; })
       .attr("date", function(d) { return d.date; })
       .attr("time", function(d) { return d.time; })
-      .on("mouseover", mouseover(event));
+      .on("mouseover", mouseover);
 
   // Handle what happens for a mouseover
-  function mouseover(event) {
-    var date = formatDate(new Date(event.target.getAttribute("date")));
-    var time = formatTime(Math.round(event.target.getAttribute("time")), 2);
+  function mouseover(d) {
+    var date = formatDate(new Date(d.date));
+    var time = formatTime(Math.round(d.time), 2);
     var xPosition = d3.mouse(this)[0];
     var yPosition = d3.mouse(this)[1];
     var xGap = -10;
