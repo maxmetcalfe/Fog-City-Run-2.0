@@ -1,0 +1,5 @@
+<td>
+<%= link_to 'Edit', edit_result_path(@result), :class => "btn btn-default" %>
+<%= link_to 'Destroy', result_path(@result), method: :delete, data: { confirm: 'Are you sure you want to delete the result for ' + @result.racer.first_name.to_s + ' ' + @result.racer.last_name.to_s }, :class => "btn btn-default" %>
+<%= link_to 'Continue', continue_time_path(@result), method: :post, :class => "btn btn-default" %>
+</td>
