@@ -1,15 +1,15 @@
 // During collect_time, create a row in the results table for the corresponding result.
 // TO DO:
 // - Add link to first_name / last_name.
-// - Add action links.
 
-var resultKeys = ["<%= @result.rank %>", "<%= @result.bib %>", "<%= @result.group_name %>", "<%= @racer.first_name %> <%= @racer.last_name %>", "<%= @result.time %>"];
-
+var resultData = ["<%= @result.rank %>", "<%= @result.bib %>", "<%= @result.group_name %>", "<%= @racer.first_name %> <%= @racer.last_name %>", "<%= @result.time %>"];
+var actionLinks = "<%= escape_javascript(render partial: 'shared/result_action_links') %>";
+resultData.push(actionLinks);
 var resultsTable = document.getElementById("results-table");
 var newRow = document.createElement("tr");
-for (var i=0; i<resultKeys.length; i++) {
+for (var i = 0; i < resultData.length; i++) {
   var cell = document.createElement("td");
-  cell.innerHTML = resultKeys[i];
+  $(cell).html(resultData[i]);
   newRow.appendChild(cell);
 }
 resultsTable.tBodies[0].append(newRow);
