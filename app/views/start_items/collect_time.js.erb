@@ -2,10 +2,22 @@
 // TO DO:
 // - Add link to first_name / last_name.
 
-var resultData = ["<%= @result.rank %>", "<%= @result.bib %>", "<%= @result.group_name %>", "<%= @racer.first_name %> <%= @racer.last_name %>", "<%= @result.time %>"];
+// Define shared views for result row.
 var actionLinks = "<%= escape_javascript(render partial: 'shared/result_action_links') %>";
-resultData.push(actionLinks);
+var racerNameLinks = "<%= escape_javascript(render partial: 'shared/racer_name_link') %>";
+
+// Create cells for result row.
+var resultData = ["<%= @result.rank %>",
+  "<%= @result.bib %>",
+  "<%= @result.group_name %>",
+  racerNameLinks,
+  "<%= @result.time %>",
+  actionLinks
+];
+
 var resultsTable = document.getElementById("results-table");
+
+// Create new result row and populate cells.
 var newRow = document.createElement("tr");
 for (var i = 0; i < resultData.length; i++) {
   var cell = document.createElement("td");
