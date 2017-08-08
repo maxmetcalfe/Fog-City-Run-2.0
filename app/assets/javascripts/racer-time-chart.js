@@ -119,15 +119,6 @@ function displayRacerChart(data) {
       .attr("text-anchor", "end")
       .text("Time");
 
-  g.append("path")
-      .datum(racerData)
-      .attr("fill", "none")
-      .attr("stroke", "grey")
-      .attr("stroke-linejoin", "round")
-      .attr("stroke-linecap", "round")
-      .attr("stroke-width", 2.0)
-      .attr("d", line);
-
   // Add scatter plot (dots).
   svg.selectAll("circle")
       .data(racerData)
