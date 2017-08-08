@@ -7,15 +7,17 @@ $( document ).ready(function() {
 
   // Add a listener to remove a startItem row when clicked on.
   var startItemsTable = document.getElementById("start-items-table");
-  var stopBtns = startItemsTable.querySelectorAll(".btn");
-  if (stopBtns.length > 0) {
-    for (var i = 0; i < stopBtns.length; i++) {
-      stopBtns[i].addEventListener("click", function(event) {
-        var btn = event.target;
-        var cell = btn.parentElement;
-        var row = cell.parentElement;
-        row.remove();
-      });
+  if (startItemsTable) {
+    var stopBtns = startItemsTable.querySelectorAll(".btn");
+    if (stopBtns.length > 0) {
+      for (var i = 0; i < stopBtns.length; i++) {
+        stopBtns[i].addEventListener("click", function(event) {
+          var btn = event.target;
+          var cell = btn.parentElement;
+          var row = cell.parentElement;
+          row.remove();
+        });
+      }
     }
   }
 });
