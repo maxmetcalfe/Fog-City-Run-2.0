@@ -1,34 +1,18 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-michael:
-  first_name: Michael
-  last_name: Example
-  email: michael@example.com
+marlin:
+  first_name: Marin
+  last_name: Dog
+  email: marlindog@dogs.br
   password_digest: <%= User.digest('password') %>
   admin: true
   activated: true
+  racer_id: 1
   activated_at: <%= Time.zone.now %>
 
-archer:
-  first_name: Sterling
-  last_name: Archer
-  email: duchess@example.gov
+sophie:
+  first_name: Sophie
+  last_name: Dogie
+  email: sophiedog@dogs.br
   password_digest: <%= User.digest('password') %>
-  activated: true
-  activated_at: <%= Time.zone.now %>
-
-lana:
-  first_name: Lana
-  last_name: Kane
-  email: hands@example.gov
-  password_digest: <%= User.digest('password') %>
-  activated: true
-  activated_at: <%= Time.zone.now %>
-
-malory:
-  first_name: Malory
-  last_name: Archer
-  email: boss@example.gov
-  password_digest: <%= User.digest('password') %>
+  admin: false
   activated: true
   activated_at: <%= Time.zone.now %>

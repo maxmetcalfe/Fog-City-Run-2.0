@@ -16,7 +16,7 @@
     <% @racers.order("race_count DESC").each do |racer| %>
     <tr>
     <td><%= link_to racer.first_name + " " + racer.last_name, racer_path(racer) %>
-    <% if !current_user.nil? and !User.where(racer_id: Racer.find(racer).id).pluck(:strava_link).empty? %>
+    <% if !current_user.nil? and !User.where(racer_id: Racer.find(racer.id)).pluck(:strava_link).empty? %>
     <%= link_to image_tag("icon-strava-blue.svg", height: 18), User.where(:racer_id => racer).first.strava_link, :class => "fa-fw fa-lg" %></td>
     <% end %>
     <td><%= racer.longest_streak %></td>
