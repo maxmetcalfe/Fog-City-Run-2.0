@@ -1,9 +1,19 @@
 class Racer < ActiveRecord::Base
 
+  validate :validate_names
+
   has_many :results
 
   def self.search(search)
     where("LOWER(first_name) LIKE LOWER(:search) OR LOWER(last_name) LIKE LOWER(:search)", search: "%#{search}%")
+  end
+
+  # Validates names
+  # Users sometimes add whitespace when adding new racers. This can break the app.
+  def validate_names
+    if first_name[-1] == " " || last_name[-1] == " "
+      errors.add(:base, "The first name or last name contains a space at the end.")
+    end
   end
 
   validates :first_name, presence: true
