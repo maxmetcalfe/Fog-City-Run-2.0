@@ -66,7 +66,7 @@ function displayRacerChart(data) {
   // TO DO: Convert all dates to UTC and fix this up.
   // This is quite ugly.
   function formatDate(date) {
-    return date.getMonth() + 1 + "/" + (parseInt(date.toString().split(" ")[2]) - 2).toString() + "/" + date.getFullYear();
+    return date.getMonth() + 1 + "/" + (parseInt(date.toString().split(" ")[2])).toString() + "/" + date.getFullYear();
   }
 
   // Get array of date values from data array.
