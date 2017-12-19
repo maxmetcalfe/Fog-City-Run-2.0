@@ -96,6 +96,7 @@ class StartItemsController < ApplicationController
       result.save
     end
     validate_ranks(@race.id)
+    update_streak_calendar([@start_item.racer_id])
 
     # TO DO: We can speed this up by avoiding another call to the DB.
     @racer = Racer.find(result.racer_id)
