@@ -1,4 +1,7 @@
 
+dev:
+	rails server
+
 db-remote:
 	echo "Capturing Heroku db..."
 	heroku pg:backups:capture
