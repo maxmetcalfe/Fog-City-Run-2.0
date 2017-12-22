@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     open_dates = []
     racers = Racer.find(racer_ids)
     open_dates = open_dates.push '2013-01-16'.to_date
-    while open_dates[-1] < Date.today
+    while open_dates[-1] < Date.today - 1.week
       open_dates = open_dates.push open_dates[-1].advance(:weeks => 1)
     end
     for racer in racers
