@@ -1,0 +1,5 @@
+
+/* Make sure the "Remember me..." checkbox aligns properly with the other login content. */
+.checkbox {
+  margin-left: 20px;
+}
