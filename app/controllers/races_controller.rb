@@ -32,10 +32,10 @@ class RacesController < ApplicationController
 
   # Delete race
   def destroy
-    @race = Race.find(params[:id])
-    racer_ids = Result.where(:race_id => @race.id).pluck(:racer_id)
-    @race.results.destroy_all
-    @race.destroy
+    race = Race.find(params[:id])
+    racer_ids = race.results.pluck(:racer_id)
+    race.results.destroy_all
+    race.destroy
     update_racer_info(racer_ids)
     update_streak_calendar(racer_ids)
 
@@ -112,14 +112,16 @@ class RacesController < ApplicationController
     @race.update(state: 'STOPPED')
     redirect_to @race
   end
-  
-  # Stop race.
+
+  # Save race and reca
   def save_race
-    @race = Race.find(params[:id])
-    @race.update(state: 'FINISHED')
-    redirect_to @race
+    race = Race.find(params[:id])
+    racer_ids = race.results.pluck(:racer_id)
+    race.update(state: 'FINISHED')
+    update_streak_calendar(racer_ids)
+    redirect_to race
   end
-  
+
   # enable race.
   def enable_race
     @race = Race.find(params[:id])
