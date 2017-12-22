@@ -3,8 +3,7 @@ Hi <%= @user.first_name %>,
 Welcome to the Fog City Run! Click on the link below to activate your account:
 
 <%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
-\r\n
-\r\n
+
 Thanks,
-\r\n
+
 Fog City Run
