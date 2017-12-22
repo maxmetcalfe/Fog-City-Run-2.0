@@ -10,4 +10,10 @@ Staging: https://fogcityrun-dev.herokuapp.com
 
 ## Linting ##
 
-```rake eslint:run_all```
+```make lint```
+
+## Fetching Production Database ##
+
+You can fetch and load a snapshot of the production database by running:
+
+```make db-remote USERNAME=[username] DM=[local pg databse name]```
