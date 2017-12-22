@@ -9,10 +9,7 @@
     </div>
   </div>
   <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <div class="alert alert-danger">
-        The form contains <%= pluralize(@user.errors.count, "error") %>.
-      </div>
+    <div class="error-explanation">
       <ul>
       <% @order.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

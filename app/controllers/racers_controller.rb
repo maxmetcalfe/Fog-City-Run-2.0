@@ -58,7 +58,7 @@ class RacersController < ApplicationController
     racer = Racer.find(params[:id])
   end
 
-  # Create article
+  # Create racer
   def create
   	@racer = Racer.new(racer_params)
     @racer.id = Racer.maximum(:id).next

@@ -1,0 +1,13 @@
+
+/*  Styles for the error messages in forms.*/
+
+.error-explanation {
+  background-color: red;
+  color: yellow;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.error-explanation ul {
+  margin-bottom: 0px;
+}

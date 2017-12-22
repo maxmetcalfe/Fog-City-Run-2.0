@@ -1,19 +1,4 @@
 <%= form_for @racer do |r| %>
- 
-  <% if @racer.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@racer.errors.count, "error") %> prohibited
-        this racer from being saved:
-      </h2>
-      <ul>
-        <% @racer.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
- 
   <p>
     <%= r.label :first_name %><br>
     <%= r.text_field :first_name %>
@@ -27,5 +12,4 @@
   <p>
     <%= r.submit %>
   </p>
- 
 <% end %>

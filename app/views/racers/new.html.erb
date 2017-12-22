@@ -10,11 +10,7 @@
   </div>
   <%= form_for @racer, :html => {:class => "form-horizontal "} do |r| %>
     <% if @racer.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@racer.errors.count, "error") %> prohibited
-          this start_item from being saved:
-        </h2>
+      <div class="error-explanation">
         <ul>
           <% @racer.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>

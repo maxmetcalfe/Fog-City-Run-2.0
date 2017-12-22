@@ -10,11 +10,7 @@
   </div>
   <%= form_for @race, :html => {:class => "form-horizontal "} do |r| %>
     <% if @race.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@result.errors.count, "error") %> prohibited
-          this race from being saved:
-        </h2>
+      <div class="error-explanation">
         <ul>
           <% @race.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
