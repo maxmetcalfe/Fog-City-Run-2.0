@@ -1,0 +1,10 @@
+<form class="navbar-form navbar-left" role="search">
+  <div class="input-group">
+    <%= form_tag(racers_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search racers...", class: 'form-control' %>
+      <span class="input-group-btn">
+        <%= submit_tag "Search", class: "btn btn-default" %>
+      </span>
+      <% end %>
+  </div>
+</form>
