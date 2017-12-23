@@ -234,7 +234,7 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   less-rails
-  omniauth
+  omniauth (= 1.7.1)
   omniauth-facebook (= 1.4.0)
   pg
   rails (= 4.2.7.1)
