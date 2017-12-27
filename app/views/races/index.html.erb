@@ -31,7 +31,7 @@
         <% end %>
         <% if current_user and current_user.admin? %>
         <td><%= link_to 'Edit', race_path(race), :class => 'btn btn-default btn-xs' %> <%= link_to 'Destroy',
-              race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + Race.find(race).date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %></td>
+              race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + Race.find(race.id).date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %></td>
         <% end %>
       </tr>
     <% end %>
