@@ -3,7 +3,7 @@ one:
   id: 1
   first_name: Max
   last_name: Metcalfe
-  race_count: 2
+  race_count: 0
 
 two:
   id: 2
