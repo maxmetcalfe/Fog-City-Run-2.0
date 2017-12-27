@@ -4,9 +4,15 @@ one:
   first_name: Max
   last_name: Metcalfe
   race_count: 0
+  longest_streak: 0
+  current_streak: 0
+  fav_bib: 1
 
 two:
   id: 2
   first_name: Julia
   last_name: Metcalfe
   race_count: 0
+  longest_streak: 0
+  current_streak: 0
+  fav_bib: 11

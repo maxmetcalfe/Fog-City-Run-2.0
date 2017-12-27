@@ -21,6 +21,6 @@ class RaceTest < ActiveSupport::TestCase
   test "should save race with valid date with correct data type" do
     race = Race.new
     race.date = "2017-12-27"
-    assert_equal race.date, F.Date
+    assert_equal race.date.class, Date
   end
 end
