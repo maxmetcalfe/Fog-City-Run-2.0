@@ -1,6 +1,14 @@
 class Racer < ActiveRecord::Base
 
   has_many :results
+  after_initialize :init
+
+  def init
+    self.race_count = 0
+    self.current_streak = 0
+    self.longest_streak = 0
+    self.fav_bib = 0
+  end
 
   def self.search(search)
     where("LOWER(first_name) LIKE LOWER(:search) OR LOWER(last_name) LIKE LOWER(:search)", search: "%#{search}%")
