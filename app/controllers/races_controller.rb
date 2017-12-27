@@ -5,11 +5,11 @@ class RacesController < ApplicationController
   # Show all races
   def index
     @races = Race.all
-    @races_to_show = @races.joins(:results).group("race_id").count(:race_id).sort_by { |k| k[0]}.reverse
-    @upcoming_races_to_show = Race.where("date >= ?", Date.today)
     if params[:search]
       @races = Race.search(params[:search])
     end
+    @races_to_show = @races.joins(:results).group("race_id").count(:race_id).sort_by { |k| k[0]}.reverse
+    @upcoming_races_to_show = @races.where("date >= ?", Date.today)
   end
 
   # Show race by id
