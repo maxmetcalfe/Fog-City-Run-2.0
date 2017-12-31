@@ -14,4 +14,12 @@ class RacersControllerTest < ActionController::TestCase
     longest_streak, streak = @controller.update_streak_calendar([1])
     assert_equal streak.length, 0
   end
+
+  test "racers index display racers" do
+    get 'index'
+    assert_select "a[href=?]", racer_path(racers(:one))
+    assert_select "a[href=?]", racer_path(racers(:two))
+    assert_select "table", count: 1
+    assert_select "tr", count: Racer.count + 1
+  end
 end
