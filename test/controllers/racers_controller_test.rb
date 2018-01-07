@@ -22,4 +22,13 @@ class RacersControllerTest < ActionController::TestCase
     assert_select "table", count: 1
     assert_select "tr", count: Racer.count + 1
   end
+
+  test "racer show displays racer info" do
+    get :show, id: racers(:one).id
+    assert_select "h2", racers(:one).first_name + " " + racers(:one).last_name
+    assert_select "table", 2
+    for result in racers(:one).results
+      assert_select "a[href=?]", race_path(result.race_id)
+    end
+  end
 end
