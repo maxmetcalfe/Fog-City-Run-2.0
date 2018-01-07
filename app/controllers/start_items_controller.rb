@@ -54,7 +54,7 @@ class StartItemsController < ApplicationController
       puts "ERROR: We have multiple start items for the same racer for this race."
     else
       if @start_item.save
-        redirect_to(:back)
+        redirect_to race_path(race)
       else
         render 'new'
       end
