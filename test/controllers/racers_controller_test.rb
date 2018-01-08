@@ -23,7 +23,7 @@ class RacersControllerTest < ActionController::TestCase
     assert_select "tr", count: Racer.count + 1
   end
 
-  test "racer show displays racer info" do
+  test "racer show displays basic racer info" do
     get :show, id: racers(:one).id
     assert_select "h2", racers(:one).first_name + " " + racers(:one).last_name
     assert_select "table", 2
@@ -31,4 +31,28 @@ class RacersControllerTest < ActionController::TestCase
       assert_select "a[href=?]", race_path(result.race_id)
     end
   end
+
+  # test "racer show displays correct streak info" do
+  #   racer = Racer.new(first_name: "Tommy", last_name: "Streak", race_count: 0, longest_streak: 0, current_streak: 0, fav_bib: 0)
+  #   racer.save
+  #   puts racer.id
+  #   race1 = Race.new(date: Date.today)
+  #   race1.save
+  #   race2 = Race.new(date: Date.today -  1.week)
+  #   race2.save
+  #   race3 = Race.new(date: Date.today -  2.week)
+  #   race3.save
+  #   result1 = Result.new(rank: 1, bib: 1, racer_id: racer.id, race_id: race1.id, group_name: "ALL", time: "00:19:00")
+  #   result1.save
+  #   result2 = Result.new(rank: 1, bib: 1, racer_id: racer.id, race_id: race2.id, group_name: "ALL", time: "00:19:00")
+  #   result2.save
+  #   result3 = Result.new(rank: 1, bib: 1, racer_id: racer.id, race_id: race2.id, group_name: "ALL", time: "00:19:00")
+  #   result3.save
+  #   @controller.update_racer_info(racer.id)
+  #   get :show, id: racer.id
+  #   # assert_select "h4:first-of-type", "Races: " + racers(:one).race_count.to_s
+  #   # assert_select "h3:first-of-type", "Current: " + racers(:one).current_streak.to_s
+  #   # assert_select "h3:last-of-type", "Longest: " + racers(:one).longest_streak.to_s
+  #   puts @response.body
+  # end
 end

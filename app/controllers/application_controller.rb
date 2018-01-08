@@ -50,12 +50,9 @@ class ApplicationController < ActionController::Base
 
   # Update the racer info
   def update_racer_info(racer_ids)
-    puts "updating info..."
-    puts racer_ids
     racers = Racer.find(racer_ids)
     for r in racers
       results = Result.where(racer_id: r.id)
-      puts results.count
       r.update_attribute(:race_count, results.count)
       r.update_attribute(:fav_bib, results.includes(:race).order("races.date DESC").pluck(:bib).first)
     end
