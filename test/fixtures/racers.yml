@@ -3,9 +3,9 @@ one:
   id: 1
   first_name: Max
   last_name: Metcalfe
-  race_count: 0
-  longest_streak: 0
-  current_streak: 0
+  race_count: 12
+  longest_streak: 10
+  current_streak: 2
   fav_bib: 1
 
 two:
@@ -16,3 +16,22 @@ two:
   longest_streak: 0
   current_streak: 0
   fav_bib: 11
+
+three:
+  id: 3
+  first_name: Gameof
+  last_name: Thrones
+  race_count: 100
+  longest_streak: 10
+  current_streak: 1
+  fav_bib: 15
+
+four:
+  id: 4
+  first_name: Stranger
+  last_name: Things
+  race_count: 100
+  longest_streak: 10
+  current_streak: 1
+  fav_bib: 15
+
