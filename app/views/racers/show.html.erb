@@ -55,7 +55,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Bib Numbers</div>
         <div class="panel-body">
-          <%= bar_chart Result.where(racer_id: @racer.id).group(:bib).count, xtitle: "Bib #{}", ytitle: "Count", title: "Finish Place Distribution", width: "300px", height: "250px", colors: ["#ff8080"]%>
+          <%= bar_chart Result.where(racer_id: @racer.id).group(:bib).count, xtitle: "Bib #{}", ytitle: "Count", title: "Bib Number Distribution", width: "300px", height: "250px", colors: ["#ff8080"]%>
         </div>
       </div>
     </div>
