@@ -12,8 +12,8 @@ class ResultMailer < ApplicationMailer
     @race_date = reformat_date(@race.date.to_s)
     @race_rank = result.rank
     @race_time = result.time
-    @race_url = 'http://fogcityrun.com/races/' + @race.id.to_s
-    @racer_url = 'http://fogcityrun.com/racers/' + @racer.id.to_s
+    @race_url = 'https://www.fogcityrun.com/races/' + @race.id.to_s
+    @racer_url = 'https://www.fogcityrun.com/racers/' + @racer.id.to_s
     mail(to: email, subject: "Fog City Run Results") do |format|
       format.text
     end
