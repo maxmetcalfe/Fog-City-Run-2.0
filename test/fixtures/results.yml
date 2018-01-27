@@ -5,7 +5,7 @@ one:
   racer_id: 1
   race_id: 1
   group_name: ALL
-  time: 00:21:00.0
+  time: 00:20:20.0
 
 two:
   rank: 1
@@ -22,3 +22,19 @@ three:
   race_id: 4
   group_name: ALL
   time: 00:21:00.0
+
+four:
+  rank: 4
+  bib: 34
+  racer_id: 3
+  race_id: 1
+  group_name: ALL
+  time: 00:21:00.0
+
+five:
+  rank: 1
+  bib: 20
+  racer_id: 4
+  race_id: 1
+  group_name: ALL
+  time: 00:34:00.0
