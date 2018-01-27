@@ -62,11 +62,6 @@ class RacersController < ApplicationController
   def create
   	@racer = Racer.new(racer_params)
     @racer.id = Racer.maximum(:id).next
-    # Initialize counts to 0
-    @racer.race_count = 0
-    @racer.longest_streak = 0
-    @racer.current_streak = 0
-    @racer.fav_bib = 0
     if @racer.save
       next_race = Race.where("date >= ?", Date.today).first
       full_name = @racer.first_name + " "+ @racer.last_name
