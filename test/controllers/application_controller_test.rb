@@ -13,6 +13,10 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_equal @controller.from_seconds(3600), "01:00:00.0"
   end
 
+  test "from_seconds() returns the expected value - 1 hour, > 10 seconds" do
+    assert_equal @controller.from_seconds(3630), "01:00:30.0"
+  end
+
   test "to_seconds() returns the expected value" do
     assert_equal @controller.to_seconds("00:25:00.0"), 1500
   end
