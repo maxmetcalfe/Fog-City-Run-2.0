@@ -27,6 +27,7 @@ gem "d3-rails"
 gem 'will_paginate', '~> 3.1.0'
 gem 'eslint-rails'
 gem 'coveralls', require: false
+gem 'puma'
 
 group :development, :test do
   gem 'byebug'
