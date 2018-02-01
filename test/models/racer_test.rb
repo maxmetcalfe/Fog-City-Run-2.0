@@ -9,7 +9,6 @@ class RacerTest < ActiveSupport::TestCase
   test "should not save racer without name" do
     racer = racers(:one)
     racer.first_name = ""
-    # racer.last_name = ""
     assert_not racer.save
   end
 

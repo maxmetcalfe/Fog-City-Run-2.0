@@ -1,7 +1,7 @@
 class Racer < ActiveRecord::Base
 
   has_many :results
-  before_create :init
+  after_initialize :init
 
   def init
     self.race_count = 0
