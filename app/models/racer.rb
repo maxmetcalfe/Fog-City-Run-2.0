@@ -4,10 +4,10 @@ class Racer < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.race_count = 0
-    self.current_streak = 0
-    self.longest_streak = 0
-    self.fav_bib = 0
+    self.race_count ||= 0
+    self.current_streak ||= 0
+    self.longest_streak ||= 0
+    self.fav_bib ||= 0
   end
 
   def self.search(search)
