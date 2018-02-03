@@ -1,12 +1,12 @@
 
-one:
-  item: MyString
+hat:
+  item: "The Divis"
   user_id: 1
   delivered: false
   quantity: 1
 
-two:
-  item: MyString
+shirt:
+  item: "4YT-Shirt"
   user_id: 1
   delivered: false
   quantity: 1
