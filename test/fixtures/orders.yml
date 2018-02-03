@@ -2,11 +2,13 @@
 hat:
   item: "The Divis"
   user_id: 1
-  delivered: false
+  delivered: true
   quantity: 1
+  size: "One Size Fits All"
 
 shirt:
   item: "4YT-Shirt"
   user_id: 1
   delivered: false
   quantity: 1
+  size: "F-medium"
