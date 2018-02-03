@@ -53,4 +53,12 @@ class RacerTest < ActiveSupport::TestCase
     racer.last_name = racer.last_name + " "
     assert_not racer.save
   end
+
+  test "racer initialization does not override existing value" do
+    racer = racers(:one)
+    assert_equal 12, racer.race_count
+    assert_equal 10, racer.longest_streak
+    assert_equal 2, racer.current_streak
+    assert_equal 1, racer.fav_bib
+  end
 end
