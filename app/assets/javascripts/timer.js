@@ -1,3 +1,4 @@
+/* eslint-disable */
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
 
 $( document ).ready(function() {

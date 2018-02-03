@@ -11,7 +11,7 @@ db-remote:
 	rm latest.dump
 	echo "Done."
 
-test:
+test: lint
 	rake test
 	cat coverage/.last_run.json  | grep "covered" | sed 's/.*:/Coverage:/'
 

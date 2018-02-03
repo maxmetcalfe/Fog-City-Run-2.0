@@ -1,5 +1,8 @@
+/* global document */
+/*eslint-disable no-unused-vars*/
 
 function addLikelyRacersListener() {
+    "use strict";
     var likelyTable = document.getElementById("likely-table");
     if (likelyTable) {
         likelyTable.addEventListener("click", function(event) {
