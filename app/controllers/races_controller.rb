@@ -1,5 +1,6 @@
 class RacesController < ApplicationController
 
+  before_filter :must_be_admin, only: [:create]
   @races = Race.includes(:race)
 
   # Show all races
@@ -49,16 +50,14 @@ class RacesController < ApplicationController
 
   # Create race
   def create
-    if current_user and current_user.admin?
-      @race = Race.new(race_params)
-      @race.id = Race.maximum(:id).next
-      @race.state = 'PLANNED'
-       if @race.save
-         redirect_to races_path
-       else
-         render 'new'
-       end
-    end
+    @race = Race.new(race_params)
+    @race.id = Race.maximum(:id).next
+    @race.state = 'PLANNED'
+      if @race.save
+        redirect_to races_path
+      else
+        render 'new'
+      end
   end
 
   # New race

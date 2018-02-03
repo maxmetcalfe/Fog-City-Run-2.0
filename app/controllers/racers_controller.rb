@@ -1,5 +1,7 @@
 class RacersController < ApplicationController
 
+  before_filter :must_be_admin, only: [:edit]
+
   def autocomplete_racer
     term = params[:term]
     racers = Racer.where(

@@ -1,8 +1,5 @@
 class ResultsController < ApplicationController
 
-  @results = Result.includes(:racer)
-  @results = Result.includes(:race)
-
   skip_before_action :verify_authenticity_token
   before_filter :must_be_admin, only: [:edit]
 
@@ -83,13 +80,6 @@ class ResultsController < ApplicationController
       redirect_to Race.find(@result.race_id)
     else
       render 'edit'
-    end
-  end
-
-  # Basic admin permissions
-  def must_be_admin
-    unless current_user && current_user.admin?
-      redirect_to root_path
     end
   end
 
