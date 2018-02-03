@@ -1,3 +1,4 @@
+.PHONY: dev db-remote test lint
 
 dev:
 	rails server
@@ -9,6 +10,10 @@ db-remote:
 	pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $(USERNAME) -d $(DB) latest.dump
 	rm latest.dump
 	echo "Done."
+
+test:
+	rake test
+	cat coverage/.last_run.json  | grep "covered" | sed 's/.*:/Coverage:/'
 
 lint:
 	rake eslint:run_all
