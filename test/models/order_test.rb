@@ -29,10 +29,4 @@ class OrderTest < ActiveSupport::TestCase
     order.size = ""
     assert_not order.save
   end
-
-  test "should not save an order without a delivered attribute" do
-    order = orders(:hat)
-    order.delivered = ""
-    assert_not order.save
-  end
 end
