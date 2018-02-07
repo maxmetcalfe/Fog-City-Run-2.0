@@ -146,7 +146,7 @@ GEM
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
-    pg (0.21.0)
+    pg (0.20.0)
     puma (3.8.2)
     rack (1.6.8)
     rack-test (0.6.3)
@@ -267,7 +267,7 @@ DEPENDENCIES
   less-rails
   omniauth (= 1.7.1)
   omniauth-facebook (= 4.0.0)
-  pg
+  pg (~> 0.20.0)
   puma
   rails (= 4.2.7.1)
   rails4-autocomplete
