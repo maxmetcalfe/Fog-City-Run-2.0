@@ -19,4 +19,14 @@ class StartItemsControllerTest < ActionController::TestCase
     assert start_item.destroyed?
     assert_response 200
   end
+
+  test "collect_time creates a result that matches the start item" do
+    start_item = StartItem.new(racer_id: racers(:three).id, group: "ALL", start_time: Time.now, end_time: Time.now, bib: 101, race_id: races(:four).id)
+    start_item.save!
+    post :collect_time, :id => start_item.id, format: :json
+    result = Result.where(racer_id: racers(:three).id, race_id: races(:four))
+    assert_equal 1, result.count
+    assert_equal racers(:three), result[0].racer
+    assert_equal races(:four), result[0].race
+  end
 end

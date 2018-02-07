@@ -95,7 +95,7 @@ class StartItemsController < ApplicationController
       puts "ERROR: We have multiple results for the same racer for this race."
     else
       result = Result.create(:rank => 0, :id => Result.maximum(:id).next, :group_name => @start_item.group, :bib => @start_item.bib, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
-      result.save
+      result.save!
     end
     validate_ranks(@race.id)
 
@@ -105,6 +105,7 @@ class StartItemsController < ApplicationController
 
     # Call collect_time.js.erb
     respond_to do |format|
+      format.json { render json: @result }
       format.js
     end
   end
