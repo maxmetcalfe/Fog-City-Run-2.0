@@ -45,7 +45,7 @@ class RacersControllerTest < ActionController::TestCase
     result1.save
     result2 = Result.new(rank: 1, bib: 1, racer_id: racer.id, race_id: race2.id, group_name: "ALL", time: "00:19:00")
     result2.save
-    result3 = Result.new(rank: 1, bib: 1, racer_id: racer.id, race_id: race2.id, group_name: "ALL", time: "00:19:00")
+    result3 = Result.new(rank: 1, bib: 1, racer_id: racer.id, race_id: race3.id, group_name: "ALL", time: "00:19:00")
     result3.save
     @controller.update_racer_info([racer.id])
     get :show, id: racer.id
