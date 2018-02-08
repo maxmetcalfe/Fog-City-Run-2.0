@@ -11,7 +11,7 @@ class RacersController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        puts render :json => racers.map { |racer| racer.first_name + " " + racer.last_name }
+        puts render :json => racers.map { |racer| { label: racer.first_name + " " + racer.last_name, value: racer.id } }
       }
     end
   end

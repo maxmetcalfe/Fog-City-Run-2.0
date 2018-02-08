@@ -25,20 +25,9 @@ class StartItemsController < ApplicationController
     @start_item = StartItem.find(params[:id])
   end
 
-  # This is a Hack. We should be using a display_value for autocomplete. This is a temp implementation.
-  def modify_start_item_params
-    new_params = start_item_params
-    name_list = new_params[:racer_id].split
-    first_name = name_list[0]
-    last_name = name_list[1]
-    new_params[:racer_id] = Racer.where(first_name: first_name, last_name: last_name).first.id
-    return new_params
-  end
-
   # Create start_item
   def create
-    # Hack: See above at modify_start_item_params
-    @start_item = StartItem.new(modify_start_item_params)
+    @start_item = StartItem.new(start_item_params)
     id = StartItem.maximum(:id)
     if id.nil?
       @start_item.id = 1

@@ -22,7 +22,7 @@ class NewRaceTest < ActionDispatch::IntegrationTest
     post races_path, { race: { date: Date.today + 1.year, state: "PLANNED" } }
     race = Race.find(Race.maximum(:id))
     racer = Racer.find(@admin_user.racer_id)
-    post start_items_path, { start_item: { race_id: race.id, bib: 1, group: "ALL", racer_id: "Max Metcalfe" } }
+    post start_items_path, { start_item: { race_id: race.id, bib: 1, group: "ALL", racer_id: 1 } }
     follow_redirect!
     assert_select "a[href=?]", start_item_path(StartItem.maximum(:id))
     assert_select "table", count: 2
