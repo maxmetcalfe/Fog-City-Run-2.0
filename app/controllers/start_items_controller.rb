@@ -28,12 +28,6 @@ class StartItemsController < ApplicationController
   # Create start_item
   def create
     @start_item = StartItem.new(start_item_params)
-    id = StartItem.maximum(:id)
-    if id.nil?
-      @start_item.id = 1
-    else
-      @start_item.id = id.next
-    end
     @start_item.start_time = DateTime.now
     race = Race.find(@start_item.race_id)
     existing_start_item = StartItem.where(:racer_id => @start_item.racer_id, :race_id => @start_item.race_id)
@@ -83,7 +77,7 @@ class StartItemsController < ApplicationController
     elsif existing_result.length > 1
       puts "ERROR: We have multiple results for the same racer for this race."
     else
-      result = Result.create(:rank => 0, :id => Result.maximum(:id).next, :group_name => @start_item.group, :bib => @start_item.bib, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
+      result = Result.create(:rank => 0, :group_name => @start_item.group, :bib => @start_item.bib, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
       result.save!
     end
     validate_ranks(@race.id)
