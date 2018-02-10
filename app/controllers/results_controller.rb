@@ -3,19 +3,10 @@ class ResultsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_filter :must_be_admin, only: [:edit]
 
-  # Show all results
   def index
-    @results = Result.all
-    # Refresh all racer info
-    update_racer_info([@results.pluck(:racer_id)])
-    # TEMP: An easy way to fix ranks for all.
-    races = @results.pluck(:race_id)
-    for r in races
-      validate_ranks(r)
-    end
   end
 
-  # Show result by id
+  # Show result
   def show
     @result = Result.find(params[:id])
   end
@@ -69,7 +60,7 @@ class ResultsController < ApplicationController
     end
   end
 
-  #Permit parameters when creating result
+  # Permit parameters when creating result
   private
   def result_params
     params.require(:result).permit(:rank, :bib, :racer_id, :group_name, :time, :race_id)
