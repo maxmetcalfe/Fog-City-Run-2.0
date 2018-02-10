@@ -11,6 +11,7 @@
         <table class="table table-hover table-bordered sortable" id="likely-table">
           <thead>
           <tr>
+            <th>ID</th>
             <th>Racer</th>
             <th>Bib</th>
           </tr>
@@ -18,6 +19,7 @@
           <tbody>
           <% @likely_racers.each do |racer| %>
             <tr>
+              <td><%= racer.id %> </td>
               <td><%= racer.first_name %> <%= racer.last_name %> </td>
               <td><%= racer.fav_bib %> </td>
             </tr>

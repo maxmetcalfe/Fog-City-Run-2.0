@@ -7,10 +7,13 @@ function addLikelyRacersListener() {
     if (likelyTable) {
         likelyTable.addEventListener("click", function(event) {
             var row = likelyTable.rows[event.target.parentNode.rowIndex];
-            var name = row.cells[0].textContent;
-            var bib = row.cells[1].textContent;
+            var id = row.cells[0].textContent;
+            var name = row.cells[1].textContent;
+            var bib = row.cells[2].textContent;
             var racerField = document.getElementById("start_item_racer_id");
+            var racerIdHiddenDiv = document.getElementById("racer_id_hidden");
             racerField.value = name;
+            racerIdHiddenDiv.value = id;
             var bibField = document.getElementById("start_item_bib");
             bibField.value = bib;
         });
