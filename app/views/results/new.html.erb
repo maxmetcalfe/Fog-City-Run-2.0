@@ -28,6 +28,7 @@
       <%= r.label :racer_id, "Racer:", class: "col-md-1 control-label" %>
         <div class="col-md-3">
           <%= r.autocomplete_field :racer_id, autocomplete_racer_racers_path, class: "form-control" %>
+          <%= r.hidden_field :racer_id, id: "racer_id_hidden"%>
         </div>
     </div>
     <div class="form-group">
@@ -55,3 +56,8 @@
     </div>
   <% end %>
 </div>
+<script>
+  $(document).ready(function() {
+    runAutocompleteDance();
+  });
+</script>
