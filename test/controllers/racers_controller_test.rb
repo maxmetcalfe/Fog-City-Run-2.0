@@ -1,18 +1,13 @@
 require 'test_helper'
 
 class RacersControllerTest < ActionController::TestCase
-  test "longest streak matches reality" do
-    # Max should have a longest streak of 2.
-    # Max has raced three races but only 2 in a "streak."
-    longest_streak, streak = @controller.update_streak_calendar([1])
-    assert_equal longest_streak.length, 2
-  end
 
-  test "current streak matches reality" do
-    # Max should have a current streak of 0.
-    # TO DO: Improve this test for the case that Max has a streak.
-    longest_streak, streak = @controller.update_streak_calendar([1])
-    assert_equal streak.length, 0
+  test "update_streak_calendar() should return the expected results" do
+    attributes = @controller.update_streak_calendar([racers(:one).id])
+    assert_equal 2, attributes[:longest_streak]
+    assert_equal 0, attributes[:current_streak]
+    assert_same 2, attributes[:longest_streak_array].length
+    assert_same 0, attributes[:current_streak_array].length
   end
 
   test "racers index display racers" do

@@ -26,15 +26,13 @@ class RacersController < ApplicationController
 
   # Show racer by id
   def show
-    # TO DO: We need to refactor updating streaks and racer info, badly.
     racer = Racer.find(params[:id])
-    longest_streak, current_streak = update_streak_calendar([racer.id])
     @racer = Racer.find(params[:id])
-    @longest_streak_for_view = "(" + longest_streak[0].to_s + " through " + longest_streak[-1].to_s + ")"
-    if current_streak.length == 0
+    @longest_streak_for_view = "(" + racer.longest_streak_array[0].to_s + " through " + racer.longest_streak_array[-1].to_s + ")"
+    if racer.current_streak_array.length == 0
       @current_streak_for_view = "(no current streak)"
     else
-      @current_streak_for_view = "(" + current_streak[0].to_s + " through " + current_streak[-1].to_s + ")"
+      @current_streak_for_view = "(" + racer.current_streak_array[0].to_s + " through " + racer.current_streak_array[-1].to_s + ")"
     end
     @racer_data = @racer.results.joins(:race).map {|result| {:date => Race.find(result.race_id).date, :time => to_seconds(result.time), :group_name => result.group_name } }.to_json.html_safe
     if current_user

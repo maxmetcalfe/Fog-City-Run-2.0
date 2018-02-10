@@ -8,7 +8,6 @@ class ResultsController < ApplicationController
     @results = Result.all
     # Refresh all racer info
     update_racer_info([@results.pluck(:racer_id)])
-    update_streak_calendar([@results.pluck(:racer_id)])
     # TEMP: An easy way to fix ranks for all.
     races = @results.pluck(:race_id)
     for r in races
@@ -23,12 +22,13 @@ class ResultsController < ApplicationController
 
   # Delete result
   def destroy
+    puts "Destroying result."
     @result = Result.find(params[:id])
     @race_id = @result.race_id
     racer_id = @result.racer_id
     @result.destroy
     validate_ranks(@result.race_id)
-    update_streak_calendar([racer_id])
+    update_racer_info([@result.racer_id])
 
     redirect_to Race.find(@race_id)
   end
@@ -54,7 +54,6 @@ class ResultsController < ApplicationController
     @result.rank = 0
     @result.id = Result.maximum(:id).next
     update_racer_info([@result.racer_id])
-    update_streak_calendar([@result.racer_id])
 
     if @result.save
       validate_ranks(@result.race_id)
@@ -75,7 +74,6 @@ class ResultsController < ApplicationController
     if @result.update(result_params)
       validate_ranks(@result.race_id)
       update_racer_info([@result.racer_id])
-      update_streak_calendar([@result.racer_id])
 
       redirect_to Race.find(@result.race_id)
     else
