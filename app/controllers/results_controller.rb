@@ -22,7 +22,6 @@ class ResultsController < ApplicationController
 
   # Delete result
   def destroy
-    puts "Destroying result."
     @result = Result.find(params[:id])
     @race_id = @result.race_id
     racer_id = @result.racer_id
