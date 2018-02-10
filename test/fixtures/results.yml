@@ -46,3 +46,11 @@ six:
   race_id: 1
   group_name: ALL
   time: 00:41:00.0
+
+seven:
+  rank: 3
+  bib: 20
+  racer_id: 3
+  race_id: 4
+  group_name: ALL
+  time: "a nice little string"
