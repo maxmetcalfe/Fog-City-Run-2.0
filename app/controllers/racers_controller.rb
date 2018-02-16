@@ -47,6 +47,7 @@ class RacersController < ApplicationController
   def destroy
     @racer = Racer.find(params[:id])
     @racer.destroy
+    redirect_to racers_path
   end
 
   # Edit racer

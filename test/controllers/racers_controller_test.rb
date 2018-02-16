@@ -49,4 +49,12 @@ class RacersControllerTest < ActionController::TestCase
     assert_select "h3:first-of-type", "Current: " + racer.current_streak.to_s
     assert_select "h3:last-of-type", "Longest: " + racer.longest_streak.to_s
   end
+
+  test "destroying a racer properly removes the racer" do
+    racer = Racer.new(first_name: "About", last_name: "To Go", race_count: 10, longest_streak: 0, current_streak: 0, fav_bib: 0)
+    racer.save!
+    delete :destroy, id: racer.id
+    assert_redirected_to racers_path
+    assert_not Racer.exists?(racer.id)
+  end
 end
