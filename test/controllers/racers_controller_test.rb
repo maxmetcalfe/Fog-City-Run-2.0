@@ -57,4 +57,15 @@ class RacersControllerTest < ActionController::TestCase
     assert_redirected_to racers_path
     assert_not Racer.exists?(racer.id)
   end
+
+  test "racer search returns expected racers from query string - single result" do
+    get :index, :search => "Thrones"
+    assert_select "a[href=?]", racer_path(racers(:three))
+  end
+
+  test "racer search returns expected racers from query string - multiple results" do
+    get :index, :search => "Metcalfe"
+    assert_select "a[href=?]", racer_path(racers(:one))
+    assert_select "a[href=?]", racer_path(racers(:two))
+  end
 end
