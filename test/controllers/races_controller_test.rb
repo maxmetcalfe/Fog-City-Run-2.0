@@ -13,4 +13,16 @@ class RacesControllerTest < ActionController::TestCase
     get :destroy, id: race.id
     assert_equal 0, race.results.count
   end
+
+  test "race search returns expected races from query string - single result" do
+    get :index, :search => "2017-05-31"
+    assert_select "a[href=?]", race_path(races(:one))
+  end
+
+  test "race search returns expected races from query string - multiple results" do
+    get :index, :search => "2017"
+    assert_select "a[href=?]", race_path(races(:one))
+    assert_select "a[href=?]", race_path(races(:two))
+    assert_select "a[href=?]", race_path(races(:four))
+  end
 end
