@@ -28,6 +28,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'eslint-rails'
 gem 'coveralls', require: false
 gem 'puma'
+gem 'scout_apm'
 
 group :development, :test do
   gem 'byebug'
