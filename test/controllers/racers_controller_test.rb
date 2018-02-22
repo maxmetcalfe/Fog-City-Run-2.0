@@ -27,6 +27,12 @@ class RacersControllerTest < ActionController::TestCase
     end
   end
 
+  test "racer show displays basic racer info for racer with zero races" do
+    get :show, id: racers(:two).id
+    assert_select "h2", racers(:two).first_name + " " + racers(:two).last_name
+    assert_select "h4:first-of-type", "Races: 0"
+  end
+
   test "racer show displays correct streak info" do
     racer = Racer.new(first_name: "Tommy", last_name: "Streak", race_count: 0, longest_streak: 0, current_streak: 0, fav_bib: 0)
     racer.save

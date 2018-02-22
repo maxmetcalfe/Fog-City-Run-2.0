@@ -22,7 +22,9 @@
       <% end %>
       <% if @has_results %>
       <h4>Races: <%= @racer.race_count %></h4>
+      <% if @racer.results.exists? %>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
+      <% end %>
       <h4>Loop-Beer Runs: <%= @racer.results.where("group_name = ?", "Loop-Beer").count %></h4>
       <% end %>
       <%= @users_race_count %>
