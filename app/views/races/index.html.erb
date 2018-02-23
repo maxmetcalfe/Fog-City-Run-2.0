@@ -31,7 +31,7 @@
         <% end %>
         <% if current_user and current_user.admin? %>
         <td><%= link_to 'Edit', race_path(race), :class => 'btn btn-default btn-xs' %> <%= link_to 'Destroy',
-              race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + Race.find(race.id).date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %></td>
+              race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + race.date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %></td>
         <% end %>
       </tr>
     <% end %>
@@ -51,11 +51,11 @@
     <tbody>
     <% @races_to_show.each do |race| %>
       <tr>
-        <td><%= link_to Race.find(race[0]).date, race_path(Race.find(race[0])) %></td>
-        <td><%= race[1] %></td>
+        <td><%= link_to race.date, race_path(race) %></td>
+        <td><%= race.results.count %></td>
         <% if current_user and current_user.admin? %>
-          <td><%= link_to 'Edit', race_path(Race.find(race[0])), :class => 'btn btn-default btn-xs' %> <%= link_to 'Destroy',
-                race_path(Race.find(race[0])), method: :delete, data: { confirm: 'Are you sure you want to delete ' + Race.find(race[0]).date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %></td>
+          <td><%= link_to 'Edit', race_path(race), :class => 'btn btn-default btn-xs' %> <%= link_to 'Destroy',
+                race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + race.date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %></td>
         <% end %>
       </tr>
     <% end %>

@@ -9,8 +9,8 @@
     if params[:search]
       @races = Race.search(params[:search])
     end
-    @races_to_show = @races.joins(:results).group("race_id").count(:race_id).sort_by { |k| k[0]}.reverse
-    @upcoming_races_to_show = @races.where("date >= ?", Date.today)
+    @races_to_show = @races.order("date DESC")
+    @upcoming_races_to_show = @races.where("date >= ?", Date.today).order("date DESC")
   end
 
   # Show race by id
