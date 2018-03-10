@@ -2,14 +2,6 @@ require 'test_helper'
 
 class RacersControllerTest < ActionController::TestCase
 
-  test "update_streak_calendar() should return the expected results" do
-    attributes = @controller.update_streak_calendar([racers(:one).id])
-    assert_equal 2, attributes[:longest_streak]
-    assert_equal 0, attributes[:current_streak]
-    assert_same 2, attributes[:longest_streak_array].length
-    assert_same 0, attributes[:current_streak_array].length
-  end
-
   test "racers index display racers" do
     get 'index'
     assert_select "a[href=?]", racer_path(racers(:one))
@@ -48,7 +40,6 @@ class RacersControllerTest < ActionController::TestCase
     result2.save
     result3 = Result.new(rank: 1, bib: 1, racer_id: racer.id, race_id: race3.id, group_name: "ALL", time: "00:19:00")
     result3.save
-    @controller.update_racer_info([racer.id])
     get :show, id: racer.id
     racer = Racer.find(racer.id)
     assert_select "h4:first-of-type", "Races: " + racer.race_count.to_s

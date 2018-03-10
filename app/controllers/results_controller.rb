@@ -18,7 +18,6 @@ class ResultsController < ApplicationController
     racer_id = @result.racer_id
     @result.destroy
     validate_ranks(@result.race_id)
-    update_racer_info([@result.racer_id])
 
     redirect_to Race.find(@race_id)
   end
@@ -32,7 +31,6 @@ class ResultsController < ApplicationController
     @result = Result.new(result_params)
     @result.rank = 0
     @result.id = Result.maximum(:id).next
-    update_racer_info([@result.racer_id])
 
     if @result.save
       validate_ranks(@result.race_id)
@@ -52,7 +50,6 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     if @result.update(result_params)
       validate_ranks(@result.race_id)
-      update_racer_info([@result.racer_id])
 
       redirect_to Race.find(@result.race_id)
     else

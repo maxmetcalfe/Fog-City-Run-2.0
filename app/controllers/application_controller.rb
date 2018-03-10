@@ -54,62 +54,6 @@ class ApplicationController < ActionController::Base
     return h + ":" + m + ":" + s
   end
 
-  # Update the racer info
-  def update_racer_info(racer_ids)
-    racers = Racer.find(racer_ids)
-    for r in racers
-      results = Result.where(racer_id: r.id)
-      r.update_attribute(:race_count, results.count)
-      r.update_attribute(:fav_bib, results.includes(:race).order("races.date DESC").pluck(:bib).first)
-    end
-
-    update_streak_calendar(racer_ids)
-  end
-
-  # Update longest / current streak for a set of racer_ids.
-  def update_streak_calendar(racer_ids)
-    open_dates = []
-    racers = Racer.find(racer_ids)
-    open_dates = open_dates.push '2013-01-16'.to_date
-    while open_dates[-1] < Date.today - 1.week
-      open_dates = open_dates.push open_dates[-1].advance(:weeks => 1)
-    end
-    for racer in racers
-      races_run = racer.results.joins(:race).map {|result| Race.find(result.race_id).date }
-      longest_streak_count = 0
-      longest_streak = []
-      current_streak_count = 0
-      current_streak = []
-      for o in open_dates
-        found = 0
-        for r in races_run
-          if o == r
-            current_streak = current_streak.push r
-            if current_streak.length > longest_streak_count
-              longest_streak_count = current_streak.length
-              longest_streak = current_streak
-            end
-            found = 1
-            if open_dates[-1] == current_streak[-1]
-              current_streak_count = current_streak.length
-            end
-          end
-        end
-        if found == 0
-          current_streak = []
-        end
-      end
-      attributes = {
-        :longest_streak => longest_streak.length,
-        :current_streak => current_streak.length,
-        :longest_streak_array => longest_streak,
-        :current_streak_array => current_streak
-      }
-      racer.update_attributes(attributes)
-    end
-    return attributes
-  end
-
   # Sort by group and finish time for a race.
   def validate_ranks(race_id)
     results = Result.where(:race_id => race_id)

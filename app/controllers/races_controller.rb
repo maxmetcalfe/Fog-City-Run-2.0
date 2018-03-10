@@ -37,9 +37,6 @@
     racer_ids = race.results.pluck(:racer_id)
     race.results.destroy_all
     race.destroy
-    # Since we deleted a race (and a bunch of results), we need to
-    # update our racer info.
-    update_racer_info(racer_ids)
 
     redirect_to races_path
   end
@@ -118,7 +115,6 @@
     race = Race.find(params[:id])
     racer_ids = race.results.pluck(:racer_id)
     race.update(state: 'FINISHED')
-    update_racer_info(racer_ids)
     redirect_to race
   end
 
