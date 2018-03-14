@@ -26,19 +26,20 @@ class RacersController < ApplicationController
 
   # Show racer by id
   def show
-    racer = Racer.find(params[:id])
     @racer = Racer.find(params[:id])
-    @longest_streak_for_view = "(" + racer.longest_streak_array[0].to_s + " through " + racer.longest_streak_array[-1].to_s + ")"
-    if racer.current_streak_array.length == 0
+    @user = User.where(:racer_id => @racer.id).first
+    @longest_streak_for_view = "(" + @racer.longest_streak_array[0].to_s + " through " + @racer.longest_streak_array[-1].to_s + ")"
+    if @racer.current_streak_array.length == 0
       @current_streak_for_view = "(no current streak)"
     else
-      @current_streak_for_view = "(" + racer.current_streak_array[0].to_s + " through " + racer.current_streak_array[-1].to_s + ")"
+      @current_streak_for_view = "(" + @racer.current_streak_array[0].to_s + " through " + @racer.current_streak_array[-1].to_s + ")"
     end
-    @racer_data = @racer.results.joins(:race).map {|result| {:date => Race.find(result.race_id).date, :time => to_seconds(result.time), :group_name => result.group_name } }.to_json.html_safe
+    @results = @racer.results.includes(:race).order(race_id: :desc)
+    @racer_data = @results.map {|result| {:date => result.race.date, :time => to_seconds(result.time), :group_name => result.group_name } }.to_json.html_safe
     if current_user
     @user_order = Order.where(:user_id => current_user.id).first
     end
-    if @racer_data.length > 0
+    if @results.length > 0
       @has_results = true
     end
   end

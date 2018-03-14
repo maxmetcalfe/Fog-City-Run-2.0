@@ -13,19 +13,18 @@
       Please login.
       <% elsif !current_user.nil? and current_user.racer_id.to_i == @racer.id.to_i %>
       <%= link_to "Edit", edit_user_path, :class => "btn btn-warning" %>
-      <%= link_to image_tag("icon-strava-blue.svg", height: 30), User.where(:racer_id => @racer.id).first.strava_link, :class => "fa-fw fa-lg" %>
+      <%= link_to image_tag("icon-strava-blue.svg", height: 30), @user.strava_link, :class => "fa-fw fa-lg" %>
       <% elsif !current_user.nil? and User.pluck(:racer_id).include? @racer.id %>
       Another user has claimed this racer.
-      <%= link_to image_tag("icon-strava-blue.svg", height: 30), User.where(:racer_id => @racer.id).first.strava_link, :class => "fa-fw fa-lg" %>
+      <%= link_to image_tag("icon-strava-blue.svg", height: 30), @user.strava_link, :class => "fa-fw fa-lg" %>
       <% elsif !current_user.nil? %>
       <%= link_to("Claim", edit_user_path(:user => current_user, :racer_id => @racer.id), :class => "btn btn-success")%>
       <% end %>
       <% if @has_results %>
       <h4>Races: <%= @racer.race_count %></h4>
-      <% if @racer.results.exists? %>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
       <% end %>
-      <h4>Loop-Beer Runs: <%= @racer.results.where("group_name = ?", "Loop-Beer").count %></h4>
+      <h4>Loop-Beer Runs: <%= @results.select{|result| result.group_name == "Loop-Beer" }.count%></h4>
       <% end %>
       <%= @users_race_count %>
        </div>
@@ -88,9 +87,9 @@
           </tr>
           </thead>
           <tbody>
-          <% @racer.results.where("group_name != ?", "Loop-Beer").includes(:race).order("races.date DESC").each do |result| %>
+          <% @results.select{|result| result.group_name != "Loop-Beer" }.each do |result| %>
             <tr>
-              <td><%= link_to Race.find(result.race_id).date, race_path(Race.find(result.race_id)) %></td>
+              <td><%= link_to result.race.date, race_path(result.race) %></td>
               <td><%= result.time %></td>
             </tr>
           <% end %>
@@ -112,9 +111,9 @@
             </tr>
             </thead>
             <tbody>
-            <% @racer.results.where("group_name = ?", "Loop-Beer").includes(:race).order("races.date DESC").each do |result| %>
+            <% @results.select{|result| result.group_name == "Loop-Beer" }.each do |result| %>
               <tr>
-                <td><%= link_to Race.find(result.race_id).date, race_path(Race.find(result.race_id)) %></td>
+                <td><%= link_to result.race.date, race_path(result.race) %></td>
                 <td><%= result.time %></td>
               </tr>
             <% end %>
