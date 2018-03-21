@@ -20,12 +20,11 @@
       <% elsif !current_user.nil? %>
       <%= link_to("Claim", edit_user_path(:user => current_user, :racer_id => @racer.id), :class => "btn btn-success")%>
       <% end %>
-      <% if @has_results %>
       <h4>Races: <%= @racer.race_count %></h4>
+      <% if @racer.results.exists? %>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
       <% end %>
-      <h4>Loop-Beer Runs: <%= @results.select{|result| result.group_name == "Loop-Beer" }.count%></h4>
-      <% end %>
+      <h4>Loop-Beer Runs: <%= @results.select{|result| result.group_name == "Loop-Beer"}.count %></h4>
       <%= @users_race_count %>
        </div>
       </div>
@@ -87,7 +86,7 @@
           </tr>
           </thead>
           <tbody>
-          <% @results.select{|result| result.group_name != "Loop-Beer" }.each do |result| %>
+          <% @results.select{|result| result.group_name != "Loop-Beer"}.each do |result| %>
             <tr>
               <td><%= link_to result.race.date, race_path(result.race) %></td>
               <td><%= result.time %></td>
@@ -111,7 +110,7 @@
             </tr>
             </thead>
             <tbody>
-            <% @results.select{|result| result.group_name == "Loop-Beer" }.each do |result| %>
+            <% @results.select{|result| result.group_name == "Loop-Beer"}.each do |result| %>
               <tr>
                 <td><%= link_to result.race.date, race_path(result.race) %></td>
                 <td><%= result.time %></td>
