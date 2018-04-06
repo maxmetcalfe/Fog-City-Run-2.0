@@ -73,12 +73,6 @@
     end
   end
 
-  # import CSV
-  def import
-    Race.import(params[:file])
-    redirect_to races_url, notice: "Races imported successfully"
-  end
-
   def send_results_email
     results = Result.where(:race_id => params[:race_id])
     for r in results
