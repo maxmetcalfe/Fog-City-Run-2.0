@@ -16,3 +16,13 @@ sophie:
   admin: false
   activated: true
   activated_at: <%= Time.zone.now %>
+
+fuzz:
+  first_name: fuzz
+  last_name: buzz
+  email: fuzz_buzz@dogs.br
+  password_digest: <%= User.digest('password') %>
+  admin: false
+  activated: true
+  racer_id: 4
+  activated_at: <%= Time.zone.now %>

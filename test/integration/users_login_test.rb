@@ -9,7 +9,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "login admin / racer associated user with valid information" do
     get login_path
-    post login_path, { session: { email: @admin_user.email,password: "password" } }
+    post login_path, { session: { email: @admin_user.email, password: "password" } }
     assert_redirected_to racers_path
     follow_redirect!
     assert_select "a[href=?]", login_path, count: 0
@@ -20,7 +20,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "login non-admin / unassociated user with valid information" do
     get login_path
-    post login_path, { session: { email: @non_admin_user.email,password: "password" } }
+    post login_path, { session: { email: @non_admin_user.email, password: "password" } }
     assert_redirected_to racers_path
     follow_redirect!
     assert_select "a[href=?]", login_path, count: 0
@@ -30,7 +30,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "logout admin user" do
     get login_path
-    post login_path, { session: { email: @admin_user.email,password: "password" } }
+    post login_path, { session: { email: @admin_user.email, password: "password" } }
     delete logout_path
     follow_redirect!
     assert_select "a[href=?]", login_path, count: 1
@@ -38,7 +38,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "logout non-admin user" do
     get login_path
-    post login_path, { session: { email: @non_admin_user.email,password: "password" } }
+    post login_path, { session: { email: @non_admin_user.email, password: "password" } }
     delete logout_path
     follow_redirect!
     assert_select "a[href=?]", login_path, count: 1

@@ -1,7 +1,5 @@
 class StartItemsController < ApplicationController
 
-  before_filter :must_be_admin, only: [:create]
-
   # Show all start_items
   def index
     @start_items = StartItem.all
