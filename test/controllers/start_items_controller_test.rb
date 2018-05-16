@@ -7,14 +7,14 @@ class StartItemsControllerTest < ActionController::TestCase
   end
 
   test "likely racers shouldn't suggest a racer who is already registered" do
-    start_item = StartItem.new(racer_id: racers(:three).id, start_time: Time.now, end_time: Time.now, bib: 101, race_id: races(:four).id)
+    start_item = StartItem.new(racer_id: racers(:three).id, group: "ALL", start_time: Time.now, end_time: Time.now, bib: 101, race_id: races(:four).id)
     start_item.save
     likely_racers = @controller.get_likely_racers(races(:four).id)
-    assert_equal [racers(:four), racers(:one)], likely_racers
+    assert_equal [racers(:four), racers(:one)].sort, likely_racers.sort
   end
 
   test "destroying a start items destroys the record and returns to the race" do
-    start_item = StartItem.new(racer_id: racers(:three).id, start_time: Time.now, end_time: Time.now, bib: 101, race_id: races(:four).id)
+    start_item = StartItem.new(racer_id: racers(:three).id, group: "ALL", start_time: Time.now, end_time: Time.now, bib: 101, race_id: races(:four).id)
     start_item.destroy
     assert start_item.destroyed?
     assert_response 200
