@@ -23,7 +23,7 @@ function addLikelyRacersListener() {
 function runAutocompleteDance() {
   "use strict";
   var racerIdHiddenDiv = document.getElementById("racer_id_hidden");
-  var racerIdDiv = racerIdHiddenDiv.parentNode.childNodes[0].nextSibling;
+  var racerIdDiv = document.getElementById("start_item_racer_id");
   if (racerIdHiddenDiv && racerIdDiv) {
     $("#" + racerIdDiv.id).bind("railsAutocomplete.select", function(event, data) {
       racerIdDiv.value = data.item.label;
