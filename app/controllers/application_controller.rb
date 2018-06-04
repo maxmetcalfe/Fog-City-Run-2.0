@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_racer
-    @current_racer = Racer.find(current_user)
+    @current_racer = Racer.find(current_user.racer_id)
   end
 
   def destroy
