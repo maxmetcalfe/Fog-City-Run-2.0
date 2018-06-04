@@ -27,7 +27,7 @@
         <td><%= link_to race.date, race_path(race) %></td>
         <td><%= StartItem.where(race_id: race.id).count %></td>
         <% if current_user and current_user.racer_id %>
-        <td><%= link_to 'Register', new_start_item_path(:race_id => race.id, :racer_id => current_user.racer_id), :class => "btn btn-default btn-xs" %></td>
+        <td><%= link_to 'Register', new_start_item_path(:race_id => race.id, :racer_id => current_racer.id, :racer_name => current_racer.first_name + " " + current_racer.last_name), :class => "btn btn-default btn-xs" %></td>
         <% end %>
         <% if current_user and current_user.admin? %>
         <td><%= link_to 'Edit', race_path(race), :class => 'btn btn-default btn-xs' %> <%= link_to 'Destroy',

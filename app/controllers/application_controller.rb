@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
+  def current_racer
+    @current_racer = Racer.find(current_user)
+  end
+
   def destroy
     log_out if logged_in?
     redirect_to root_url
@@ -95,5 +99,6 @@ class ApplicationController < ActionController::Base
   private
 
   helper_method :current_user
+  helper_method :current_racer
 
 end
