@@ -23,7 +23,7 @@ module SessionsHelper
   def remember(user)
     user.remember
     cookies.permanent.signed[:user_id] = user.id
-    cookies.permanent[:remember_token] = { :value => user.remember_token, :expires => 6.months.from_now }
+    cookies.permanent[:remember_token] = user.remember_token
   end
   
   # Returns the current logged-in user (if any).
