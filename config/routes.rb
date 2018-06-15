@@ -52,5 +52,6 @@ Rails.application.routes.draw do
   put 'races/:id/enable' => 'races#enable_race', :as => 'enable_race'
   post 'start_items/:id/collect_time' => 'start_items#collect_time', :as => 'collect_time'
   post 'start_items/:id/continue_time' => 'start_items#continue_time', :as => 'continue_time'
+  post 'racers/:id/refresh_streak' => 'racers#refresh_streak', :as => 'refresh_streak'
 
 end

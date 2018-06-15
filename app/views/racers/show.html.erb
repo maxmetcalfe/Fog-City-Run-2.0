@@ -38,7 +38,12 @@
     <h6 style="color:#f6b417"><%= @current_streak_for_view %></h6>
     <h3 style="color:red">Longest: <%= @racer.longest_streak.to_s %></h3>
     <h6 style="color:red"><%= @longest_streak_for_view %></h6>
-    <h6 style="color:rgb(220,220,220)"><%= @racer.updated_at%></h6>
+    <td>Wrong? Manually refresh streak info here 👉🏻
+      <%= link_to refresh_streak_path(@racer), method: :post do %>
+        <i class="fa fa-refresh fa-1x"></i>
+      <% end %>
+    </td>
+    <h6 style="color:rgb(220,220,220)">Last Updated: <%= @racer.updated_at%></h6>
     </div>
     </div>
     </div>

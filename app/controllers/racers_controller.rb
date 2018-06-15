@@ -1,3 +1,5 @@
+require "#{Rails.root}/lib/utils"
+
 class RacersController < ApplicationController
 
   before_filter :must_be_admin, only: [:edit]
@@ -88,6 +90,13 @@ class RacersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  # Manually run update_streak_calendar() for a particular racer
+  def refresh_streak
+    racer = Racer.find(params[:id])
+    update_streak_calendar(racer)
+    redirect_to :back
   end
 
   # Permit parameters when creating article
