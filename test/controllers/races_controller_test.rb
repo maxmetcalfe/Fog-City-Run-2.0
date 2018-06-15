@@ -14,6 +14,23 @@ class RacesControllerTest < ActionController::TestCase
     assert_equal 0, race.results.count
   end
 
+  test "races in the future appear as upcoming races" do
+    race = Race.new(date: Date.today.next_day(1))
+    race.save
+    get :index
+    # The headers for both tables are present.
+    assert_select "h2", "Upcoming Races"
+    assert_select "h2", "Past Races"
+    # The upcoming race exists only once across both tables
+    assert_select "a[href=?]", race_path(race), 1
+    # The upcoming race exists in the upcoming race table.
+    assert_select "table:first-of-type" do
+      assert_select "tr" do
+        assert_select "td:nth-child(1)", race.date.to_s
+      end
+    end
+  end
+
   test "race search returns expected races from query string - single result" do
     get :index, :search => "2017-05-31"
     assert_select "a[href=?]", race_path(races(:one))

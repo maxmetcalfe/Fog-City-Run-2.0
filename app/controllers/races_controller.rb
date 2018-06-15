@@ -9,7 +9,7 @@
     if params[:search]
       @races = Race.search(params[:search])
     end
-    @races_to_show = @races.order("date DESC")
+    @races_to_show = @races.where("date < ?", Date.today).order("date DESC")
     @upcoming_races_to_show = @races.where("date >= ?", Date.today).order("date DESC")
   end
 
