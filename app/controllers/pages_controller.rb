@@ -12,8 +12,8 @@ class PagesController < ApplicationController
       'FROM results '\
       'LEFT JOIN races on (results.race_id = races.id) '\
       'GROUP BY races.date) as p '\
-      'GROUP BY extract(year from p.date) '\
-      'ORDER by average_count DESC;'
+      'GROUP BY extract(year from p.date)'\
+      'ORDER by extract(year from p.date) DESC;'
     @output = connection.exec_query(query)
     # @racer_count_series = Racer.first.results.joins(:race).where(group_name: "ALL").map {|result| [Race.find(result.race_id).date, to_seconds(result.time)] }
     @racer_count_series = gather_racer_count_series
