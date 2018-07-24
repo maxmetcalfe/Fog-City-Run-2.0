@@ -71,7 +71,7 @@ class RacersController < ApplicationController
     next_race = Race.where("date >= ?", Date.today).first
     if @racer.save && next_race
       full_name = @racer.first_name + " "+ @racer.last_name
-      redirect_to new_start_item_path(:race_id => next_race.id, :racer => full_name)
+      redirect_to new_start_item_path(:race_id => next_race.id, :racer_name => full_name, :racer_id => @racer.id)
     else
       render 'new'
     end
