@@ -45,3 +45,15 @@ def update_streak_calendar(racer)
   racer.update_attributes(attributes)
   return attributes
 end
+
+def get_next_day_of_week(day_of_week)
+  today_wday = Date.today.wday
+
+  if today_wday <= day_of_week
+    day = Date.today + (day_of_week - today_wday)
+  else
+    day = Date.today + (7 - today_wday) + day_of_week
+  end
+
+  return day
+end
