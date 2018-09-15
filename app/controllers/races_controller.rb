@@ -5,9 +5,9 @@
 
   # Show all races
   def index
-    @races = Race.all
+    @races = Race.paginate(:page => params[:page])
     if params[:search]
-      @races = Race.search(params[:search])
+      @races = Race.search(params[:search]).paginate(:page => params[:page])
     end
     @races_to_show = @races.where("date < ?", Date.today).order("date DESC")
     @upcoming_races_to_show = @races.where("date >= ?", Date.today).order("date DESC")
