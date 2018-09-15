@@ -4,7 +4,7 @@ require_relative "../utils"
 task :create_next_race => :environment do
   race_date = get_next_day_of_week(3)
   if !Race.exists?(date: race_date)
-    race = Race.new(date: race_date)
+    race = Race.new(date: race_date, state: "PLANNED")
     race.save!
     puts "Race auto-create - race created: " + race_date.to_s
   else
