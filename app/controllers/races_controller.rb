@@ -1,4 +1,4 @@
-  class RacesController < ApplicationController
+class RacesController < ApplicationController
 
   before_filter :must_be_admin, only: [:create]
   @races = Race.includes(:race)
@@ -104,10 +104,22 @@
     redirect_to @race
   end
 
-  # Save race and reca
+  # Save race
   def save_race
     race = Race.find(params[:id])
-    racer_ids = race.results.pluck(:racer_id)
+
+    # Update racer info for all racers in this race.
+    for result in race.results do
+      update_racer_info(result.racer)
+    end
+
+    # Update racer info for all racers in the second most recent race.
+    # This is to make sure racer who may be exiting a streak are updated accordingly.
+    previous_race = Race.order("date DESC").second
+    for result in previous_race.results do
+      update_racer_info(result.racer)
+    end
+
     race.update(state: 'FINISHED')
     redirect_to race
   end

@@ -4,7 +4,6 @@ class Result < ActiveRecord::Base
   belongs_to :racer
   belongs_to :race
   after_destroy :update_racer_info
-  after_save :update_racer_info
 
   validates :rank, presence: true
   validates :bib, presence: true
