@@ -1,6 +1,7 @@
 class Racer < ActiveRecord::Base
 
   has_many :results
+  has_many :start_items
   after_initialize :init
 
   def init

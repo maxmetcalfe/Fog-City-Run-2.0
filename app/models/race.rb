@@ -1,6 +1,7 @@
 class Race < ActiveRecord::Base
 
   has_many :results
+  has_many :start_items
 
   def self.search(search)
       where("cast(date as varchar) LIKE :search", search: "%#{search}%")
