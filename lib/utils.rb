@@ -1,4 +1,4 @@
-def update_racer_info()
+def update_racer_info(racer)
   racer = racer || Racer.find(self.racer_id)
   racer.update_attribute(:race_count, racer.results.count)
   racer.update_attribute(:fav_bib, racer.results.includes(:race).order("races.date DESC").pluck(:bib).first)
@@ -9,7 +9,7 @@ end
 def update_streak_calendar(racer)
   open_dates = []
   open_dates = open_dates.push '2013-01-16'.to_date
-  while open_dates[-1] < Date.today - 1.week
+  while open_dates[-1] <= Date.today - 1.week
     open_dates = open_dates.push open_dates[-1].advance(:weeks => 1)
   end
   races_run = racer.results.joins(:race).map {|result| Race.find(result.race_id).date }
