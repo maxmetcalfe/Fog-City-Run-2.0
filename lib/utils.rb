@@ -1,4 +1,4 @@
-def update_racer_info(racer)
+def update_racer_info(racer = nil)
   racer = racer || Racer.find(self.racer_id)
   racer.update_attribute(:race_count, racer.results.count)
   racer.update_attribute(:fav_bib, racer.results.includes(:race).order("races.date DESC").pluck(:bib).first)
