@@ -5,6 +5,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   def setup
     @admin_user = users(:marlin)
     @non_admin_user = users(:sophie)
+    @new_user = users(:edward)
   end
 
   test "login admin / racer associated user with valid information" do
@@ -42,5 +43,21 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     follow_redirect!
     assert_select "a[href=?]", login_path, count: 1
+  end
+
+  test "login with a non-activated user" do
+    get login_path
+    post login_path, { session: { email: @new_user.email, password: "password" } }
+    delete logout_path
+    follow_redirect!
+    assert_select ".alert-warning", "Account not activated. Check your email for the activation link."
+  end
+
+  test "login with incorrect username / password" do
+    get login_path
+    post login_path, { session: { email: @new_user.email, password: "wrong-password" } }
+    delete logout_path
+    follow_redirect!
+    assert_select ".alert-danger", "Invalid email/password combination"
   end
 end

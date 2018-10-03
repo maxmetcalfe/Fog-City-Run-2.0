@@ -26,3 +26,11 @@ fuzz:
   activated: true
   racer_id: 4
   activated_at: <%= Time.zone.now %>
+
+edward:
+  first_name: Edward
+  last_name: Dog
+  email: edwarddog@dogs.br
+  password_digest: <%= User.digest('password') %>
+  admin: false
+  activated: false
