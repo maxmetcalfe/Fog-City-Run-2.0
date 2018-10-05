@@ -57,7 +57,7 @@ class StartItemsController < ApplicationController
     if @start_item.update(start_item_params)
       redirect_to race_path(race)
     else
-      render race_path(race)
+      render 'edit'
     end
   end
 

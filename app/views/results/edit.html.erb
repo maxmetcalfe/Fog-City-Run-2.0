@@ -10,7 +10,7 @@
   </div>
   <%= form_for @result, :html => {:class => "form-horizontal "} do |r| %>
     <% if @result.errors.any? %>
-      <div class="error_-xplanation">
+      <div class="error-explanation">
         <ul>
           <% @result.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
