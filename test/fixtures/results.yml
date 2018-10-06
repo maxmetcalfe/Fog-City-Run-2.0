@@ -40,6 +40,7 @@ five:
   time: 00:34:00.0
 
 six:
+  id: 6
   rank: 200
   bib: 20
   racer_id: 4

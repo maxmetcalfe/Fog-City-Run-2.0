@@ -22,4 +22,25 @@ class ResultsControllerTest < ActionController::TestCase
     assert_equal 3, race.results.count
     assert_redirected_to race
   end
+
+  test "should update result" do
+    result = results(:six)
+    patch :update, id: result.id, result: { bib: 30, time: "00:11:00.0" }
+    updated_result = Result.find(result.id)
+    # Confirm the bib value is updated.
+    assert_equal 30, updated_result.bib
+    # Confirm the time has been updated.
+    assert_equal "00:11:00.0", updated_result.time
+    # Confirm the rank has been updated (via validate_ranks()).
+    assert_equal 1, updated_result.rank
+    assert_redirected_to races(:one)
+  end
+
+  test "invalid result update should redirect to result form" do
+    result = results(:six)
+    patch :update, id: result.id, result: { racer_id: 0 }
+    updated_result = Result.find(result.id)
+    assert_template :edit
+    assert_select ".error-explanation", "Racer does not exist."
+  end
 end
