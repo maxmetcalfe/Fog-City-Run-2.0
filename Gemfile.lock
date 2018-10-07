@@ -76,7 +76,7 @@ GEM
       execjs
       railties (>= 3.2)
     execjs (2.7.0)
-    ffi (1.9.18)
+    ffi (1.9.25)
     font-awesome-less (4.6.2)
       less (>= 2.4.0)
     font-awesome-rails (4.7.0.2)
