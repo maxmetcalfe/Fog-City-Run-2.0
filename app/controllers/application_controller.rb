@@ -72,15 +72,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Check if the current user is registered
-  def is_current_user_registered(race_id)
-    if current_user and StartItem.where(:race_id => race_id).pluck(:racer_id).include? current_user.racer_id
-      return true
-    else
-      return false
-    end
-  end
-
   # Continue timing a result by toggling the start item, found by racer_id and racer_id.
   def continue_time
     result = Result.find(params[:id])
