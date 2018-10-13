@@ -43,4 +43,17 @@ class ResultsControllerTest < ActionController::TestCase
     assert_template :edit
     assert_select ".error-explanation", "Racer does not exist."
   end
+
+  test "should create result" do
+    put :create, result: { bib: 100, racer_id: 4, group_name: "ALL", time: "00:25:00.0", race_id: 1 }
+    result = Result.order("created_at").last
+    assert_equal 100, result.bib
+    assert_equal "00:25:00.0", result.time
+    assert_redirected_to races(:one)
+  end
+
+  test "invalid result create should redirect to result form" do
+    put :create, result: { bib: 40, racer_id: 0, group_name: "ALL", time: "00:25:00.0", race_id: 1 }
+    assert_template :new
+  end
 end

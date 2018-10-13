@@ -21,7 +21,7 @@
     <div class="form-group">
       <%= r.label :bib, "Bib:", class: "col-md-1 control-label" %>
         <div class="col-md-3">
-          <%= r.text_field :bib, class: "form-control", :value => Result.where(:race_id => params[:race_id]).maximum(:bib) + 1 %>
+          <%= r.text_field :bib, class: "form-control" %>
         </div>
     </div>
     <div class="form-group">
