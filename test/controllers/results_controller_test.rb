@@ -38,6 +38,7 @@ class ResultsControllerTest < ActionController::TestCase
 
   test "invalid result update should redirect to result form" do
     result = results(:six)
+    # racer_id: 0 - this racer does not exist.
     patch :update, id: result.id, result: { racer_id: 0 }
     updated_result = Result.find(result.id)
     assert_template :edit
@@ -53,6 +54,7 @@ class ResultsControllerTest < ActionController::TestCase
   end
 
   test "invalid result create should redirect to result form" do
+    # racer_id: 0 - this racer does not exist.
     put :create, result: { bib: 40, racer_id: 0, group_name: "ALL", time: "00:25:00.0", race_id: 1 }
     assert_template :new
   end

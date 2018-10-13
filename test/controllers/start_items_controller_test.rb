@@ -38,4 +38,18 @@ class StartItemsControllerTest < ActionController::TestCase
     assert_equal racers(:three), result[0].racer
     assert_equal races(:four), result[0].race
   end
+
+  test "should create start item" do
+    put :create, start_item: { bib: 101, racer_id: 4, group: "ALL", start_time: Time.now, end_time: Time.now, race_id: 1 }
+    start_item = StartItem.order("created_at").last
+    assert_equal 101, start_item.bib
+    assert_equal 1, start_item.race_id
+    assert_redirected_to races(:one)
+  end
+
+  test "invalid start item should redirect to start item form" do
+    # racer_id: 0 - this racer does not exist.
+    put :create, start_item: { bib: 101, racer_id: 0, group: "ALL", start_time: Time.now, end_time: Time.now, race_id: 1 }
+    assert_template :new
+  end
 end
