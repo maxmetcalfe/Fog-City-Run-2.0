@@ -68,13 +68,10 @@ class StartItemsController < ApplicationController
     @race = Race.find(@start_item.race_id)
     finish_time = from_seconds(@start_item.end_time - @start_item.start_time)
     existing_result = Result.where(:racer_id => @start_item.racer_id, :race_id => @start_item.race_id)
-
     if existing_result.length == 1
       to_edit = existing_result.first
       to_edit.update(time: finish_time)
       to_edit.save!
-    elsif existing_result.length > 1
-      puts "ERROR: We have multiple results for the same racer for this race."
     else
       result = Result.create(:rank => 0, :group_name => @start_item.group, :bib => @start_item.bib, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
       result.save!
