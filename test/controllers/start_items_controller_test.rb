@@ -14,10 +14,11 @@ class StartItemsControllerTest < ActionController::TestCase
   end
 
   test "destroying a start items destroys the record and returns to the race" do
-    start_item = StartItem.new(racer_id: racers(:three).id, group: "ALL", start_time: Time.now, end_time: Time.now, bib: 101, race_id: races(:four).id)
-    start_item.destroy
-    assert start_item.destroyed?
-    assert_response 200
+    start_item = start_items(:two)
+    delete :destroy, id: start_item.id
+    race = Race.find(start_item.race_id)
+    assert_equal 1, race.start_items.count
+    assert_redirected_to race
   end
 
   test "collect_time creates a result that matches the start item" do
@@ -37,6 +38,24 @@ class StartItemsControllerTest < ActionController::TestCase
     assert_equal "00:00:00.0", result[0].time
     assert_equal racers(:three), result[0].racer
     assert_equal races(:four), result[0].race
+  end
+
+  test "should update start item" do
+    start_item = start_items(:two)
+    patch :update, id: start_item.id, start_item: { bib: 2 }
+    updated_start_item = StartItem.find(start_item.id)
+    # Confirm the bib value is updated.
+    assert_equal 2, updated_start_item.bib
+    assert_redirected_to races(:one)
+  end
+
+  test "invalid result update should redirect to result form" do
+    start_item = start_items(:two)
+    # racer_id: 0 - this racer does not exist.
+    patch :update, id: start_item.id, start_item: { racer_id: 0 }
+    updated_start_item = StartItem.find(start_item.id)
+    assert_template :edit
+    assert_select ".error-explanation", "Racer does not exist."
   end
 
   test "should create start item" do

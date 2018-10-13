@@ -30,7 +30,7 @@ class StartItemsController < ApplicationController
     @race = Race.find(@start_item.race_id)
     existing_start_item = StartItem.where(:racer_id => @start_item.racer_id, :race_id => @start_item.race_id)
   
-    if existing_start_item == 1
+    if existing_start_item.length == 1
       to_edit = existing_start_item.first
       to_edit.update(bib: start_item_params[:bib], group: start_item_params[:group])
       to_edit.save
