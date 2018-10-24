@@ -7,34 +7,35 @@ def update_racer_info(racer = nil)
 end
 
 def update_streak_calendar(racer)
-  open_dates = []
-  open_dates = open_dates.push '2013-01-16'.to_date
-  while open_dates[-1] <= Date.today - 1.week
-    open_dates = open_dates.push open_dates[-1].advance(:weeks => 1)
-  end
-  races_run = racer.results.joins(:race).map {|result| Race.find(result.race_id).date }
-  longest_streak_count = 0
-  longest_streak = []
-  current_streak_count = 0
+  races = racer.results.includes(:race).order("races.date").map {|result| result.race.date }
+
+  streak = []
   current_streak = []
-  for o in open_dates
-    found = 0
-    for r in races_run
-      if o == r
-        current_streak = current_streak.push r
-        if current_streak.length > longest_streak_count
-          longest_streak_count = current_streak.length
-          longest_streak = current_streak
-        end
-        found = 1
-        if open_dates[-1] == current_streak[-1]
-          current_streak_count = current_streak.length
-        end
-      end
+  longest_streak = []
+
+  current_race = races[0]
+
+  for race in races
+
+    # Check if this race is a consecutive race.
+    if (race - current_race).to_i <= 7
+      streak.push race
+    else
+      streak = [race]
     end
-    if found == 0
-      current_streak = []
+
+    # Check if the streak is the longest streak.
+    if streak.length > longest_streak.length
+      longest_streak = streak
     end
+
+    # Check if the streak is the current streak.
+    diff = (Date.today - streak[-1]).to_i
+    if diff >= 0 && diff < 7
+      current_streak = streak
+    end
+
+    current_race = race
   end
   attributes = {
     :longest_streak => longest_streak.length,
