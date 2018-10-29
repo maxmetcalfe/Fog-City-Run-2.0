@@ -12,10 +12,15 @@ def update_streak_calendar(racer)
   streak = []
   current_streak = []
   longest_streak = []
+  count_data = { name: racer.first_name + " " + racer.last_name[0] + ".", data: []}
+  count = 0
 
   current_race = races[0]
 
   for race in races
+
+    count_data[:data].push([race.to_s, count + 1])
+    count = count + 1
 
     # Check if this race is a consecutive race.
     if (race - current_race).to_i <= 7
@@ -37,11 +42,13 @@ def update_streak_calendar(racer)
 
     current_race = race
   end
+
   attributes = {
     :longest_streak => longest_streak.length,
     :current_streak => current_streak.length,
     :longest_streak_array => longest_streak,
-    :current_streak_array => current_streak
+    :current_streak_array => current_streak,
+    :count_data => count_data
   }
   racer.update_attributes(attributes)
   return attributes

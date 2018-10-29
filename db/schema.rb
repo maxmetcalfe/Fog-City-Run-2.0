@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180210032337) do
+ActiveRecord::Schema.define(version: 20181029022730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20180210032337) do
     t.integer  "fav_bib"
     t.text     "current_streak_array", default: [],              array: true
     t.text     "longest_streak_array", default: [],              array: true
+    t.text     "count_data",           default: ""
   end
 
   create_table "races", force: :cascade do |t|
