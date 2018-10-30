@@ -12,14 +12,14 @@ def update_streak_calendar(racer)
   streak = []
   current_streak = []
   longest_streak = []
-  count_data = { name: racer.first_name + " " + racer.last_name[0] + ".", data: []}
+  count_data = []
   count = 0
 
   current_race = races[0]
 
   for race in races
 
-    count_data[:data].push([race.to_s, count + 1])
+    count_data.push([race.to_s, count + 1])
     count = count + 1
 
     # Check if this race is a consecutive race.

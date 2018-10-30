@@ -61,16 +61,13 @@ class UtilsTest < ActiveSupport::TestCase
 
   test "update_streak_calendar() returns the expected count data" do
     attributes = update_streak_calendar(racers(:one))
-    assert_equal "Max M.", attributes[:count_data][:name]
-    assert_equal "[[Wed, 31 May 2017, 1], [Wed, 07 Jun 2017, 2], [Wed, 11 Oct 2017, 3]]", attributes[:count_data][:data].to_s
+    assert_equal '''[["2017-05-31", 1], ["2017-06-07", 2], ["2017-10-11", 3]]''', attributes[:count_data].to_s
 
     attributes = update_streak_calendar(racers(:two))
-    assert_equal "Julia M.", attributes[:count_data][:name]
-    assert_equal "[]", attributes[:count_data][:data].to_s
+    assert_equal "[]", attributes[:count_data].to_s
 
     attributes = update_streak_calendar(racers(:three))
-    assert_equal "Gameof T.", attributes[:count_data][:name]
-    assert_equal "[[Wed, 31 May 2017, 1], [Wed, 11 Oct 2017, 2]]", attributes[:count_data][:data].to_s
+    assert_equal '''[["2017-05-31", 1], ["2017-10-11", 2]]''', attributes[:count_data].to_s
   end
 
 end
