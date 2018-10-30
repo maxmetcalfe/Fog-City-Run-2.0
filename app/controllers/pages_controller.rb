@@ -25,7 +25,12 @@ class PagesController < ApplicationController
     @racer_count_series = []
 
     for r in Racer.where("race_count >= ?", filter)
-      @racer_count_series.push({ name: r.first_name[0] + ". " + r.last_name, data: JSON.parse(r.count_data) })
+      begin
+        json_data = JSON.parse(r.count_data)
+      rescue JSON::ParserError => e
+        puts "ERROR: failed to parse count_data for racer: " + r.id.to_s + " - " + r.first_name + " " + r.last_name
+      end
+      @racer_count_series.push({ name: r.first_name[0] + ". " + r.last_name, data: json_data })
     end
   end
 
