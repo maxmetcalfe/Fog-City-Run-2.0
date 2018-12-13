@@ -2,6 +2,8 @@ class PasswordResetsController < ApplicationController
   before_action :get_user,   only: [:edit, :update]
   before_action :valid_user, only: [:edit, :update]
 
+  include SessionsHelper
+
   def new
   end
 
