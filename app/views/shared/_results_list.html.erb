@@ -45,6 +45,7 @@
         </div>
       <% elsif current_user and current_user.admin? and !@race_in_progess and !@is_current_race %>
         <div class="row text-center">
+          <%= link_to 'Send Email', send_results_email_path(:race_id => @race), :class => "btn btn-default" %>
           <%= link_to 'Enable Race', enable_race_path(), method: :put, :class => "btn btn-default" %>
         </div>
       <% end %>
