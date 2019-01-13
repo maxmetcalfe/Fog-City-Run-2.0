@@ -6,7 +6,14 @@ function addLikelyRacersListener() {
     var likelyTable = document.getElementById("likely-table");
     if (likelyTable) {
         likelyTable.addEventListener("click", function(event) {
-            var row = likelyTable.rows[event.target.parentNode.rowIndex];
+            var rowIndex = event.target.parentNode.rowIndex;
+
+            // A click on the header shouldn't do anything.
+            if (rowIndex === 0) {
+                return;
+            }
+
+            var row = likelyTable.rows[rowIndex];
             var id = row.cells[0].textContent;
             var name = row.cells[1].textContent;
             var bib = row.cells[2].textContent;
