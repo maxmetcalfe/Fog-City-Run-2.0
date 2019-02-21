@@ -20,9 +20,9 @@
           <% if @likely_racers && @likely_racers.any? %>
             <% @likely_racers.each do |racer| %>
               <tr>
-                <td><%= racer.id %> </td>
-                <td><%= racer.first_name %> <%= racer.last_name %> </td>
-                <td><%= racer.fav_bib %> </td>
+                <td><%= racer.id %></td>
+                <td><%= racer.first_name %> <%= racer.last_name %></td>
+                <td><%= racer.fav_bib %></td>
               </tr>
             <% end %>
           <% end %>

@@ -14,9 +14,9 @@ function addLikelyRacersListener() {
             }
 
             var row = likelyTable.rows[rowIndex];
-            var id = row.cells[0].textContent;
+            var id = row.cells[0].textContent.trim();
             var name = row.cells[1].textContent;
-            var bib = row.cells[2].textContent;
+            var bib = row.cells[2].textContent.trim();
             var racerField = document.getElementById("start_item_racer_id");
             var racerIdHiddenDiv = document.getElementById("racer_id_hidden");
             racerField.value = name;
