@@ -94,7 +94,7 @@
           <% @results.select{|result| result.group_name != "Loop-Beer"}.each do |result| %>
             <tr>
               <td><%= link_to result.race.date, race_path(result.race) %></td>
-              <td><%= result.time %></td>
+              <%= render "shared/result_td", { result: result } %>
             </tr>
           <% end %>
           </tbody>
@@ -102,7 +102,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       <div class="panel panel-default">
         <div class="panel-heading">Loop-Beer Runs</div>
         <div class="panel-body">
@@ -118,7 +118,7 @@
             <% @results.select{|result| result.group_name == "Loop-Beer"}.each do |result| %>
               <tr>
                 <td><%= link_to result.race.date, race_path(result.race) %></td>
-                <td><%= result.time %></td>
+                <%= render "shared/result_td", { result: result } %>
               </tr>
             <% end %>
             </tbody>
