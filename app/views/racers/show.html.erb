@@ -88,13 +88,15 @@
           <tr>
             <th>Date</th>
             <th>Time</th>
+            <th>Rank</th>
           </tr>
           </thead>
           <tbody>
           <% @results.select{|result| result.group_name != "Loop-Beer"}.each do |result| %>
             <tr>
               <td><%= link_to result.race.date, race_path(result.race) %></td>
-              <%= render "shared/result_td", { result: result } %>
+              <td><%= result.time %></td>
+              <td><%= result.rank %></td>
             </tr>
           <% end %>
           </tbody>
@@ -112,13 +114,15 @@
             <tr>
               <th>Date</th>
               <th>Time</th>
+              <th>Rank</th>
             </tr>
             </thead>
             <tbody>
             <% @results.select{|result| result.group_name == "Loop-Beer"}.each do |result| %>
               <tr>
                 <td><%= link_to result.race.date, race_path(result.race) %></td>
-                <%= render "shared/result_td", { result: result } %>
+                <td><%= result.time %></td>
+                <td><%= result.rank %></td>
               </tr>
             <% end %>
             </tbody>
