@@ -40,6 +40,13 @@ class StartItemsControllerTest < ActionController::TestCase
     assert_equal races(:four), result[0].race
   end
 
+  test "a start item created after a race has begun should use the start time of the first start item" do
+    races(:one).update_attributes(state: 'IN_PROGRESS')
+    put :create, start_item: { racer_id: racers(:three).id, group: "ALL", start_time: Time.now, end_time: Time.now, bib: 56, race_id: races(:one).id }
+    assert_equal start_items(:one).start_time, StartItem.order("created_at").last.start_time
+    assert_redirected_to races(:one)
+  end
+
   test "should update start item" do
     start_item = start_items(:two)
     patch :update, id: start_item.id, start_item: { bib: 2 }

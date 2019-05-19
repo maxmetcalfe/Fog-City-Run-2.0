@@ -26,10 +26,18 @@ class StartItemsController < ApplicationController
   # Create start_item
   def create
     @start_item = StartItem.new(start_item_params)
-    @start_item.start_time = DateTime.now
     @race = Race.find(@start_item.race_id)
+
+    # If the race is already in progress, set the start time to equal that
+    # of the first start_item
+    if @race.state == "IN_PROGRESS"
+      @start_item.start_time = @race.start_items.first.start_time
+    else
+      @start_item.start_time = DateTime.now
+    end
+
     existing_start_item = StartItem.where(:racer_id => @start_item.racer_id, :race_id => @start_item.race_id)
-  
+
     if existing_start_item.length == 1
       to_edit = existing_start_item.first
       to_edit.update(bib: start_item_params[:bib], group: start_item_params[:group])
