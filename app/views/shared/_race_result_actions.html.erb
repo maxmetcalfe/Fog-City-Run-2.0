@@ -1,0 +1,12 @@
+<% if current_user and current_user.admin? %>
+  <div class="row text-center">
+    <% if !@race_in_progess and @is_current_race %>
+      <%= link_to 'New Result', new_result_path(:race_id => @race.id), :class => "btn btn-default" %>
+      <%= link_to 'Save Race', save_race_path(), method: :put, :class => "btn btn-default" %>
+    <% end %>
+  <% if !@race_in_progess and !@is_current_race %>
+    <%= link_to 'Enable Race', enable_race_path(), method: :put, :class => "btn btn-default" %>
+    <%= link_to 'Send Email', send_results_email_path(:race_id => @race), :class => "btn btn-default" %>
+  <% end %>
+  </div>
+<% end %>
