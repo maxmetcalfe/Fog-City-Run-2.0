@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get '/loop_beer' => 'pages#loop_beer'
   get '/safety' => 'pages#safety'
   get '/singup' => 'sessions#new'
+  get '/rungo' => 'pages#rungo'
   get '/login' => 'sessions#new'
   get '/shop' => 'pages#shop'
   get 'password_resets/new'
