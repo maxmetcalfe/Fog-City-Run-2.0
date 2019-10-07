@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_filter :must_be_admin
+
   # Show all users
   def index
     @users = User.all
