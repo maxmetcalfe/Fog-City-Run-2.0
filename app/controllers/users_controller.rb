@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :must_be_admin, only: [:edit, :destroy]
+  before_filter :must_be_admin, only: [:destroy]
 
   # Show all users
   def index
