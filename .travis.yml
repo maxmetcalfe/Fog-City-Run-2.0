@@ -11,6 +11,8 @@ notifications:
     on_failure: always
 before_script:
 - psql -c 'create database travis_ci_test;' -U postgres
+before_install:
+  - bundle update --bundler
 script: bundle exec rake test
 deploy:
   provider: heroku
