@@ -27,10 +27,10 @@ function addLikelyRacersListener() {
     }
 }
 
-function runAutocompleteDance() {
+function runAutocompleteDance(racerIdElementId) {
   "use strict";
   var racerIdHiddenDiv = document.getElementById("racer_id_hidden");
-  var racerIdDiv = document.getElementById("start_item_racer_id");
+  var racerIdDiv = document.getElementById(racerIdElementId);
   if (racerIdHiddenDiv && racerIdDiv) {
     $("#" + racerIdDiv.id).bind("railsAutocomplete.select", function(event, data) {
       racerIdDiv.value = data.item.label;
