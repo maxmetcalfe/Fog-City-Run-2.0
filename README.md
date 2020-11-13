@@ -7,7 +7,6 @@
 This is a new version (2.0) of the Fog City Run website.
 
 Prod: https://fogcityrun.com
-Staging: https://fogcityrun-dev.herokuapp.com
 
 ## Linting ##
 
