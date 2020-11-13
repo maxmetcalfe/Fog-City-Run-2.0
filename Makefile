@@ -1,7 +1,7 @@
 .PHONY: dev db-remote test lint
 
 dev:
-	rails server
+	bin/rails server
 
 db-remote:
 	echo "Capturing Heroku db..."
