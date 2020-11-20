@@ -42,6 +42,7 @@ class StartItemsController < ApplicationController
       to_edit = existing_start_item.first
       to_edit.update(bib: start_item_params[:bib], group: start_item_params[:group])
       to_edit.save
+      redirect_to race_path(@race)
     else
       if @start_item.save
         redirect_to race_path(@race)
