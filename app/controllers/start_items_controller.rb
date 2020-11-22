@@ -104,9 +104,9 @@ class StartItemsController < ApplicationController
   def get_likely_racers(race_id)
     already_registered = StartItem.where(:race_id => race_id).pluck(:racer_id)
     if already_registered.length > 0
-      likely_racers = Racer.where(["current_streak > ? AND id not in (?)", 1, already_registered]).order(race_count: :desc).first(20)
+      likely_racers = Racer.where(["(race_count > ? OR current_streak > ?) AND id not in (?)", 20, 0, already_registered]).order("current_streak DESC, race_count DESC").first(20)
     else
-      likely_racers = Racer.where(["current_streak > ?", 1]).order(race_count: :desc).first(20)
+      likely_racers = Racer.where(["race_count > ? OR current_streak > ?", 20, 0]).order("current_streak DESC, race_count DESC").first(20)
     end
     return likely_racers
   end

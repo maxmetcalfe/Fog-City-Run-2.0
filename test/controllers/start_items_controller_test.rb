@@ -3,14 +3,14 @@ require 'test_helper'
 class StartItemsControllerTest < ActionController::TestCase
   test "likely racers matches expected result" do
     likely_racers = @controller.get_likely_racers(races(:four).id)
-    assert_equal [racers(:one)], likely_racers
+    assert_equal [racers(:one), racers(:three), racers(:four)], likely_racers
   end
 
   test "likely racers shouldn't suggest a racer who is already registered" do
     start_item = StartItem.new(racer_id: racers(:three).id, group: "ALL", start_time: Time.now, end_time: Time.now, bib: 101, race_id: races(:four).id)
     start_item.save
     likely_racers = @controller.get_likely_racers(races(:four).id)
-    assert_equal [racers(:one)], likely_racers.sort
+    assert_equal [racers(:one), racers(:four)], likely_racers.sort
   end
 
   test "destroying a start items destroys the record and returns to the race" do
