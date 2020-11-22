@@ -9,7 +9,7 @@ class RacersController < ApplicationController
     racers = Racer.where(
         'LOWER(first_name) LIKE LOWER(?) OR LOWER(last_name) LIKE LOWER(?)',
         "%#{term}%", "%#{term}%"
-        ).order(:id).all
+      ).order(:race_count).reverse_order
     respond_to do |format|
       format.html
       format.json {
