@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-3">
       <div class="race-note">
-        <% if @race.note %>
+        <% if @race.note.present? %>
           <%= link_to @race.note, edit_race_path(@race) %>
         <% else %>
           <%= link_to 'add note', edit_race_path(@race) %>
