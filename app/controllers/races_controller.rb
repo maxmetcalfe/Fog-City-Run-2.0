@@ -155,6 +155,6 @@ class RacesController < ApplicationController
   private
 
   def race_params
-    params.require(:race).permit(:date)
+    params.require(:race).permit(:date, :note)
   end
 end

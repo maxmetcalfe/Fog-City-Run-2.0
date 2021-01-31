@@ -1,9 +1,33 @@
 <head>
-  <title>New Race</title>
+  <title>Update Race</title>
   <%= render "shared/navbar_races" %>
 </head>
-<h1>New Race</h1>
- 
-<%= render 'form' %>
- 
-<%= link_to 'Back', results_path %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <h2> Edit Race </h2>
+    </div>
+  </div>
+  <% if @race.errors.any? %>
+    <div class="error-explanation">
+      <ul>
+      <% @race.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form_for @race, :html => {:class => "form-horizontal "} do |r| %>
+    <div class="form-group">
+      <%= r.label :note, "Note:", class: "col-md-1 control-label" %>
+        <div class="col-md-3">
+          <%= r.text_field :note, class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-1 col-md-offset-1">
+      <%=button_tag "Update", class: "btn btn-success"%>
+      </div>
+    </div>
+  <% end %>
+</div>

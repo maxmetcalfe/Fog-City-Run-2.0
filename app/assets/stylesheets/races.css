@@ -21,3 +21,26 @@
     padding: 10px 15px;
     margin: -10px -15px;
 }
+
+.race-note {
+  border-radius: 5px;
+  display: inline-block;
+  background-color: rgb(245, 205, 89);
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  color: rgb(121, 82, 12);
+}
+
+td > div.race-note {
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+.race-note a {
+  color: rgb(121, 82, 12);
+  margin-bottom: 10px;
+}
+
+.race-note a:hover {
+  text-decoration: none
+}

@@ -7,6 +7,13 @@
   <% if @is_current_race %>
     <%= render "shared/timer" %>
   <% end %>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="race-note">
+        <%= link_to @race.note, edit_race_path(@race) %>
+      </div>
+    </div>
+  </div>
   <%= render "shared/start_list" %>
   <%= render "shared/results_list" %>
 </div>
