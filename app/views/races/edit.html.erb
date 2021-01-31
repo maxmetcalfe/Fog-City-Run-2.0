@@ -19,6 +19,12 @@
   <% end %>
   <%= form_for @race, :html => {:class => "form-horizontal "} do |r| %>
     <div class="form-group">
+      <%= r.label :date, "Date:", class: "col-md-1 control-label" %>
+        <div class="col-md-3">
+          <%= r.date_field :date, class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
       <%= r.label :note, "Note:", class: "col-md-1 control-label" %>
         <div class="col-md-3">
           <%= r.text_field :note, class: "form-control" %>
