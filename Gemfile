@@ -27,6 +27,7 @@ gem 'eslint-rails'
 gem 'coveralls', require: false
 gem 'puma'
 gem 'scout_apm'
+gem "bugsnag", "~> 6.19"
 
 group :development, :test do
   gem 'byebug'
@@ -36,4 +37,3 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-
