@@ -1,6 +1,7 @@
 class RacesController < ApplicationController
 
-  before_filter :must_be_admin, only: [:create]
+  before_filter :must_be_admin
+
   @races = Race.includes(:race)
 
   # Show all races
