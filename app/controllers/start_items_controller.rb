@@ -7,7 +7,7 @@ class StartItemsController < ApplicationController
 
   # Show start_item by id
   def show
-    @start_item = StartItem.find(params[:id])
+    redirect_to races_path
   end
 
   # Delete start_item
