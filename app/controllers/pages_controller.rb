@@ -18,6 +18,8 @@ class PagesController < ApplicationController
 
     if params[:filter].nil?
       filter = 80
+    elsif !filter.is_a? Integer
+      filter =0
     else
       filter = params[:filter]
     end
