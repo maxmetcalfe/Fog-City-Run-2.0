@@ -18,6 +18,8 @@ class PagesController < ApplicationController
 
     if params[:filter].nil?
       filter = 80
+    elsif !filter.is_a? Integer
+      filter =0
     else
       filter = params[:filter]
     end
@@ -26,7 +28,9 @@ class PagesController < ApplicationController
 
     for r in Racer.where("race_count >= ?", filter)
       begin
-        json_data = JSON.parse(r.count_data)
+        if r.count_data
+          json_data = JSON.parse(r.count_data)
+        end
       rescue JSON::ParserError => e
         puts "ERROR: failed to parse count_data for racer: " + r.id.to_s + " - " + r.first_name + " " + r.last_name
       end
