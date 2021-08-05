@@ -17,7 +17,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'chartkick'
 gem 'bootstrap-sass', '>= 3.4.1'
 gem 'rails_12factor', group: :production
-gem 'bcrypt', '3.1.11'
+gem 'bcrypt', '3.1.12'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
