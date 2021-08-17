@@ -30,7 +30,6 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     @result.rank = 0
-    @result.id = Result.maximum(:id).next
 
     if @result.save
       validate_ranks(@result.race_id)
