@@ -81,7 +81,8 @@ class StartItemsController < ApplicationController
       to_edit.update(time: finish_time)
       to_edit.save!
     else
-      result = Result.create(:rank => 0, :group_name => @start_item.group, :bib => @start_item.bib, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
+      id = Result.maximum(:id).next
+      result = Result.create(:id => id, :rank => 0, :group_name => @start_item.group, :bib => @start_item.bib, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
       result.save!
     end
     validate_ranks(@race.id)
