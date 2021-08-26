@@ -1,21 +1,16 @@
 language: ruby
 rvm:
-- 2.5.8
+  - 2.5.8
 services:
-- postgresql
+  - postgresql
 notifications:
   email:
     recipients:
-    - runfogcity@gmail.com
+      - runfogcity@gmail.com
     on_success: always
     on_failure: always
 before_script:
-- psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database travis_ci_test;' -U postgres
 before_install:
-- bundle update --bundler
+  - bundle update --bundler
 script: bundle exec rake test
-deploy:
-  provider: heroku
-  app: fogcityrun
-  api_key:
-    secure: NBc3gfkzLRyuiQxiz8HKDwavVwEVE2jMPgZZEDVJqGlcqvT5ir8E+hHAb6xK3RAygc2y7j/jSnYjBCFcaLNVLmEBPzc4sU5Ky4IxSLCO4CkN1MJhYHlU5uwD8EK2idWDhtAdC15pfNQwDAD4jjEim/kIINoSxIzNzUzZ5CRL2CFJ+My4aqzeoHUdEMgQ6yNhJmnF4QDja2BevfyuIrkcdsuj2Avy38ntUr+XDHo/dZy4S8j3jApjt5MLhmr/FGEd8PjnIW7Qc9aha7UJLg5uuVjDhvXtE2EulORauvEGSAo+D/6CTmYPSSFiIU5ym2jApf3IbLeuEwafc4OboysDojaTKVOP9FS77hx1zd4Ksbt9eCvsr+SIhZzUFFiURSRD7QUgQp9azji9WZ6xFPJ3G2AaJTWCoMZK4dg62hTa7Axfrw46vFyss+irm08uVQKhGf8PtwRrvRxNqaTddWURle3lEN0HwZeI/2u1nLC4mQvc9ktVNWUeoDZoHw9iv3OncUwVtGTkZfhwa3yPwNGnTQ/seYmOF2IgfF88yP1UiSUUwfmXDkgxa32nFDb2ufnz2wluosBzKBFa0qg1dDkwhrWiLlozcXMNFjfBiXkPXnr+0d5h35E5ZeeguL3rOygqF1KyK3nsDRmLB5CZfLJoscnFMb24xHFXfkT3VMgD5VU=
