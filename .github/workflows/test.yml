@@ -11,13 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.6', '2.7', '3.0']
+        ruby-version: ['2.5.8']
     steps:
-    - uses: actions/checkout@v2
-    - name: Test
-    uses: ruby/setup-ruby@v1
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Install bundler
+      run: gem install bundler -v 1.17.3
+    - name: Install dependendies for build
+      run: bundle install
+    - name: Install dependencies for ${{ matrix.rails-version }}
+      run: bundle exec appraisal ${{ matrix.rails-version }} bundle install
     - name: Run tests
-      run: bundle exec rake
+      run: bundle exec appraisal ${{ matrix.rails-version }} rake
