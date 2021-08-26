@@ -19,11 +19,6 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-    - name: Install bundler
-      run: gem install bundler -v 1.17.3
-    - name: Install dependendies for build
-      run: bundle install
-    - name: Install dependencies for ${{ matrix.rails-version }}
-      run: bundle exec appraisal ${{ matrix.rails-version }} bundle install
+        bundler-cache: true
     - name: Run tests
       run: bundle exec appraisal ${{ matrix.rails-version }} rake
