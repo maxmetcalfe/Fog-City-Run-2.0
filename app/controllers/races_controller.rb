@@ -24,9 +24,11 @@ class RacesController < ApplicationController
     @start_items = StartItem.where(:race_id=>params[:id]).where(:finished=>false).order(:bib)
     @start_items_length = @start_items.length
     # Only show start items if race is current and if start items exist
-    if @start_items.length > 0 and is_current_race
+    if is_current_race
       @show_start_items = true
-      @start_time = @start_items[0].start_time.to_time.utc.to_i
+      if @start_items.length > 0
+        @start_time = @start_items[0].start_time.to_time.utc.to_i
+      end
     else
       @show_start_items = false
     end
