@@ -28,7 +28,7 @@
           <tr>
             <td><%= item.bib %></td>
             <td><%= item.group %></td>
-            <td><%= item.racer.first_name %> <%= item.racer.last_name %></td>
+            <td><%= link_to item.racer.first_name + ' ' + item.racer.last_name, racer_path(item.racer)%></td>
             <% if (current_user and current_user.racer_id == item.racer_id) or (current_user and current_user.admin?) %>
               <% if @race_in_progess and !item.finished %>
                 <td><%= link_to 'Stop', collect_time_path(item), method: :post, :id => "stop-button", :remote => true, :class => "btn btn-default" %></td>
