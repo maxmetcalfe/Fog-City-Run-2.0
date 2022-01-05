@@ -29,6 +29,7 @@ class ResultsController < ApplicationController
 
   def create
     @result = Result.new(result_params)
+    @result.id = Result.maximum(:id).next
     @result.rank = 0
 
     if @result.save
