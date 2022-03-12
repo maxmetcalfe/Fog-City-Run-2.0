@@ -37,7 +37,7 @@ class RacersController < ApplicationController
       @current_streak_for_view = "(" + @racer.current_streak_array[0].to_s + " through " + @racer.current_streak_array[-1].to_s + ")"
     end
     @results = @racer.results.includes(:race).order("races.date desc")
-    @racer_data = @results.map {|result| {:date => result.race.date, :time => to_seconds(result.time), :group_name => result.group_name } }.to_json.html_safe
+    @racer_data = @results.select{|result| result.group_name != "Loop-Beer"}.map {|result| {:date => result.race.date, :time => to_seconds(result.time), :group_name => result.group_name } }.to_json.html_safe
     if current_user
     @user_order = Order.where(:user_id => current_user.id).first
     end
