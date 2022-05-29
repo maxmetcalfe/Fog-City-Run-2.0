@@ -67,12 +67,12 @@
         var state = element.data('state');
         var txt = element.text();
 
-        console.log(element.addClass("btn-danger countdown"));
+        element.addClass("btn-danger countdown");
         if (!state) {
             element.data('state', 'last');
 
-            var count = 3
-            var countTo = 1;
+            var count = 10
+            var countTo = 0;
 
             element.text(count);
 
@@ -80,16 +80,13 @@
               count--;
               element.text(count);
 
-              if (count < countTo) {
+              if (count <= countTo) {
                 element.text("Go!");
                 element.data('state', null);
                 $.rails.handleMethod(element);
                 clearInterval(interval);
               }
             }, 1000);
-            setTimeout(function()
-            {
-            }, 2000);
             return false;
         } else {
             return true;
