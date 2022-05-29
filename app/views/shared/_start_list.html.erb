@@ -50,7 +50,7 @@
           <%= link_to 'Register Racer', new_start_item_path(:race_id => @race.id), :class => "btn btn-default" %>
         <% end %>
         <% if current_user and current_user.admin? and !@race_in_progess and @is_current_race %>
-          <%= link_to 'Start', start_race_path(), method: :put, :class => "btn btn-default" %>
+          <%= link_to 'Start', start_race_path(), data: { confirm: 'start-race'}, id: "start-button", method: :put, :class => "btn btn-default" %>
         <% elsif current_user and current_user.admin? and @race_in_progess %>
           <%= link_to 'Stop Race', stop_race_path(), method: :put, :class => "btn btn-default" %>
         <% end %>
@@ -58,3 +58,56 @@
     </div>
   </div>
 </div>
+<script>
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+
+    // Taken from: https://gist.github.com/khash/2594409
+    $.rails.confirm = function(message, element) {
+        var state = element.data('state');
+        var txt = element.text();
+
+        console.log(element.addClass("btn-danger countdown"));
+        if (!state) {
+            element.data('state', 'last');
+
+            var count = 3
+            var countTo = 1;
+
+            element.text(count);
+
+            var interval = setInterval(() => {
+              count--;
+              element.text(count);
+
+              if (count < countTo) {
+                element.text("Go!");
+                element.data('state', null);
+                $.rails.handleMethod(element);
+                clearInterval(interval);
+              }
+            }, 1000);
+            setTimeout(function()
+            {
+            }, 2000);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    $.rails.allowAction = function(element) {
+        var message = element.data('confirm'),
+            answer = false, callback;
+
+        if (!message) { return true; }
+
+        if ($.rails.fire(element, 'confirm')) {
+            answer = $.rails.confirm(message, element);
+            callback = $.rails.fire(element, 'confirm:complete', [answer]);
+        }
+
+        return answer && callback;
+    }
+  });
+</script

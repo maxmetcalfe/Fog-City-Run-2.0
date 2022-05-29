@@ -9,6 +9,10 @@
   margin-top: 15px;
 }
 
+a.countdown {
+  min-width: 60px;
+}
+
 #timer {
     font-size: 60px;
     background-color: white;
