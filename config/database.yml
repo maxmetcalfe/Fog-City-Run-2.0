@@ -1,17 +1,22 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: fogcityrun
   pool: 5
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL_2"] %>
+
+development:
+  <<: *default
+  database: fogcityrun
   username: maxmetcalfe
   password:
   host: localhost
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: travis_ci_test
-  pool: 5
   username: postgres
   password:
   host: localhost
