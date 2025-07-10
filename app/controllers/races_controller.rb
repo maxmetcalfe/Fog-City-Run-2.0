@@ -1,6 +1,6 @@
 class RacesController < ApplicationController
 
-  before_filter :must_be_admin, only: [:create, :edit]
+  before_action :must_be_admin, only: [:create, :edit]
 
   @races = Race.includes(:race)
 
@@ -52,7 +52,7 @@ class RacesController < ApplicationController
   # Create race
   def create
     @race = Race.new(race_params)
-    @race.id = Race.maximum(:id).next
+    @race.id = (Race.maximum(:id) || 0) + 1
     @race.state = 'PLANNED'
       if @race.save
         redirect_to races_path
@@ -118,8 +118,7 @@ class RacesController < ApplicationController
 
     # Update racer info for all racers in the second most recent race.
     # This is to make sure racer who may be exiting a streak are updated accordingly.
-    previous_race = Race.order("date DESC").second
-    for result in previous_race.results do
+    Race.order("date DESC").second&.results&.each do |result|
       update_racer_info(result.racer)
     end
 
@@ -143,7 +142,7 @@ class RacesController < ApplicationController
       return false
     end
   end
-  
+
   # Check if race is in progress
   def race_in_progess
     @race = Race.find(params[:id])

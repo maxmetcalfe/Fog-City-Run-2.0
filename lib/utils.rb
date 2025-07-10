@@ -34,10 +34,18 @@ def update_streak_calendar(racer)
       longest_streak = streak
     end
 
-    # Check if the streak is the current streak.
-    diff = (Date.today - streak[-1]).to_i
-    if diff >= 0 && diff < 7
-      current_streak = streak
+    last_date = streak[-1]
+
+    if last_date
+      begin
+        parsed_date = last_date.to_date
+        diff = (Date.today - parsed_date).to_i
+        if diff >= 0 && diff < 7
+          current_streak = streak
+        end
+      rescue => e
+        puts "DEBUG: Failed to parse date: #{last_date.inspect} (#{e.message})"
+      end
     end
 
     current_race = race
@@ -50,7 +58,7 @@ def update_streak_calendar(racer)
     :current_streak_array => current_streak,
     :count_data => count_data
   }
-  racer.update_attributes(attributes)
+  racer.update(attributes)
   return attributes
 end
 

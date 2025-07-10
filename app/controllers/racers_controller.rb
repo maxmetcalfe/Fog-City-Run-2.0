@@ -2,7 +2,7 @@ require "#{Rails.root}/lib/utils"
 
 class RacersController < ApplicationController
 
-  before_filter :must_be_admin, only: [:edit]
+  before_action :must_be_admin, only: [:edit]
 
   def autocomplete_racer
     term = params[:term]
@@ -67,7 +67,7 @@ class RacersController < ApplicationController
   # Create racer
   def create
     @racer = Racer.new(racer_params)
-    @racer.id = Racer.maximum(:id).next
+    @racer.id = (Racer.maximum(:id) || 0) + 1
     next_race = Race.where("date >= ?", Date.today).first
     if @racer.save && next_race
       full_name = @racer.first_name + " "+ @racer.last_name

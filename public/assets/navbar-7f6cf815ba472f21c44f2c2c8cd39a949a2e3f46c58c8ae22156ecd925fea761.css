@@ -1,0 +1,6 @@
+
+/* Properly align the search bars within navbar-collapse. */
+.navbar-collapse form {
+  margin-left: 0px;
+  margin-right: 0px;
+}

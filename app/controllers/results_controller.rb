@@ -1,7 +1,7 @@
 class ResultsController < ApplicationController
 
   skip_before_action :verify_authenticity_token
-  before_filter :must_be_admin, only: [:edit]
+  before_action :must_be_admin, only: [:edit]
 
   def index
   end
@@ -29,7 +29,7 @@ class ResultsController < ApplicationController
 
   def create
     @result = Result.new(result_params)
-    @result.id = Result.maximum(:id).next
+    @result.id = (Result.maximum(:id) || 0) + 1
     @result.rank = 0
 
     if @result.save

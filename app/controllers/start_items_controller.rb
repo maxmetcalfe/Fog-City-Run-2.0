@@ -81,7 +81,7 @@ class StartItemsController < ApplicationController
       to_edit.update(time: finish_time)
       to_edit.save!
     else
-      id = Result.maximum(:id).next
+      id = (Result.maximum(:id) || 0) + 1
       result = Result.create(:id => id, :rank => 0, :group_name => @start_item.group, :bib => @start_item.bib, :racer_id => @start_item.racer_id, :race_id => @start_item.race_id, :time => finish_time)
       result.save!
     end
@@ -98,7 +98,7 @@ class StartItemsController < ApplicationController
       format.js
     end
   end
-  
+
   # Get a list of likely racers for a race.
   # Likely racers are the top 12 racers with more than 10 races OR
   # a current streak of more than 1, excluding those already registered.

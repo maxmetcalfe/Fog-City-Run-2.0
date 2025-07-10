@@ -1,0 +1,46 @@
+/* line 7, app/assets/stylesheets/welcome.scss */
+.navbar-right {
+  margin-right: 20px;
+  margin-left: 10px;
+  padding: 0px;
+  margin-top: 15px;
+}
+
+/* line 14, app/assets/stylesheets/welcome.scss */
+body.welcome {
+  padding-top: 10%;
+  background: transparent;
+  font-size: 16px;
+  background-image: url(/assets/photo-45174aaebf417a0fb571445db11a51fc2dc78633c383f0d92cd35ac36a92f611.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* line 26, app/assets/stylesheets/welcome.scss */
+h1 {
+  font-size: 45px;
+}
+
+/* line 30, app/assets/stylesheets/welcome.scss */
+.terms_link {
+  color: #727272 !important;
+}
+
+/* line 34, app/assets/stylesheets/welcome.scss */
+.heylo-link {
+  color: #4d996b;
+}
+
+/* line 38, app/assets/stylesheets/welcome.scss */
+.heylo-link img {
+  width: 16px;
+  height: 16px;
+}
+
+/* line 44, app/assets/stylesheets/welcome.scss */
+.panel-transparent {
+  background: rgba(240, 240, 240, 0.8) !important;
+}
