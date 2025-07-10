@@ -9,33 +9,31 @@
       <br>
       <br>
       <br>
-      <div class="col-md-8 col-md-offset-2 panel panel-default panel-transparent" style="height:50%;">
+      <div class="col-md-8 col-md-offset-2 panel panel-default panel-transparent">
         <div class="text-center">
-          <h1><b>Fog City Run</b></h1>
-          <p>A weekly running race in San Francisco, CA</p>
+          <h1><b>Nite Moves</b></h1>
+          <p>The Summer Sunset Series in Santa Barbara, CA</p>
           <br>
             <% if @next_race %>
-              <h4> Next Race: <%= @next_race.date %> - <%= link_to "Register", race_path(@next_race) %> </h4>
+              <h4> Next Race: <%= @next_race.date.strftime('%m/%d/%Y') %> - <%= link_to "Register", race_path(@next_race) %> </h4>
             <% end %>
           <br>
         </div>
         <div class="text-left">
-          <p><b><i class="fa fa-calendar"></i>&nbsp; When:</b> The race is every Wednesday @ 6:30pm. Rain or shine. Best to arrive at 6:15pm.</P>
-          <p><b><i class="fa fa-globe"></i>&nbsp; Where:</b> We leave from <a href="http://www.thebluelightsf.com/"><i>The Blue Light</i></a> - <a href="http://maps.apple.com/?q=1979 Union St, San Francisco, CA 94123">1979 Union St, San Francisco, CA 94123.</a></P>
-          <p><b><i class="fa fa-users"></i>&nbsp; How do I register?</b> Registration is upon arrival. $5.00 cash. We usually don't have change.</P>
-          <p><b><i class="fa fa-road"></i>&nbsp; What is the course?</b> A hilly 5km(ish) route in the Marina / Presidio <a href="https://raw.githubusercontent.com/maxmetcalfe/Fog-City-Run/master/website/images/race_map.jpeg"> - Map </a> / <a href="https://www.strava.com/segments/7613369">Strava </a>/ <a href="./rungo">RunGo.</a></P>
-          <p><b><i class="fa fa-bar-chart-o"></i>&nbsp;&nbsp;How many people come?</b> 5-20. You can view the race results <%= link_to "here", races_path %> </a> and our <a href=http://www.strava.com/segments/7613369>Strava.</a></P>
-          <p><i class="fa fa-suitcase"></i><b>&nbsp;&nbsp;A locked closet is available for any extra belongings.</b></P>
-          <p><a href="http://facebook.com/FogCityRun"><i class="fa fa-facebook-square"></i>&nbsp;&nbsp;Go to our Facebook page. </a></P>
-          <p><a class="heylo-link" href="https://link.heylo.co/AgCZ"><img src="https://app.heylo.co/favicon.ico"</img>&nbsp;&nbsp;Join our group on Heylo!</a></P>
-      
-          </div>
-        <div class="text-center">
-          <i><%= link_to "Terms and Conditions", safety_path, :class => "terms_link" %></i>
-        </div>
-        </br>
-        <div class="text-center">
-          <i class="fa fa-github"></i> <i><%= link_to "Source Code ", "https://github.com/maxmetcalfe/Fog-City-Run-2.0/" %></i> <i><%= link_to "| File Bug", "https://github.com/maxmetcalfe/Fog-City-Run-2.0/issues/new" %></i>
+          <p><b><i class="fa fa-users"></i>&nbsp; About Nite Moves:</b> A family evening on the Santa Barbara shore of the American Riviera built around a 5K Fun Run.</p>
+          <p><b><i class="fa fa-road"></i>&nbsp; Events:</b></p>
+            <ul>
+              <li>Traditional 1K swim and 3.5-mile run</li>
+              <li>Beginner's 500-meter swim and 1-mile run</li>
+              <li>2000 meter Open Ocean Swim</li>
+              <li>Kids Mile and Soft Sand Sprint for small children</li>
+            </ul>
+          <p><b><i class="fa fa-calendar"></i>&nbsp; When:</b> Every Wednesday during summer. Registration opens at 5 p.m. on site.</p>
+          <p><b><i class="fa fa-clock-o"></i>&nbsp; Schedule:</b> Ocean swim waves begin at 6:25 p.m., Running events begin at 6:35 p.m., Free Kiddies Sand Sprint at 7:30 p.m.</p>
+          <p><b><i class="fa fa-trophy"></i>&nbsp; Perks:</b> Full season registration includes the beautiful and collectible Nite Moves Tee, the shirt loved by SB locals. Tees are also available for purchase at the event for single night registrations.</p>
+          <p><b><i class="fa fa-music"></i>&nbsp; Post Race:</b> Live music, food sampling, soft drinks, adult beverages, bib drawing door prizes, and a variety of vendors throughout the summer.</p>
+          <p><b><i class="fa fa-info-circle"></i>&nbsp; Tip:</b> Bring lawn chairs or blankets to enjoy the sunset performances, along with your transition gear and set up early.</p>
+          <p><a href="#"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;Click Here for 2019 Nite Moves Results</a></p>
         </div>
         <br>
       </div>
