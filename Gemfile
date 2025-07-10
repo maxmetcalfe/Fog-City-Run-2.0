@@ -20,7 +20,6 @@ gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
 gem "d3-rails"
 gem 'will_paginate', '~> 3.1.0'
-gem 'eslint-rails'
 gem 'puma'
 gem 'scout_apm'
 gem "bugsnag", "~> 6.19"
@@ -35,4 +34,5 @@ end
 
 group :development do
   gem "web-console", "~> 4.2"
+  gem 'eslint-rails'
 end
