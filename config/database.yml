@@ -9,9 +9,9 @@ production:
 
 development:
   <<: *default
-  database: fogcityrun
-  username: maxmetcalfe
-  password:
+  database: fog_city_run_development
+  username: postgres
+  password: postgres
   host: localhost
 
 test:
