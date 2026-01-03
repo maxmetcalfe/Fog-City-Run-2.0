@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
  
   root 'welcome#index'
+  get '/__health' => 'health#show'
   get 'welcome/index'
   get '/count' => 'pages#count'
   get '/records' => 'pages#records'
