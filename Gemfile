@@ -19,7 +19,7 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
 gem "d3-rails"
-gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate', '~> 4.0'
 gem 'puma'
 gem 'scout_apm'
 gem "bugsnag", "~> 6.19"
