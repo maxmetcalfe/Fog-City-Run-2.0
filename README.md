@@ -12,6 +12,14 @@ Prod: https://fogcityrun.com
 
 ```make lint```
 
+## Local Development ##
+
+```bin/setup```
+
+```bin/rails server```
+
+Visit http://localhost:3000
+
 ## Fetching Production Database ##
 
 You can fetch and load a snapshot of the production database by running:
