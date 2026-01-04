@@ -110,16 +110,12 @@ class RacesController < ApplicationController
   # Save race
   def save_race
     race = Race.find(params[:id])
+    racer_ids = race.results.pluck(:racer_id)
+    streak_racer_ids = Racer.where("current_streak > 0 OR longest_streak > 0").pluck(:id)
+    racer_ids_to_update = (racer_ids + streak_racer_ids).uniq
 
-    # Update racer info for all racers in this race.
-    for result in race.results do
-      update_racer_info(result.racer)
-    end
-
-    # Update racer info for all racers in the second most recent race.
-    # This is to make sure racer who may be exiting a streak are updated accordingly.
-    Race.order("date DESC").second&.results&.each do |result|
-      update_racer_info(result.racer)
+    Racer.where(id: racer_ids_to_update).find_each do |racer|
+      update_racer_info(racer)
     end
 
     race.update(state: 'FINISHED')
