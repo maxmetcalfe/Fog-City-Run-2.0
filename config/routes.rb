@@ -34,6 +34,7 @@ Rails.application.routes.draw do
  
   root 'welcome#index'
   get '/__health' => 'health#show'
+  get '/__next_race' => 'next_race#show'
   get 'welcome/index'
   get '/count' => 'pages#count'
   get '/records' => 'pages#records'
