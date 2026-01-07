@@ -25,6 +25,5 @@ class SaveRaceJob < ApplicationJob
       update_streak_calendar(racer)
     end
 
-    race.update(state: 'FINISHED')
   end
 end

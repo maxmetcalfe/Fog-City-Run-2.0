@@ -110,6 +110,7 @@ class RacesController < ApplicationController
   # Save race
   def save_race
     race = Race.find(params[:id])
+    race.update(state: 'FINISHED')
     SaveRaceJob.perform_later(race.id)
     redirect_to race, notice: "Race save is running in the background."
   end
