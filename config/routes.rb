@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get '/count' => 'pages#count'
   get '/records' => 'pages#records'
-  get '/loop_beer' => 'pages#loop_beer'
+
   get '/safety' => 'pages#safety'
   get '/singup' => 'sessions#new'
   get '/rungo' => 'pages#rungo'
