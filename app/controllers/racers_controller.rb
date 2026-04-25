@@ -20,9 +20,13 @@ class RacersController < ApplicationController
 
   # Show all racers
   def index
+    logger.debug "[Racers#index] params: #{params.inspect}"
     @racers = Racer.paginate(:page => params[:page])
+    logger.debug "[Racers#index] paginated racers count: #{@racers.total_entries}"
     if params[:search]
+      logger.debug "[Racers#index] search term: #{params[:search]}"
       @racers = Racer.search(params[:search]).paginate(:page => params[:page])
+      logger.debug "[Racers#index] search results count: #{@racers.total_entries}"
     end
   end
 

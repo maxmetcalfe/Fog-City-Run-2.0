@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :log_request
+  after_action :log_response
+
+  rescue_from StandardError, with: :log_error
+
   def must_be_admin
     unless current_user && current_user.admin?
       redirect_to root_path
@@ -87,5 +92,28 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_racer
+
+  def log_request
+    @request_start_time = Time.now
+    filtered_params = filter_sensitive_params(params)
+    logger.info "[REQUEST] #{request.method} #{request.path} IP: #{request.remote_ip} UUID: #{request.uuid} params: #{filtered_params.inspect}"
+  end
+
+  def log_response
+    duration = Time.now - @request_start_time
+    logger.info "[RESPONSE] #{request.method} #{request.path} status: #{response.status} duration: #{duration.round(3)}s"
+  end
+
+  def log_error(exception)
+    logger.error "[ERROR] #{exception.class}: #{exception.message} path: #{request&.path} UUID: #{request&.uuid}"
+    logger.error exception.backtrace.join("\n") if exception.backtrace
+    # Re-raise the exception for Bugsnag and default Rails error handling
+    raise exception
+  end
+
+  def filter_sensitive_params(params)
+    filter = Rails.application.config.filter_parameters
+    ActionDispatch::Http::ParameterFilter.new(filter).filter(params)
+  end
 
 end
