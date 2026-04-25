@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   before_action :log_request
   after_action :log_response
 
-  rescue_from StandardError, with: :log_error
+  rescue_from StandardError do |exception|
+    log_error(exception)
+  end
 
   def must_be_admin
     unless current_user && current_user.admin?
