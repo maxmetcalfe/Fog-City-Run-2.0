@@ -3,6 +3,8 @@
   <%= render "shared/navbar_racers" %>
 </head>
 <div class="container-fluid">
+  <h1>Racers Debug</h1>
+  <p>Total: <%= @racers.respond_to?(:total_entries) ? @racers.total_entries : @racers.count %></p>
   <table class="table table-hover table-bordered sortable">
     <thead>
       <tr>
@@ -15,12 +17,7 @@
     <tbody>
       <% @racers.each do |racer| %>
         <tr>
-          <td>
-            <%= link_to racer.first_name + " " + racer.last_name, racer_path(racer) %>
-            <% if current_user && (user = User.find_by(racer_id: racer.id)) && user.strava_link.present? %>
-              <%= link_to image_tag("icon-strava-blue.svg", height: 18), user.strava_link, :class => "fa-fw fa-lg" %>
-            <% end %>
-          </td>
+          <td><%= link_to racer.first_name + " " + racer.last_name, racer_path(racer) %></td>
           <td><%= racer.longest_streak %></td>
           <td><%= racer.current_streak %></td>
           <td><%= racer.race_count %></td>
