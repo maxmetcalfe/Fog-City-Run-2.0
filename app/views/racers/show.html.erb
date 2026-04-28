@@ -24,7 +24,7 @@
       <% if @racer.results.exists? %>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
       <% end %>
-      <h4>Loop-Beer Runs: <%= @results.select{|result| result.group_name == "Loop-Beer"}.count %></h4>
+
       <%= @users_race_count %>
        </div>
       </div>
@@ -87,6 +87,7 @@
           <thead>
           <tr>
             <th>Date</th>
+            <th>Group</th>
             <th>Time</th>
             <th>Rank</th>
           </tr>
@@ -95,6 +96,7 @@
           <% @results.select{|result| result.group_name != "Loop-Beer"}.each do |result| %>
             <tr>
               <td><%= link_to result.race.date, race_path(result.race) %></td>
+              <td><%= result.group_name %></td>
               <td><%= result.time %></td>
               <td><%= result.rank %></td>
             </tr>
@@ -104,33 +106,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">Loop-Beer Runs</div>
-        <div class="panel-body">
-          <br>
-            <table class="table table-hover table-bordered">
-            <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Rank</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @results.select{|result| result.group_name == "Loop-Beer"}.each do |result| %>
-              <tr>
-                <td><%= link_to result.race.date, race_path(result.race) %></td>
-                <td><%= result.time %></td>
-                <td><%= result.rank %></td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
     </div>
 </div>
