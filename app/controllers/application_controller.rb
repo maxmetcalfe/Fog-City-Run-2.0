@@ -6,9 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :log_request
   after_action :log_response
 
-  rescue_from StandardError do |exception|
-    log_error(exception)
-  end
+
 
   def must_be_admin
     unless current_user && current_user.admin?
@@ -106,16 +104,16 @@ class ApplicationController < ActionController::Base
     logger.info "[RESPONSE] #{request.method} #{request.path} status: #{response.status} duration: #{duration.round(3)}s"
   end
 
-  def log_error(exception)
-    logger.error "[ERROR] #{exception.class}: #{exception.message} path: #{request&.path} UUID: #{request&.uuid}"
-    logger.error exception.backtrace.join("\n") if exception.backtrace
-    # Re-raise the exception for Bugsnag and default Rails error handling
-    raise exception
-  end
+
 
   def filter_sensitive_params(params)
     filter = Rails.application.config.filter_parameters
-    ActionDispatch::Http::ParameterFilter.new(filter).filter(params)
+    # Use ActiveSupport::ParameterFilter if available (Rails 5.1+), otherwise fall back
+    if defined?(ActiveSupport::ParameterFilter)
+      ActiveSupport::ParameterFilter.new(filter).filter(params)
+    else
+      ActionDispatch::Http::ParameterFilter.new(filter).filter(params)
+    end
   end
 
 end
