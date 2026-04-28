@@ -1,5 +1,6 @@
 # Log exceptions at the Rack level to ensure they appear in logs
 # before being rescued by Rails or Bugsnag.
+Rails.logger.info "[ExceptionLogger] Initializer loading" if defined?(Rails) && Rails.logger
 module FogCityRun
   class ExceptionLogger
     def initialize(app)
@@ -66,10 +67,28 @@ end
 
 # Insert this middleware near the top of the stack, but after Rails' internal middleware
 # that adds request UUID etc. We'll insert after ActionDispatch::RequestId.
-begin
-  Rails.application.config.middleware.insert_after ActionDispatch::RequestId, FogCityRun::ExceptionLogger
-rescue => e
-  Rails.logger.error "Failed to insert ExceptionLogger middleware: #{e.class}: #{e.message}"
-  # Still try to insert at the end of the stack as a fallback
-  Rails.application.config.middleware.use FogCityRun::ExceptionLogger
+# Wrap in after_initialize to ensure Rails is fully loaded.
+Rails.application.config.after_initialize do
+  begin
+    Rails.logger.info "[ExceptionLogger] Attempting to insert middleware" if Rails.logger
+    
+    # Check if ActionDispatch::RequestId exists
+    if defined?(ActionDispatch::RequestId)
+      Rails.application.config.middleware.insert_after ActionDispatch::RequestId, FogCityRun::ExceptionLogger
+      Rails.logger.info "[ExceptionLogger] Middleware inserted after ActionDispatch::RequestId" if Rails.logger
+    else
+      Rails.logger.warn "[ExceptionLogger] ActionDispatch::RequestId not defined, inserting at end" if Rails.logger
+      Rails.application.config.middleware.use FogCityRun::ExceptionLogger
+    end
+  rescue => e
+    Rails.logger.error "[ExceptionLogger] Failed to insert middleware: #{e.class}: #{e.message}" if Rails.logger
+    Rails.logger.error "[ExceptionLogger] Backtrace: #{e.backtrace.join("\n")}" if Rails.logger && e.backtrace
+    # Try one more fallback
+    begin
+      Rails.application.config.middleware.use FogCityRun::ExceptionLogger
+      Rails.logger.info "[ExceptionLogger] Middleware inserted via fallback" if Rails.logger
+    rescue => e2
+      Rails.logger.error "[ExceptionLogger] Fallback also failed: #{e2.class}: #{e2.message}" if Rails.logger
+    end
+  end
 end
