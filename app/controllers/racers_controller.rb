@@ -22,27 +22,19 @@ class RacersController < ApplicationController
   def index
     begin
       logger.debug "[Racers#index] params: #{params.inspect}" if Rails.env.development?
-    rescue => e
-      # Ignore logging errors
-    end
-    @racers = Racer.paginate(:page => params[:page])
-    begin
+      @racers = Racer.paginate(:page => params[:page])
       logger.debug "[Racers#index] paginated racers count: #{@racers.total_entries}" if Rails.env.development?
-    rescue => e
-      # Ignore logging errors
-    end
-    if params[:search]
-      begin
+      if params[:search]
         logger.debug "[Racers#index] search term: #{params[:search]}" if Rails.env.development?
-      rescue => e
-        # Ignore logging errors
-      end
-      @racers = Racer.search(params[:search]).paginate(:page => params[:page])
-      begin
+        @racers = Racer.search(params[:search]).paginate(:page => params[:page])
         logger.debug "[Racers#index] search results count: #{@racers.total_entries}" if Rails.env.development?
-      rescue => e
-        # Ignore logging errors
       end
+    rescue => exception
+      # Log the error with full context
+      logger.error "[Racers#index ERROR] #{exception.class}: #{exception.message}"
+      logger.error "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}" if exception.backtrace
+      # Re-raise to allow Rails error handling
+      raise exception
     end
   end
 
