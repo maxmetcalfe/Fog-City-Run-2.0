@@ -27,8 +27,12 @@
       <% end %>
     </tbody>
   </table>
-  <div class="apple_pagination">
+  <%# Temporarily disabled pagination due to will_paginate error %>
+  <%# <div class="apple_pagination">
     <%= will_paginate @racers %>
+  </div> %>
+  <div class="apple_pagination">
+    <p>Showing all <%= @racers.respond_to?(:total_entries) ? @racers.total_entries : @racers.count %> racers</p>
   </div>
 </div>
 <% rescue => e %>
