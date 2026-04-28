@@ -22,7 +22,9 @@ class RacersController < ApplicationController
   def index
     begin
       logger.info "[Racers#index] Starting index action"
+      puts "[Racers#index] Starting index action"
       logger.info "[Racers#index] params: #{params.inspect}"
+      puts "[Racers#index] params: #{params.inspect}"
       
       # Base query with default ordering
       base_query = Racer.order("race_count DESC")
@@ -41,8 +43,16 @@ class RacersController < ApplicationController
       logger.info "[Racers#index] Completed successfully"
       
     rescue => exception
-      logger.error "[Racers#index ERROR] #{exception.class}: #{exception.message}"
-      logger.error "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}" if exception.backtrace
+      # Use both logger and puts to ensure we see the error
+      error_msg = "[Racers#index ERROR] #{exception.class}: #{exception.message}"
+      logger.error error_msg
+      puts error_msg
+      
+      if exception.backtrace
+        backtrace_msg = "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}"
+        logger.error backtrace_msg
+        puts backtrace_msg
+      end
       raise exception
     end
   end
