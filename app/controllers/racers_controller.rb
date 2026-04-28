@@ -20,24 +20,31 @@ class RacersController < ApplicationController
 
   # Show all racers
   def index
-    logger.info "[Racers#index] Starting index action"
-    logger.info "[Racers#index] params: #{params.inspect}"
-    
-    @racers = Racer.paginate(:page => params[:page])
-    logger.info "[Racers#index] @racers class: #{@racers.class.name}"
-    logger.info "[Racers#index] @racers total_entries: #{@racers.total_entries}"
-    
-    if params[:search]
-      logger.info "[Racers#index] search term: #{params[:search]}"
-      @racers = Racer.search(params[:search]).paginate(:page => params[:page])
-      logger.info "[Racers#index] search results total_entries: #{@racers.total_entries}"
+    begin
+      logger.info "[Racers#index] Starting index action"
+      logger.info "[Racers#index] params: #{params.inspect}"
+      
+      # Base query with default ordering
+      base_query = Racer.order("race_count DESC")
+      
+      # Apply search if present
+      if params[:search].present?
+        logger.info "[Racers#index] search term: #{params[:search]}"
+        base_query = base_query.search(params[:search])
+      end
+      
+      # Paginate the ordered query
+      @racers = base_query.paginate(page: params[:page], per_page: 30)
+      
+      logger.info "[Racers#index] @racers class: #{@racers.class.name}"
+      logger.info "[Racers#index] @racers total_entries: #{@racers.total_entries}"
+      logger.info "[Racers#index] Completed successfully"
+      
+    rescue => exception
+      logger.error "[Racers#index ERROR] #{exception.class}: #{exception.message}"
+      logger.error "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}" if exception.backtrace
+      raise exception
     end
-    
-    logger.info "[Racers#index] Completed successfully"
-  rescue => exception
-    logger.error "[Racers#index ERROR] #{exception.class}: #{exception.message}"
-    logger.error "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}" if exception.backtrace
-    raise exception
   end
 
   # Show racer by id
