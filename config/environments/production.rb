@@ -17,6 +17,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   # Use environment variable for host or default to fogcityrun.com
   host = ENV['RAILS_HOST'] || 'www.fogcityrun.com'
@@ -27,7 +28,7 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
+    :domain         => ENV['RAILS_HOST'] || 'heroku.com',
     :enable_starttls_auto => true
   }
 
