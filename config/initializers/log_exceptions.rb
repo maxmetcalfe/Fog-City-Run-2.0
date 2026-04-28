@@ -44,11 +44,20 @@ module FogCityRun
 
     def filter_sensitive_params(params)
       filter = Rails.application.config.filter_parameters
+      # Convert ActionController::Parameters to hash for filtering
+      params_hash = if params.respond_to?(:to_unsafe_h)
+                      params.to_unsafe_h
+                    elsif params.respond_to?(:to_h)
+                      params.to_h
+                    else
+                      params
+                    end
+      
       # Use ActiveSupport::ParameterFilter if available (Rails 5.1+), otherwise fall back
       if defined?(ActiveSupport::ParameterFilter)
-        ActiveSupport::ParameterFilter.new(filter).filter(params)
+        ActiveSupport::ParameterFilter.new(filter).filter(params_hash)
       else
-        ActionDispatch::Http::ParameterFilter.new(filter).filter(params)
+        ActionDispatch::Http::ParameterFilter.new(filter).filter(params_hash)
       end
     end
   end

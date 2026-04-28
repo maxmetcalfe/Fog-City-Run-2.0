@@ -94,25 +94,43 @@ class ApplicationController < ActionController::Base
   helper_method :current_racer
 
   def log_request
-    @request_start_time = Time.now
-    filtered_params = filter_sensitive_params(params)
-    logger.info "[REQUEST] #{request.method} #{request.path} IP: #{request.remote_ip} UUID: #{request.uuid} params: #{filtered_params.inspect}"
+    begin
+      @request_start_time = Time.now
+      filtered_params = filter_sensitive_params(params)
+      logger.info "[REQUEST] #{request.method} #{request.path} IP: #{request.remote_ip} UUID: #{request.uuid} params: #{filtered_params.inspect}"
+    rescue => e
+      logger.error "[LOG_REQUEST ERROR] #{e.class}: #{e.message}"
+      @request_start_time = Time.now # still set it for log_response
+    end
   end
 
   def log_response
-    duration = Time.now - @request_start_time
-    logger.info "[RESPONSE] #{request.method} #{request.path} status: #{response.status} duration: #{duration.round(3)}s"
+    begin
+      duration = @request_start_time ? Time.now - @request_start_time : 0
+      logger.info "[RESPONSE] #{request.method} #{request.path} status: #{response.status} duration: #{duration.round(3)}s"
+    rescue => e
+      logger.error "[LOG_RESPONSE ERROR] #{e.class}: #{e.message}"
+    end
   end
 
 
 
   def filter_sensitive_params(params)
     filter = Rails.application.config.filter_parameters
+    # Convert ActionController::Parameters to hash for filtering
+    params_hash = if params.respond_to?(:to_unsafe_h)
+                    params.to_unsafe_h
+                  elsif params.respond_to?(:to_h)
+                    params.to_h
+                  else
+                    params
+                  end
+    
     # Use ActiveSupport::ParameterFilter if available (Rails 5.1+), otherwise fall back
     if defined?(ActiveSupport::ParameterFilter)
-      ActiveSupport::ParameterFilter.new(filter).filter(params)
+      ActiveSupport::ParameterFilter.new(filter).filter(params_hash)
     else
-      ActionDispatch::Http::ParameterFilter.new(filter).filter(params)
+      ActionDispatch::Http::ParameterFilter.new(filter).filter(params_hash)
     end
   end
 

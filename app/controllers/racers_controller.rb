@@ -20,13 +20,29 @@ class RacersController < ApplicationController
 
   # Show all racers
   def index
-    logger.debug "[Racers#index] params: #{params.inspect}"
+    begin
+      logger.debug "[Racers#index] params: #{params.inspect}" if Rails.env.development?
+    rescue => e
+      # Ignore logging errors
+    end
     @racers = Racer.paginate(:page => params[:page])
-    logger.debug "[Racers#index] paginated racers count: #{@racers.total_entries}"
+    begin
+      logger.debug "[Racers#index] paginated racers count: #{@racers.total_entries}" if Rails.env.development?
+    rescue => e
+      # Ignore logging errors
+    end
     if params[:search]
-      logger.debug "[Racers#index] search term: #{params[:search]}"
+      begin
+        logger.debug "[Racers#index] search term: #{params[:search]}" if Rails.env.development?
+      rescue => e
+        # Ignore logging errors
+      end
       @racers = Racer.search(params[:search]).paginate(:page => params[:page])
-      logger.debug "[Racers#index] search results count: #{@racers.total_entries}"
+      begin
+        logger.debug "[Racers#index] search results count: #{@racers.total_entries}" if Rails.env.development?
+      rescue => e
+        # Ignore logging errors
+      end
     end
   end
 
