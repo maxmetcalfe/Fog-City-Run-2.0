@@ -1,5 +1,6 @@
 # Log exceptions at the Rack level to ensure they appear in logs
 # before being rescued by Rails or Bugsnag.
+puts "[ExceptionLogger] Initializer loading"
 Rails.logger.info "[ExceptionLogger] Initializer loading" if defined?(Rails) && Rails.logger
 module FogCityRun
   class ExceptionLogger

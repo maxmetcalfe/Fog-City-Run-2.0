@@ -18,8 +18,9 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'https://www.fogcityrun.com'
-  config.action_mailer.default_url_options = { host: host }
+  # Use environment variable for host or default to fogcityrun.com
+  host = ENV['RAILS_HOST'] || 'www.fogcityrun.com'
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
