@@ -20,22 +20,24 @@ class RacersController < ApplicationController
 
   # Show all racers
   def index
-    begin
-      logger.debug "[Racers#index] params: #{params.inspect}" if Rails.env.development?
-      @racers = Racer.paginate(:page => params[:page])
-      logger.debug "[Racers#index] paginated racers count: #{@racers.total_entries}" if Rails.env.development?
-      if params[:search]
-        logger.debug "[Racers#index] search term: #{params[:search]}" if Rails.env.development?
-        @racers = Racer.search(params[:search]).paginate(:page => params[:page])
-        logger.debug "[Racers#index] search results count: #{@racers.total_entries}" if Rails.env.development?
-      end
-    rescue => exception
-      # Log the error with full context
-      logger.error "[Racers#index ERROR] #{exception.class}: #{exception.message}"
-      logger.error "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}" if exception.backtrace
-      # Re-raise to allow Rails error handling
-      raise exception
+    logger.info "[Racers#index] Starting index action"
+    logger.info "[Racers#index] params: #{params.inspect}"
+    
+    @racers = Racer.paginate(:page => params[:page])
+    logger.info "[Racers#index] @racers class: #{@racers.class.name}"
+    logger.info "[Racers#index] @racers total_entries: #{@racers.total_entries}"
+    
+    if params[:search]
+      logger.info "[Racers#index] search term: #{params[:search]}"
+      @racers = Racer.search(params[:search]).paginate(:page => params[:page])
+      logger.info "[Racers#index] search results total_entries: #{@racers.total_entries}"
     end
+    
+    logger.info "[Racers#index] Completed successfully"
+  rescue => exception
+    logger.error "[Racers#index ERROR] #{exception.class}: #{exception.message}"
+    logger.error "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}" if exception.backtrace
+    raise exception
   end
 
   # Show racer by id
