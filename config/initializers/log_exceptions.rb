@@ -4,6 +4,7 @@ module FogCityRun
   class ExceptionLogger
     def initialize(app)
       @app = app
+      Rails.logger.info "[ExceptionLogger] Middleware initialized" if Rails.logger
     end
 
     def call(env)
