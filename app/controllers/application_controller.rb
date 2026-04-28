@@ -6,6 +6,38 @@ class ApplicationController < ActionController::Base
   before_action :log_request
   after_action :log_response
 
+  # Global error handling to ensure all exceptions are logged and sent to error tracking
+  rescue_from Exception, with: :handle_exception
+
+  def handle_exception(exception)
+    # Prevent infinite recursion
+    if request.env['fogcityrun.exception_handled']
+      raise exception
+    end
+    request.env['fogcityrun.exception_handled'] = true
+
+    # Log to Rails logger (goes to Heroku logs)
+    logger.error "[GLOBAL ERROR] #{exception.class}: #{exception.message}"
+    logger.error "[GLOBAL ERROR] path: #{request.path} method: #{request.method}"
+    logger.error "[GLOBAL ERROR] backtrace:\n#{exception.backtrace.join("\n")}" if exception.backtrace
+    
+    # Also output to stdout for Heroku
+    puts "[GLOBAL ERROR] #{exception.class}: #{exception.message}"
+    puts "[GLOBAL ERROR] path: #{request.path} method: #{request.method}"
+    
+    # Notify Bugsnag
+    if defined?(Bugsnag)
+      begin
+        Bugsnag.notify(exception)
+      rescue => e
+        logger.error "[BUGSNAG ERROR] Failed to notify: #{e.class}: #{e.message}"
+      end
+    end
+    
+    # Re-raise to allow Rails default error handling (500 page, etc.)
+    raise exception
+  end
+
 
 
   def must_be_admin
