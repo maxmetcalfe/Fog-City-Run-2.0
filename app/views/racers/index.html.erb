@@ -3,9 +3,8 @@
   <%= render "shared/navbar_racers" %>
 </head>
 
-<% begin %>
 <div class="container-fluid">
-  <h1>Racers Debug</h1>
+  <h1>Racers</h1>
   <p>Total: <%= @racers.respond_to?(:total_entries) ? @racers.total_entries : @racers.count %></p>
   <table class="table table-hover table-bordered sortable">
     <thead>
@@ -27,23 +26,7 @@
       <% end %>
     </tbody>
   </table>
-  <%# Temporarily disabled pagination due to will_paginate error %>
-  <%# <div class="apple_pagination">
-    <%= will_paginate @racers %>
-  </div> %>
   <div class="apple_pagination">
     <p>Showing all <%= @racers.respond_to?(:total_entries) ? @racers.total_entries : @racers.count %> racers</p>
   </div>
 </div>
-<% rescue => e %>
-  <% logger.error "Template error: #{e.class}: #{e.message}" %>
-  <% puts "Template error: #{e.class}: #{e.message}" %>
-  <% if e.backtrace %>
-    <% logger.error "Backtrace: #{e.backtrace.join("\n")}" %>
-    <% puts "Backtrace: #{e.backtrace.join("\n")}" %>
-  <% end %>
-  <div class="container-fluid">
-    <h1>Error rendering page</h1>
-    <p><%= e.class %>: <%= e.message %></p>
-  </div>
-<% end %>
