@@ -23,12 +23,12 @@ Rails.application.configure do
   host = ENV['RAILS_HOST'] || 'nightmoves.racesplit.org'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
+    :address        => 'smtp.smtp2go.com',
     :port           => '587',
     :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => ENV['RAILS_HOST'] || 'heroku.com',
+    :user_name      => ENV['SMTP2GO_USERNAME'],
+    :password       => ENV['SMTP2GO_PASSWORD'],
+    :domain         => ENV['RAILS_HOST'] || 'nightmoves.racesplit.org',
     :enable_starttls_auto => true
   }
 
