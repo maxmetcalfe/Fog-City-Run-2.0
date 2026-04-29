@@ -18,19 +18,10 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp2go
   # Use environment variable for host or default to nightmoves.racesplit.org
   host = ENV['RAILS_HOST'] || 'nightmoves.racesplit.org'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.smtp2go.com',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SMTP2GO_USERNAME'],
-    :password       => ENV['SMTP2GO_PASSWORD'],
-    :domain         => ENV['RAILS_HOST'] || 'nightmoves.racesplit.org',
-    :enable_starttls_auto => true
-  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
