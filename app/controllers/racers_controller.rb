@@ -145,6 +145,6 @@ class RacersController < ApplicationController
   # Permit parameters when creating article
   private
   def racer_params
-    params.require(:racer).permit(:first_name, :last_name)
+    params.require(:racer).permit(:first_name, :last_name, :email)
   end
 end
