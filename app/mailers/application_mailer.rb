@@ -1,4 +1,4 @@
-class ApplicationMailer > ActionMailer::Base
-  default from: ENV.fetch('MAILER_FROM', "Nite Moves")
+class ApplicationMailer < ActionMailer::Base
+  default from: "Fog City Run <runfogcity@gmail.com>"
   layout 'mailer'
 end

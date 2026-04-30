@@ -17,36 +17,18 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  # Use environment variable for host or default to nightmoves.racesplit.org
-  host = ENV['RAILS_HOST'] || 'nightmoves.racesplit.org'
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-  
-  # Support multiple email providers via ENV vars
-  if ENV['SMTP_PROVIDER'] == 'sendgrid'
-    # SendGrid (for fogcityrun)
-    ActionMailer::Base.smtp_settings = {
-      :address        => 'smtp.sendgrid.net',
-      :port           => '587',
-      :authentication => :plain,
-      :user_name      => ENV['SENDGRID_USERNAME'],
-      :password       => ENV['SENDGRID_PASSWORD'],
-      :domain         => ENV['RAILS_HOST'] || 'heroku.com',
-      :enable_starttls_auto => true
-    }
-  else
-    # SMTP2GO (default for nightmoves)
-    ActionMailer::Base.smtp_settings = {
-      :address        => 'smtp.smtp2go.com',
-      :port           => '587',
-      :authentication => :plain,
-      :user_name      => ENV['SMTP2GO_USERNAME'],
-      :password       => ENV['SMTP2GO_PASSWORD'],
-      :domain         => ENV['RAILS_HOST'] || 'nightmoves.racesplit.org',
-      :enable_starttls_auto => true
-    }
-  end
+  host = 'https://www.fogcityrun.com'
+  config.action_mailer.default_url_options = { host: host }
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -83,7 +65,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :uuid ]
+  # config.log_tags = [ :subdomain, :uuid ]
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
