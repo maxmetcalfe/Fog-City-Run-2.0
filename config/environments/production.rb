@@ -22,15 +22,31 @@ Rails.application.configure do
   # Use environment variable for host or default to nightmoves.racesplit.org
   host = ENV['RAILS_HOST'] || 'nightmoves.racesplit.org'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.smtp2go.com',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SMTP2GO_USERNAME'],
-    :password       => ENV['SMTP2GO_PASSWORD'],
-    :domain         => ENV['RAILS_HOST'] || 'nightmoves.racesplit.org',
-    :enable_starttls_auto => true
-  }
+  
+  # Support multiple email providers via ENV vars
+  if ENV['SMTP_PROVIDER'] == 'sendgrid'
+    # SendGrid (for fogcityrun)
+    ActionMailer::Base.smtp_settings = {
+      :address        => 'smtp.sendgrid.net',
+      :port           => '587',
+      :authentication => :plain,
+      :user_name      => ENV['SENDGRID_USERNAME'],
+      :password       => ENV['SENDGRID_PASSWORD'],
+      :domain         => ENV['RAILS_HOST'] || 'heroku.com',
+      :enable_starttls_auto => true
+    }
+  else
+    # SMTP2GO (default for nightmoves)
+    ActionMailer::Base.smtp_settings = {
+      :address        => 'smtp.smtp2go.com',
+      :port           => '587',
+      :authentication => :plain,
+      :user_name      => ENV['SMTP2GO_USERNAME'],
+      :password       => ENV['SMTP2GO_PASSWORD'],
+      :domain         => ENV['RAILS_HOST'] || 'nightmoves.racesplit.org',
+      :enable_starttls_auto => true
+    }
+  end
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
