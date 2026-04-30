@@ -1,4 +1,4 @@
-class ApplicationMailer < ActionMailer::Base
-  default from: "Fog City Run <runfogcity@gmail.com>"
+class ApplicationMailer > ActionMailer::Base
+  default from: "Nite Moves"
   layout 'mailer'
 end

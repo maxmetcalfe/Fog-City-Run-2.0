@@ -18,15 +18,15 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'https://www.fogcityrun.com'
+  host = 'https://nightmoves.racesplit.org'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
+    :address        => 'smtp.smtp2go.com',
     :port           => '587',
     :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
+    :user_name      => ENV['SMTP2GO_USERNAME'],
+    :password       => ENV['SMTP2GO_PASSWORD'],
+    :domain         => 'nightmoves.racesplit.org',
     :enable_starttls_auto => true
   }
 
