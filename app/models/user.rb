@@ -29,7 +29,13 @@ class User < ActiveRecord::Base
   
   # Sends password reset email.
   def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
+    begin
+      UserMailer.password_reset(self).deliver_now
+    rescue => e
+      Rails.logger.error "[PasswordReset Email ERROR] #{e.class}: #{e.message}"
+      Rails.logger.error "[PasswordReset Email ERROR] Backtrace: #{e.backtrace.join("\n")}" if e.backtrace
+      raise e # Re-raise to be caught by controller
+    end
   end
 
   class << self

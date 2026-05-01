@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :must_be_admin, only: [:destroy]
+  before_action :must_be_admin, only: [:destroy]
 
   # Show all users
   def index
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     existing_racers = Racer.where(:first_name => user.first_name, :last_name => user.last_name)
     if existing_racers.length == 0
       racer = Racer.new
-      racer.id = Racer.maximum(:id).next
+      racer.id = (Racer.maximum(:id) || 0) + 1
       racer.first_name = user.first_name
       racer.last_name = user.last_name
       racer.save

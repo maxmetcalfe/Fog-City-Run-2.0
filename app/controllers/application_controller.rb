@@ -3,6 +3,53 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :log_request
+  after_action :log_response
+
+  # Global error handling to ensure all exceptions are logged and sent to error tracking
+  # Using StandardError instead of Exception to avoid catching system-level errors
+  # Temporarily disabled due to conflict with will_paginate
+  # rescue_from StandardError, with: :handle_exception
+
+  # def handle_exception(exception)
+  #   # Prevent infinite recursion
+  #   if request.env['fogcityrun.exception_handled']
+  #     raise exception
+  #   end
+  #   
+  #   # Mark as handled and store in request env
+  #   request.env['fogcityrun.exception_handled'] = true
+  #   
+  #   # Get request details safely
+  #   path = request.path rescue 'unknown'
+  #   method = request.method rescue 'unknown'
+  #   
+  #   # Log to Rails logger (goes to Heroku logs)
+  #   logger.error "[GLOBAL ERROR] #{exception.class}: #{exception.message}"
+  #   logger.error "[GLOBAL ERROR] path: #{path} method: #{method}"
+  #   if exception.backtrace
+  #     logger.error "[GLOBAL ERROR] backtrace:\n#{exception.backtrace.join("\n")}"
+  #   end
+  #   
+  #   # Also output to stdout for Heroku (ensures visibility)
+  #   puts "[GLOBAL ERROR] #{exception.class}: #{exception.message}"
+  #   puts "[GLOBAL ERROR] path: #{path} method: #{method}"
+  #   
+  #   # Notify Bugsnag
+  #   if defined?(Bugsnag)
+  #     begin
+  #       Bugsnag.notify(exception)
+  #     rescue => e
+  #       logger.error "[BUGSNAG ERROR] Failed to notify: #{e.class}: #{e.message}"
+  #     end
+  #   end
+  #   
+  #   # Re-raise to allow Rails default error handling (500 page, etc.)
+  #   raise exception
+  # end
+
+
+
   def must_be_admin
     unless current_user && current_user.admin?
       redirect_to root_path
@@ -87,5 +134,46 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_racer
+
+  def log_request
+    begin
+      @request_start_time = Time.now
+      filtered_params = filter_sensitive_params(params)
+      logger.info "[REQUEST] #{request.method} #{request.path} IP: #{request.remote_ip} UUID: #{request.uuid} params: #{filtered_params.inspect}"
+    rescue => e
+      logger.error "[LOG_REQUEST ERROR] #{e.class}: #{e.message}"
+      @request_start_time = Time.now # still set it for log_response
+    end
+  end
+
+  def log_response
+    begin
+      duration = @request_start_time ? Time.now - @request_start_time : 0
+      logger.info "[RESPONSE] #{request.method} #{request.path} status: #{response.status} duration: #{duration.round(3)}s"
+    rescue => e
+      logger.error "[LOG_RESPONSE ERROR] #{e.class}: #{e.message}"
+    end
+  end
+
+
+
+  def filter_sensitive_params(params)
+    filter = Rails.application.config.filter_parameters
+    # Convert ActionController::Parameters to hash for filtering
+    params_hash = if params.respond_to?(:to_unsafe_h)
+                    params.to_unsafe_h
+                  elsif params.respond_to?(:to_h)
+                    params.to_h
+                  else
+                    params
+                  end
+    
+    # Use ActiveSupport::ParameterFilter if available (Rails 5.1+), otherwise fall back
+    if defined?(ActiveSupport::ParameterFilter)
+      ActiveSupport::ParameterFilter.new(filter).filter(params_hash)
+    else
+      ActionDispatch::Http::ParameterFilter.new(filter).filter(params_hash)
+    end
+  end
 
 end

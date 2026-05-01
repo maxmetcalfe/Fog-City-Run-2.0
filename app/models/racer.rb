@@ -19,6 +19,7 @@ class Racer < ActiveRecord::Base
   validates :last_name, presence: true
   validates :first_name, format: { with: /.*\S\z/, message: "cannot end with a space."}
   validates :last_name, format: { with: /.*\S\z/, message: "cannot end with a space."}
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email" }, allow_blank: true
   validates :race_count, numericality: { only_integer: true }
   validates :race_count, numericality: { greater_than_or_equal_to: 0 }
   validates :longest_streak, numericality: { only_integer: true }

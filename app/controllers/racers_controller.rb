@@ -2,7 +2,7 @@ require "#{Rails.root}/lib/utils"
 
 class RacersController < ApplicationController
 
-  before_filter :must_be_admin, only: [:edit]
+  before_action :must_be_admin, only: [:edit]
 
   def autocomplete_racer
     term = params[:term]
@@ -20,9 +20,52 @@ class RacersController < ApplicationController
 
   # Show all racers
   def index
-    @racers = Racer.paginate(:page => params[:page])
-    if params[:search]
-      @racers = Racer.search(params[:search]).paginate(:page => params[:page])
+    begin
+      logger.info "[Racers#index] Starting index action"
+      puts "[Racers#index] Starting index action"
+      logger.info "[Racers#index] params: #{params.inspect}"
+      puts "[Racers#index] params: #{params.inspect}"
+      
+      # Base query with default ordering
+      base_query = Racer.order("race_count DESC")
+      logger.info "[Racers#index] Base query built"
+      
+      # Apply search if present
+      if params[:search].present?
+        logger.info "[Racers#index] search term: #{params[:search]}"
+        base_query = base_query.search(params[:search])
+        logger.info "[Racers#index] Search applied"
+      end
+      
+      # Paginate the ordered query
+      logger.info "[Racers#index] Attempting pagination..."
+      begin
+        @racers = base_query.paginate(page: params[:page], per_page: 30)
+        logger.info "[Racers#index] Pagination successful"
+      rescue => pagination_error
+        logger.error "[Racers#index] Pagination failed: #{pagination_error.class}: #{pagination_error.message}"
+        # Fallback: use all records without pagination
+        @racers = base_query.all
+        logger.info "[Racers#index] Using fallback (no pagination), count: #{@racers.count}"
+      end
+      
+      logger.info "[Racers#index] @racers class: #{@racers.class.name}"
+      logger.info "[Racers#index] @racers total_entries: #{@racers.respond_to?(:total_entries) ? @racers.total_entries : @racers.count}"
+      logger.info "[Racers#index] Completed successfully"
+      puts "[Racers#index] Completed successfully"
+      
+    rescue => exception
+      # Use both logger and puts to ensure we see the error
+      error_msg = "[Racers#index ERROR] #{exception.class}: #{exception.message}"
+      logger.error error_msg
+      puts error_msg
+      
+      if exception.backtrace
+        backtrace_msg = "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}"
+        logger.error backtrace_msg
+        puts backtrace_msg
+      end
+      raise exception
     end
   end
 
@@ -67,7 +110,7 @@ class RacersController < ApplicationController
   # Create racer
   def create
     @racer = Racer.new(racer_params)
-    @racer.id = Racer.maximum(:id).next
+    @racer.id = (Racer.maximum(:id) || 0) + 1
     next_race = Race.where("date >= ?", Date.today).first
     if @racer.save && next_race
       full_name = @racer.first_name + " "+ @racer.last_name
@@ -102,6 +145,6 @@ class RacersController < ApplicationController
   # Permit parameters when creating article
   private
   def racer_params
-    params.require(:racer).permit(:first_name, :last_name)
+    params.require(:racer).permit(:first_name, :last_name, :email)
   end
 end
