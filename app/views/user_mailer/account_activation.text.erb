@@ -1,9 +1,9 @@
 Hi <%= @user.first_name %>,
 
-Welcome to Nite Moves! Click on the link below to activate your account:
+Welcome to the Fog City Run! Click on the link below to activate your account:
 
 <%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
 
 Thanks,
 
-Nite Moves
+Fog City Run
