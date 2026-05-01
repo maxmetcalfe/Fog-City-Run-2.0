@@ -1,15 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nite Moves</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <meta property="og:image" content="https://nightmoves.racesplit.org/og.jpg"/>
+  <meta property="og:title" content="Nite Moves"/>
+  <link rel="apple-touch-icon" href="https://nightmoves.racesplit.org/fcr-touch-icon.png">
+</head>
+<body style="padding-top: 60px">
 
+<%= render "shared/flash_messages" %>
 
+<%= yield %>
 
-
-
-
-
-
-
-
-
-
-
-
-
+</body>
+</html>
