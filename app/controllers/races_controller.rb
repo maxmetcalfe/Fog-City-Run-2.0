@@ -1,3 +1,4 @@
+require "#{Rails.root}/lib/utils"
 class RacesController < ApplicationController
 
   before_action :must_be_admin, only: [:create, :edit]
