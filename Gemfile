@@ -23,6 +23,8 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'puma'
 gem 'scout_apm'
 gem "bugsnag", "~> 6.19"
+gem "sentry-ruby"
+gem "sentry-rails"
 
 group :test do
   gem "coveralls_reborn", "~> 0.28", require: false
