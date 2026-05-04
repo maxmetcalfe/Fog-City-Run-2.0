@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2025_07_10_003238) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "orders", id: :serial, force: :cascade do |t|
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 2025_07_10_003238) do
     t.text "current_streak_array", default: [], array: true
     t.text "longest_streak_array", default: [], array: true
     t.text "count_data"
+    t.string "email"
   end
 
   create_table "races", id: :serial, force: :cascade do |t|
