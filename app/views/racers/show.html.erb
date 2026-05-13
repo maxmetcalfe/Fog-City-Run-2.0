@@ -9,17 +9,28 @@
     <div class="panel-heading">Racer Info</div>
     <div class="panel-body">
       <h2><%= @racer.first_name %> <%= @racer.last_name %></h2>
-      <% if current_user.nil? %>
-      Please login.
-      <% elsif !current_user.nil? and current_user.racer_id.to_i == @racer.id.to_i %>
-      <%= link_to "Edit", edit_user_path, :class => "btn btn-warning" %>
-      <%= link_to image_tag("icon-strava-blue.svg", height: 30), @user.strava_link, :class => "fa-fw fa-lg" %>
-      <% elsif !current_user.nil? and User.pluck(:racer_id).include? @racer.id %>
-      Another user has claimed this racer.
-      <%= link_to image_tag("icon-strava-blue.svg", height: 30), @user.strava_link, :class => "fa-fw fa-lg" %>
-      <% elsif !current_user.nil? %>
-      <%= link_to("Claim", edit_user_path(:user => current_user, :racer_id => @racer.id), :class => "btn btn-success")%>
-      <% end %>
+      <div class="racer-actions" style="margin: 15px 0;">
+        <% if current_user.nil? %>
+          <p class="text-muted">Please login.</p>
+        <% elsif current_user.racer_id.to_i == @racer.id.to_i %>
+          <%= link_to "Edit", edit_user_path, :class => "btn btn-warning" %>
+          <%= link_to image_tag("icon-strava-blue.svg", height: 30), @user.strava_link, :class => "fa-fw fa-lg" %>
+        <% elsif User.pluck(:racer_id).include? @racer.id %>
+          <span class="text-muted">Another user has claimed this racer.</span>
+          <%= link_to image_tag("icon-strava-blue.svg", height: 30), @user.strava_link, :class => "fa-fw fa-lg" %>
+        <% elsif !current_user.nil? %>
+          <%= link_to("Claim", edit_user_path(:user => current_user, :racer_id => @racer.id), :class => "btn btn-success") %>
+        <% end %>
+
+        <% if current_user && current_user.admin? %>
+          <%= link_to(
+            @racer.admin? ? "Admin ✓" : "Make Admin",
+            make_admin_racer_path(@racer),
+            method: :post,
+            class: "btn #{@racer.admin? ? 'btn-success' : 'btn-default'}"
+          ) %>
+        <% end %>
+      </div>
       <h4>Races: <%= @racer.race_count %></h4>
       <% if @racer.results.exists? %>
       <h4>PR: <%= @racer.results.order(:time).first.time%></h4>
@@ -95,7 +106,7 @@
           <tbody>
           <% @results.select{|result| result.group_name != "Loop-Beer"}.each do |result| %>
             <tr>
-              <td><%= link_to result.race.date, race_path(result.race) %></td>
+              <td><%= link_to result.race.date.strftime('%m/%d/%Y'), race_path(result.race) %></td>
               <td><%= result.group_name %></td>
               <td><%= result.time %></td>
               <td><%= result.rank %></td>

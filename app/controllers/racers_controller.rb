@@ -2,7 +2,7 @@ require "#{Rails.root}/lib/utils"
 
 class RacersController < ApplicationController
 
-  before_action :must_be_admin, only: [:edit]
+  before_action :must_be_admin, only: [:edit, :make_admin]
 
   def autocomplete_racer
     term = params[:term]
@@ -142,9 +142,16 @@ class RacersController < ApplicationController
     redirect_to :back
   end
 
+  # Toggle admin status for a racer
+  def make_admin
+    @racer = Racer.find(params[:id])
+    @racer.update(admin: !@racer.admin?)
+    redirect_to @racer
+  end
+
   # Permit parameters when creating article
   private
   def racer_params
-    params.require(:racer).permit(:first_name, :last_name, :email)
+    params.require(:racer).permit(:first_name, :last_name, :email, :admin)
   end
 end
