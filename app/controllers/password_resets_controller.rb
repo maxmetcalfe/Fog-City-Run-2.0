@@ -40,7 +40,7 @@ class PasswordResetsController < ApplicationController
       puts "[PasswordReset ERROR] #{e.class}: #{e.message}"
       logger.error "[PasswordReset ERROR] #{e.class}: #{e.message}"
       logger.error "[PasswordReset ERROR] Backtrace: #{e.backtrace.join("\n")}" if e.backtrace
-      flash.now[:danger] = "An error occurred while processing your request. Please try again."
+      flash.now[:danger] = "Email could not be sent: #{e.class}"
       render 'new'
     end
   end
