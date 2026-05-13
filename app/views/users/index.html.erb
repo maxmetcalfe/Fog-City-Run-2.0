@@ -69,7 +69,7 @@
         </td>
         <td><%= user.racer_id %></td>
         <td>
-          <%= link_to "View", user_path(user), class: "btn btn-default btn-xs" %>
+          <%= link_to "Edit", edit_user_path(user), class: "btn btn-default btn-xs" %>
           <% if current_user && current_user.admin? && current_user != user %>
             <%= link_to(
               user.admin? ? "Remove Admin" : "Make Admin",

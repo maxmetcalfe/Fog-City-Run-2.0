@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :must_be_admin, only: [:destroy, :toggle_admin]
+  before_action :correct_user_or_admin, only: [:edit, :update]
 
   # Show all users
   def index
@@ -16,16 +17,22 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
+    redirect_to users_path
   end
 
   # Edit user
   def edit
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
   # New users
   def new
   	@user = User.new
+  end
+
+  def correct_user_or_admin
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user == @user || current_user.admin?
   end
 
   # Automatically create a new racer if there isn't an obvious existing racer for a user.
