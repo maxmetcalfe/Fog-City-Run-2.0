@@ -31,6 +31,12 @@
           </div>
       </div>
       <div class="form-group">
+        <%= r.label :email, "Email:", class: "col-md-1 control-label" %>
+          <div class="col-md-3">
+            <%= r.email_field :email, class: "form-control" %>
+          </div>
+      </div>
+      <div class="form-group">
         <div class="col-md-1 col-md-offset-1">
         <%=button_tag "Submit", class: "btn btn-default"%>
         </div>

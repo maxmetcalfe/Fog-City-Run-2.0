@@ -15,7 +15,7 @@
           <p>The Summer Sunset Series in Santa Barbara, CA</p>
           <br>
             <% if @next_race %>
-              <h4> Next Race: <%= @next_race.date.strftime('%m/%d/%Y') %> - <%= link_to "Register", race_path(@next_race) %> </h4>
+              <h4> Next Race: <%= @next_race.date.strftime('%m/%d/%Y') %> </h4>
             <% end %>
           <br>
         </div>
