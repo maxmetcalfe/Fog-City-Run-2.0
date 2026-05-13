@@ -53,8 +53,13 @@ class UsersController < ApplicationController
     end
     if @user.save
       create_racer_for_new_user(@user)
-      @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
+      begin
+        @user.send_activation_email
+        flash[:info] = "Please check your email to activate your account."
+      rescue => e
+        Rails.logger.error "[UserCreate] Email failed: #{e.class}: #{e.message}"
+        flash[:warning] = "User created, but activation email failed to send."
+      end
       redirect_to root_url
     else
       if current_user && current_user.admin?
