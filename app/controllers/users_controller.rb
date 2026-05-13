@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :must_be_admin, only: [:destroy, :toggle_admin]
+  before_action :must_be_admin, only: [:index, :destroy, :toggle_admin]
   before_action :correct_user_or_admin, only: [:edit, :update]
 
   # Show all users
