@@ -45,13 +45,24 @@ class UsersController < ApplicationController
   # Create user
   def create
     @user = User.new(user_params)
+    # Generate a temporary password if none provided (e.g. admin-created user)
+    if @user.password.blank?
+      temp_password = SecureRandom.hex(10)
+      @user.password = temp_password
+      @user.password_confirmation = temp_password
+    end
     if @user.save
       create_racer_for_new_user(@user)
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
-      render 'new'
+      if current_user && current_user.admin?
+        @users = User.all
+        render 'index'
+      else
+        render 'new'
+      end
     end
   end
 

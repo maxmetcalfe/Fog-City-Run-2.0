@@ -3,6 +3,48 @@
   <%= render "shared/navbar" %>
 </head>
 <div class="container-fluid">
+
+  <% if current_user && current_user.admin? %>
+    <div class="panel panel-default" style="margin-top: 20px;">
+      <div class="panel-heading">New User</div>
+      <div class="panel-body">
+        <% if @user && @user.errors.any? %>
+          <div class="alert alert-danger">
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= form_for (@user || User.new), html: { class: "form-inline" } do |u| %>
+          <div class="form-group" style="margin-right: 10px;">
+            <%= u.label :first_name, "First Name" %>
+            <%= u.text_field :first_name, class: "form-control", placeholder: "First Name" %>
+          </div>
+          <div class="form-group" style="margin-right: 10px;">
+            <%= u.label :last_name, "Last Name" %>
+            <%= u.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
+          </div>
+          <div class="form-group" style="margin-right: 10px;">
+            <%= u.label :email, "Email" %>
+            <%= u.email_field :email, class: "form-control", placeholder: "Email" %>
+          </div>
+          <div class="form-group" style="margin-right: 10px;">
+            <%= u.label :racer_id, "Racer ID" %>
+            <%= u.number_field :racer_id, class: "form-control", placeholder: "Optional" %>
+          </div>
+          <div class="checkbox" style="margin-right: 10px;">
+            <label>
+              <%= u.check_box :admin %> Admin
+            </label>
+          </div>
+          <%= button_tag "Create User", class: "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
   <table class="table table-hover table-bordered">
     <thead>
     <tr>
