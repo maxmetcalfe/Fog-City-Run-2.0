@@ -14,7 +14,11 @@
   </p>
   <p>
     <strong>Admin:</strong>
-    <%= @user.admin %>
+    <% if @user.admin? %>
+      <span class="label label-success">Admin</span>
+    <% else %>
+      <span class="label label-default">No</span>
+    <% end %>
   </p>
   </p>
     <strong>Racer_ID:</strong>
@@ -24,6 +28,16 @@
     <strong>Strava Link:</strong>
     <%= @user.strava_link %>
   </p>
-  <%= link_to 'Back to user', users_path %></a>
+  <div class="user-actions" style="margin: 15px 0;">
+    <%= link_to 'Back to users', users_path, class: "btn btn-default" %>
+    <% if current_user && current_user.admin? && current_user != @user %>
+      <%= link_to(
+        @user.admin? ? "Remove Admin" : "Make Admin",
+        toggle_admin_user_path(@user),
+        method: :post,
+        class: "btn #{@user.admin? ? 'btn-warning' : 'btn-success'}"
+      ) %>
+    <% end %>
+  </div>
   </div>
 </div>

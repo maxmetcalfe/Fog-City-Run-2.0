@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :must_be_admin, only: [:destroy]
+  before_action :must_be_admin, only: [:destroy, :toggle_admin]
 
   # Show all users
   def index
@@ -67,8 +67,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def toggle_admin
+    @user = User.find(params[:id])
+    @user.update(admin: !@user.admin?)
+    redirect_back(fallback_location: users_path)
+  end
+
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :password, :email, :strava_link, :racer_id)
+    params.require(:user).permit(:first_name, :last_name, :password, :email, :strava_link, :racer_id, :admin)
   end
 end
