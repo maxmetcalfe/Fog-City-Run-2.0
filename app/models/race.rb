@@ -1,4 +1,5 @@
 class Race < ActiveRecord::Base
+  RACE_TYPES = ['Aquathon', '500m', '1000m', '2000m', '5k', 'Other'].freeze
 
   has_many :results
   has_many :start_items
