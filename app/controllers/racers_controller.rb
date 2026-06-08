@@ -137,7 +137,7 @@ class RacersController < ApplicationController
 
   def update_tab_count
     racer = Racer.find(params[:id])
-    racer.update(tab_count: params[:tab_count].to_i)
+    racer.update_column(:tab_count, params[:tab_count].to_i)
     redirect_back(fallback_location: racer_path(racer))
   end
 
@@ -145,7 +145,7 @@ class RacersController < ApplicationController
   def refresh_streak
     racer = Racer.find(params[:id])
     update_streak_calendar(racer)
-    redirect_to :back
+    redirect_back(fallback_location: racer_path(racer))
   end
 
   # Permit parameters when creating article
