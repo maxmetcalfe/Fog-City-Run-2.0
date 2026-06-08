@@ -55,6 +55,6 @@ Rails.application.routes.draw do
   post 'start_items/:id/continue_time' => 'start_items#continue_time', :as => 'continue_time'
   post 'racers/:id/refresh_streak' => 'racers#refresh_streak', :as => 'refresh_streak'
   post 'users/:id/toggle_admin' => 'users#toggle_admin', :as => 'toggle_admin_user'
-  patch 'users/:id/update_tab_count' => 'users#update_tab_count', :as => 'update_tab_count_user'
+  patch 'racers/:id/update_tab_count' => 'racers#update_tab_count', :as => 'update_tab_count_racer'
 
 end

@@ -118,8 +118,8 @@ class StartItemsController < ApplicationController
 
   def increment_tab_if_unpaid(racer_id)
     if params[:didnt_pay] == "1"
-      user = User.find_by(racer_id: racer_id)
-      user.increment!(:tab_count) if user
+      racer = Racer.find_by(id: racer_id)
+      racer.increment!(:tab_count) if racer
     end
   end
 

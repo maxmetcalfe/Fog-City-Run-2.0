@@ -21,13 +21,11 @@
       <%= link_to("Claim", edit_user_path(:user => current_user, :racer_id => @racer.id), :class => "btn btn-success")%>
       <% end %>
       <h4>Races: <%= @racer.race_count %></h4>
-      <% if @user && (@user.tab_count > 0 || current_user&.admin?) %>
-        <h4>Tab: <%= @user.tab_count %></h4>
-        <% if current_user&.admin? %>
-          <%= form_tag update_tab_count_user_path(@user), method: :patch, class: "form-inline", style: "margin-top: 5px;" do %>
-            <%= number_field_tag :tab_count, @user.tab_count, class: "form-control input-sm", style: "width: 70px; display: inline-block;", min: 0 %>
-            <%= submit_tag "Update Tab", class: "btn btn-sm btn-warning", style: "margin-left: 5px;" %>
-          <% end %>
+      <% if current_user&.admin? %>
+        <h4>Tab: <%= @racer.tab_count %></h4>
+        <%= form_tag update_tab_count_racer_path(@racer), method: :patch, class: "form-inline", style: "margin-top: 5px;" do %>
+          <%= number_field_tag :tab_count, @racer.tab_count, class: "form-control input-sm", style: "width: 70px; display: inline-block;", min: 0 %>
+          <%= submit_tag "Update Tab", class: "btn btn-sm btn-warning", style: "margin-left: 5px;" %>
         <% end %>
       <% end %>
       <% if @racer.results.exists? %>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :must_be_admin, only: [:index, :destroy, :toggle_admin, :update_tab_count]
+  before_action :must_be_admin, only: [:index, :destroy, :toggle_admin]
   before_action :correct_user_or_admin, only: [:edit, :update]
 
   # Show all users
@@ -75,13 +75,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def update_tab_count
-    @user = User.find(params[:id])
-    new_count = params[:tab_count].to_i
-    @user.update(tab_count: new_count)
-    redirect_back(fallback_location: racers_path)
-  end
-
   def toggle_admin
     @user = User.find(params[:id])
     @user.update(admin: !@user.admin?)
@@ -90,6 +83,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :password, :email, :strava_link, :racer_id, :admin, :tab_count)
+    params.require(:user).permit(:first_name, :last_name, :password, :email, :strava_link, :racer_id, :admin)
   end
 end

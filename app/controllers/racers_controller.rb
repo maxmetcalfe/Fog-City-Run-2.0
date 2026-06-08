@@ -2,7 +2,7 @@ require "#{Rails.root}/lib/utils"
 
 class RacersController < ApplicationController
 
-  before_action :must_be_admin, only: [:edit]
+  before_action :must_be_admin, only: [:edit, :update_tab_count]
 
   def autocomplete_racer
     term = params[:term]
@@ -25,18 +25,18 @@ class RacersController < ApplicationController
       puts "[Racers#index] Starting index action"
       logger.info "[Racers#index] params: #{params.inspect}"
       puts "[Racers#index] params: #{params.inspect}"
-      
+
       # Base query with default ordering
       base_query = Racer.order("race_count DESC")
       logger.info "[Racers#index] Base query built"
-      
+
       # Apply search if present
       if params[:search].present?
         logger.info "[Racers#index] search term: #{params[:search]}"
         base_query = base_query.search(params[:search])
         logger.info "[Racers#index] Search applied"
       end
-      
+
       # Paginate the ordered query
       logger.info "[Racers#index] Attempting pagination..."
       begin
@@ -48,18 +48,18 @@ class RacersController < ApplicationController
         @racers = base_query.all
         logger.info "[Racers#index] Using fallback (no pagination), count: #{@racers.count}"
       end
-      
+
       logger.info "[Racers#index] @racers class: #{@racers.class.name}"
       logger.info "[Racers#index] @racers total_entries: #{@racers.respond_to?(:total_entries) ? @racers.total_entries : @racers.count}"
       logger.info "[Racers#index] Completed successfully"
       puts "[Racers#index] Completed successfully"
-      
+
     rescue => exception
       # Use both logger and puts to ensure we see the error
       error_msg = "[Racers#index ERROR] #{exception.class}: #{exception.message}"
       logger.error error_msg
       puts error_msg
-      
+
       if exception.backtrace
         backtrace_msg = "[Racers#index ERROR] Backtrace:\n#{exception.backtrace.join("\n")}"
         logger.error backtrace_msg
@@ -135,6 +135,12 @@ class RacersController < ApplicationController
     end
   end
 
+  def update_tab_count
+    racer = Racer.find(params[:id])
+    racer.update(tab_count: params[:tab_count].to_i)
+    redirect_back(fallback_location: racer_path(racer))
+  end
+
   # Manually run update_streak_calendar() for a particular racer
   def refresh_streak
     racer = Racer.find(params[:id])
@@ -145,6 +151,6 @@ class RacersController < ApplicationController
   # Permit parameters when creating article
   private
   def racer_params
-    params.require(:racer).permit(:first_name, :last_name, :email)
+    params.require(:racer).permit(:first_name, :last_name, :email, :tab_count)
   end
 end
