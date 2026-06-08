@@ -60,7 +60,7 @@
             <%= i.label :racer_id, "Racer:", class: "col-md-1 control-label" %>
               <div class="col-md-3">
                 <%= i.autocomplete_field :racer_id, autocomplete_racer_racers_path, class: "form-control", :value => params[:racer_name] %>
-                <%= i.hidden_field :racer_id, id: "racer_id_hidden", :value => params[:racer_id]%>
+                <%= i.hidden_field :racer_id, id: "racer_id_hidden", :value => params[:racer_id] %>
               </div>
           </div>
           <div class="form-group">
@@ -69,9 +69,17 @@
                 <%= i.text_field :race_id, class: "form-control", :value => params[:race_id] || @race.id %>
               </div>
           </div>
+          <% if current_user&.admin? %>
+          <div class="form-group">
+            <%= label_tag :didnt_pay, "Didn't Pay:", class: "col-md-1 control-label" %>
+              <div class="col-md-3">
+                <%= check_box_tag :didnt_pay, "1", false, class: "" %>
+              </div>
+          </div>
+          <% end %>
           <div class="form-group">
             <div class="col-md-1 col-md-offset-1">
-            <%=button_tag "Submit", class: "btn btn-default"%>
+            <%= button_tag "Submit", class: "btn btn-default" %>
             </div>
           </div>
       <% end %>

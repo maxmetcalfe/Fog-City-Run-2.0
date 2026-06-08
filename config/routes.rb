@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     collection { post :import }
     collection { patch :start }
   end
-  
+
   resources :start_items do
   end
 
@@ -28,10 +28,10 @@ Rails.application.routes.draw do
 
   resources :orders do
   end
-  
+
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
- 
+
   root 'welcome#index'
   get 'welcome/index'
   get '/count' => 'pages#count'
@@ -55,5 +55,6 @@ Rails.application.routes.draw do
   post 'start_items/:id/continue_time' => 'start_items#continue_time', :as => 'continue_time'
   post 'racers/:id/refresh_streak' => 'racers#refresh_streak', :as => 'refresh_streak'
   post 'users/:id/toggle_admin' => 'users#toggle_admin', :as => 'toggle_admin_user'
+  patch 'users/:id/update_tab_count' => 'users#update_tab_count', :as => 'update_tab_count_user'
 
 end

@@ -42,9 +42,11 @@ class StartItemsController < ApplicationController
       to_edit = existing_start_item.first
       to_edit.update(bib: start_item_params[:bib], group: start_item_params[:group])
       to_edit.save
+      increment_tab_if_unpaid(@start_item.racer_id)
       redirect_to race_path(@race)
     else
       if @start_item.save
+        increment_tab_if_unpaid(@start_item.racer_id)
         redirect_to race_path(@race)
       else
         render 'new'
@@ -113,6 +115,13 @@ class StartItemsController < ApplicationController
   end
 
   private
+
+  def increment_tab_if_unpaid(racer_id)
+    if params[:didnt_pay] == "1"
+      user = User.find_by(racer_id: racer_id)
+      user.increment!(:tab_count) if user
+    end
+  end
 
   def start_item_params
     params.require(:start_item).permit(:race_id, :racer_id, :bib, :group)
