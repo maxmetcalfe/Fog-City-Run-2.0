@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
 
   # Global error handling to ensure all exceptions are logged and sent to error tracking
   # Using StandardError instead of Exception to avoid catching system-level errors
-  rescue_from StandardError, with: :handle_exception
+  # Note: rescue_from can cause issues with some gems like will_paginate during initialization
+  # rescue_from StandardError, with: :handle_exception
 
   def handle_exception(exception)
     # Prevent infinite recursion
