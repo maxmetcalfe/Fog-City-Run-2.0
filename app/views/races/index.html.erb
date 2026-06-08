@@ -22,7 +22,7 @@
     <tbody>
     <% @upcoming_races_to_show.each do |race| %>
       <tr>
-        <td><%= link_to race.date, race_path(race) %></td>
+        <td><%= link_to race.date.strftime('%m/%d/%Y'), race_path(race) %></td>
         <td><%= StartItem.where(race_id: race.id).count %></td>
         <td>
         <% if race.note.present? %>
@@ -33,7 +33,7 @@
           <td>
             <% if current_user and current_user.admin? %>
               <%= link_to 'Edit', edit_race_path(race), :class => 'btn btn-default btn-xs' %>
-              <%= link_to 'Destroy', race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + race.date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %>
+              <%= link_to 'Destroy', race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + race.date.strftime('%m/%d/%Y') + '?'  }, :class => 'btn btn-default btn-xs' %>
             <% end %>
             <% if current_user and current_user.racer_id %>
               <%= link_to 'Register', new_start_item_path(:race_id => race.id, :racer_id => current_racer.id, :racer_name => current_racer.first_name + " " + current_racer.last_name), :class => "btn btn-default btn-xs" %>
@@ -59,7 +59,7 @@
     <tbody>
     <% @races_to_show.each do |race| %>
       <tr>
-        <td><%= link_to race.date, race_path(race) %></td>
+        <td><%= link_to race.date.strftime('%m/%d/%Y'), race_path(race) %></td>
         <td><%= race.results.count %></td>
         <td>
         <% if race.note.present? %>
@@ -68,7 +68,7 @@
         </td>
         <% if current_user and current_user.admin? %>
           <td><%= link_to 'Edit', edit_race_path(race), :class => 'btn btn-default btn-xs' %> <%= link_to 'Destroy',
-                race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + race.date.to_s + '?'  }, :class => 'btn btn-default btn-xs' %></td>
+                race_path(race), method: :delete, data: { confirm: 'Are you sure you want to delete ' + race.date.strftime('%m/%d/%Y') + '?'  }, :class => 'btn btn-default btn-xs' %></td>
         <% end %>
       </tr>
     <% end %>

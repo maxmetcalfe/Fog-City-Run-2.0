@@ -26,7 +26,7 @@ class RacesControllerTest < ActionController::TestCase
     # The upcoming race exists in the upcoming race table.
     assert_select "table:first-of-type" do
       assert_select "tr" do
-        assert_select "td:nth-child(1)", race.date.to_s
+        assert_select "td:nth-child(1)", race.date.strftime('%m/%d/%Y')
       end
     end
   end
