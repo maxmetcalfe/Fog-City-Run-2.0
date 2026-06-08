@@ -144,7 +144,7 @@ class RacersController < ApplicationController
   # Manually run update_streak_calendar() for a particular racer
   def refresh_streak
     racer = Racer.find(params[:id])
-    update_streak_calendar(racer)
+    update_racer_info(racer)
     redirect_back(fallback_location: racer_path(racer))
   end
 
