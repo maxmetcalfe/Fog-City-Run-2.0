@@ -1,7 +1,7 @@
 require "#{Rails.root}/lib/utils"
 class RacesController < ApplicationController
 
-  before_action :must_be_admin, only: [:create, :edit]
+  before_action :must_be_admin, only: [:create, :edit, :save_race, :start_race, :stop_race]
 
   @races = Race.includes(:race)
 
@@ -113,14 +113,17 @@ class RacesController < ApplicationController
     race = Race.find(params[:id])
 
     # Update racer info for all racers in this race.
-    for result in race.results do
-      update_racer_info(result.racer)
+    race.results.each do |result|
+      update_racer_info(result.racer) if result.racer
     end
 
     # Update racer info for all racers in the second most recent race.
     # This is to make sure racer who may be exiting a streak are updated accordingly.
-    Race.order("date DESC").second&.results&.each do |result|
-      update_racer_info(result.racer)
+    second_race = Race.order("date DESC").second
+    if second_race&.results
+      second_race.results.each do |result|
+        update_racer_info(result.racer) if result.racer
+      end
     end
 
     race.update(state: 'FINISHED')
