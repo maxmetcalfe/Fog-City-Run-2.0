@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    redirect_to shop_path
+    redirect_to root_path
   end
 
   # Edit order
@@ -51,8 +51,8 @@ class OrdersController < ApplicationController
     if @order.user_id != current_user.id
       @order.user_id = current_user.id
     end
-    if @order.save  
-      redirect_to shop_path
+    if @order.save
+      redirect_to root_path
     else
       render 'new'
     end

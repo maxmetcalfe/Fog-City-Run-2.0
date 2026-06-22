@@ -41,7 +41,6 @@ Rails.application.routes.draw do
   get '/singup' => 'sessions#new'
   get '/rungo' => 'pages#rungo'
   get '/login' => 'sessions#new'
-  get '/shop' => 'pages#shop'
   get 'password_resets/new'
   get 'password_resets/edit'
   post '/login' => 'sessions#create'
