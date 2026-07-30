@@ -9,7 +9,7 @@ class ResultMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
  
-    assert_equal ["runfogcity@gmail.com"], email.from
+    assert_equal ["noreply@fogcityrun.com"], email.from
     assert_equal ["test@hotmail.com"], email.to
     assert_equal "Fog City Run Results", email.subject
     assert_equal read_fixture("result_mailer").join, email.body.to_s
