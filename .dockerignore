@@ -1,0 +1,9 @@
+.git
+.gitignore
+.env*
+README.md
+coverage/
+log/
+tmp/
+test/
+public/assets/
