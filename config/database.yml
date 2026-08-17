@@ -6,6 +6,7 @@ default: &default
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL_2"] %>
+  schema_search_path: fogcityrun
 
 development:
   <<: *default
