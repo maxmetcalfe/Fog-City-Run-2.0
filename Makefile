@@ -1,4 +1,7 @@
-.PHONY: dev db-remote test lint
+.PHONY: dev db-remote test lint deploy
+
+deploy: ## Deploy night-moves to Fly.io production
+	./scripts/deploy.sh
 
 dev:
 	bin/rails server
