@@ -3,7 +3,7 @@
 # Usage: ./scripts/deploy.sh   (or: make deploy)
 set -euo pipefail
 
-APP="night-moves"
+APP="nite-moves"
 BRANCH="night-moves"
 
 # Safety: only deploy from the night-moves branch

@@ -1,7 +1,7 @@
 # fly.toml for night-moves (nightmoves.racesplit.org)
 # Same shape as fogcityrun's Fly config.
 
-app = "night-moves"
+app = "nite-moves"
 primary_region = "iad"
 
 [build]
