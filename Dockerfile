@@ -14,15 +14,12 @@ ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1"
 
 # Install base packages
-# nodejs is required for assets:precompile — this branch enables the
-# uglifier JS compressor, and there is no JS runtime in ruby-slim images.
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
       libpq-dev \
       curl \
       build-essential \
-      libvips \
-      nodejs && \
+      libvips && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 
