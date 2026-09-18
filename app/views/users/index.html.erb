@@ -39,6 +39,7 @@
               <%= u.check_box :admin %> Admin
             </label>
           </div>
+          <%= render "shared/turnstile" %>
           <%= button_tag "Create User", class: "btn btn-success" %>
         <% end %>
       </div>

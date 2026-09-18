@@ -1,6 +1,7 @@
 class PasswordResetsController < ApplicationController
   before_action :get_user,   only: [:edit, :update]
   before_action :valid_user, only: [:edit, :update]
+  before_action :verify_turnstile, only: [:create]
 
   include SessionsHelper
 
@@ -62,6 +63,16 @@ class PasswordResetsController < ApplicationController
   end
 
   private
+
+    # Cloudflare Turnstile CAPTCHA check (skipped when unset).
+    def verify_turnstile
+      return if Turnstile.disabled?
+      token = params["cf-turnstile-response"]
+      if token.blank? || !Turnstile.verify(token, request.remote_ip)
+        flash.now[:danger] = "Please complete the CAPTCHA challenge and try again."
+        render "new", status: :unprocessable_entity
+      end
+    end
 
     def user_params
       params.require(:user).permit(:password, :password_confirmation)

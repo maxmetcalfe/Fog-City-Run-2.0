@@ -20,6 +20,7 @@ gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
 gem "d3-rails"
 gem 'will_paginate', '~> 3.1.0'
+gem 'rack-attack', '~> 6.7'
 gem 'puma'
 gem 'scout_apm'
 gem "bugsnag", "~> 6.19"
