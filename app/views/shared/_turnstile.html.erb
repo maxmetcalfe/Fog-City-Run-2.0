@@ -1,0 +1,5 @@
+<%# Cloudflare Turnstile CAPTCHA. Renders nothing until TURNSTILE_SITE_KEY / TURNSTILE_SECRET_KEY are set. %>
+<% if Turnstile.enabled? %>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <div class="cf-turnstile" data-sitekey="<%= Turnstile.site_key %>"></div>
+<% end %>

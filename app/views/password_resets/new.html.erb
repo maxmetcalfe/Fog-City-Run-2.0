@@ -10,6 +10,7 @@
         <%= f.label :email %>
         <%= f.email_field :email, class: 'form-control' %>
         <br>
+        <%= render "shared/turnstile" %>
         <%= f.submit "Submit", class: "btn btn-primary" %>
       <% end %>
     </div>

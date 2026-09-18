@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :must_be_admin, only: [:destroy]
+  before_action :verify_turnstile, only: [:create]
 
   # Show all users
   def index
@@ -68,6 +69,17 @@ class UsersController < ApplicationController
   end
 
   private
+
+  # Cloudflare Turnstile CAPTCHA check (skipped when unset).
+  def verify_turnstile
+    return if Turnstile.disabled?
+    token = params["cf-turnstile-response"]
+    if token.blank? || !Turnstile.verify(token, request.remote_ip)
+      flash.now[:danger] = "Please complete the CAPTCHA challenge and try again."
+      render "new", status: :unprocessable_entity
+    end
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :password, :email, :strava_link, :racer_id)
   end
